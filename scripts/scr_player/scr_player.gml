@@ -104,7 +104,6 @@ function player_control()
 	
 	if (MOUSE_LEFT_BUTTON_RELEASED)
 	{
-	
 		var _list = ds_list_create();
 		collision_point_list(mouse_x, mouse_y, DOLL, false, true, _list, true);
 
@@ -141,7 +140,7 @@ function player_control()
 			break;
 	
 			case cursor.follow:
-				//Check if mouse is on NPC and if so make them follow.
+				//Check if mouse is an NPC and if so adds them to the party list and makes them follow the player..
 				for (var _i = 0; _i < ds_list_size(_list); _i++)
 				{
 					var _npc = ds_list_find_value(_list, _i);
@@ -172,6 +171,11 @@ function player_control()
 	
 			case cursor.attack:
 				//Order all selected npcs to attack
+				//for testing purposes i'm making it so it swaps control to first npc in list.
+				if (ds_list_size(_list) != 0)
+				{
+					global.player = ds_list_find_value(_list, 0);
+				}
 			break;
 	
 			case cursor.move:

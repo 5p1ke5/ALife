@@ -24,7 +24,7 @@
 
 
 
-function camera_init(_player){
+function camera_init(){
 	properties = {
 		aspect_ratio_h : 16,				//horizontal factor of the resolution
 		aspect_ratio_v : 9,					//vertical factor of the resolution
@@ -33,7 +33,6 @@ function camera_init(_player){
 		zoom_min : 20,						//The closest you can zoom in. For best results, use a multiple of the increment. 
 		zoom_max : 300,						//The furthest you can zoom in. For best results, use a multiple of the increment. 
 		zoom_speed : 15,					//how fast to adjust zoom. 100 means instant, 50 means half speed, 1 means zooming goes slowly. 
-		object_following : _player,	//The object the camera follows. 
 		tracking_speed : 15,				//How fast the camera follows the object. 100 means instant, 1 means it will drift VERY slowly. 
 		camera_restrained : false,			//Can the camera move beyond the edges of the playfield?
 		window_scale : 4					//The size of the game window. For wider aspect ratios, this is more impactful than for ones close to square. 
@@ -57,21 +56,29 @@ function camera_init(_player){
 	window_center();
 }
 function camera_update(){
-	var target = properties.object_following;
 	
 	camera_set_zoom();
 	camera_set_view_size(view_camera[0],view_width,view_height);
 	
-
-	
-	if instance_exists(target){
-		drift_towards(target.x,target.y,tracking_divisor);
+	if instance_exists(global.player){
+		drift_towards(global.player.x,global.player.y,tracking_divisor);
 		if properties.camera_restrained = true
 			keep_in_room();
 		var cam_x = x-view_width/2;
 		var cam_y = y-view_height/2;
 		camera_set_view_pos(view_camera[0],cam_x,cam_y);
 	}
+	
+
+	
+	//if instance_exists(target){
+	//	drift_towards(target.x,target.y,tracking_divisor);
+	//	if properties.camera_restrained = true
+	//		keep_in_room();
+	//	var cam_x = x-view_width/2;
+	//	var cam_y = y-view_height/2;
+	//	camera_set_view_pos(view_camera[0],cam_x,cam_y);
+	//}
 }
 function zoom_in(){
 	if properties.zoom_level > properties.zoom_min
