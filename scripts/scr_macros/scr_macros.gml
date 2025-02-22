@@ -1,14 +1,15 @@
 #region //Room values
 #macro ROOM_TITLE room_titleScreen
 #macro ROOM_CHARACTER_CREATION room_characterCreation
-#macro ROOM_INTRO_SCREEN room_hometown
+#macro ROOM_INTRO_SCREEN room_islandA
 #endregion
 
 //player constants
 #macro PLAYER_FLICKER (game_get_speed(gamespeed_fps) * 3)
 
-#region	//static resource pointers
+#region	//static object pointers
 #macro BLOCK obj_block //Wall objects.
+#macro DOLL obj_doll //Base character object.
 #macro MELEE obj_meleeSwing //melee swing object
 #macro GUARD obj_meleeGuard //melee guard object
 #endregion
@@ -58,6 +59,7 @@
 #macro Y_BUTTON (keyboard_check(ord("C")) || gamepad_button_check(0, gp_face4))
 #macro FACE_BUTTON (A_BUTTON || B_BUTTON || X_BUTTON || Y_BUTTON) 
 #macro START_BUTTON ((gamepad_button_check(0, gp_start)) || (keyboard_check(vk_enter)))
+#macro SELECT_BUTTON ((gamepad_button_check(0, gp_select)) || (keyboard_check(vk_tab)))
 #macro MOUSE_LEFT_BUTTON mouse_check_button(mb_left)
 #macro MOUSE_RIGHT_BUTTON mouse_check_button(mb_right)
 #macro MOUSE_WHEEL_UP (mouse_wheel_up() || keyboard_check_pressed(vk_pageup))
@@ -77,6 +79,7 @@
 
 #macro ANY_BUTTON_RELEASED (keyboard_check_released(vk_anykey))
 #macro START_BUTTON_RELEASED ((gamepad_button_check_released(0, gp_start)) || (keyboard_check_released(vk_enter)))
+#macro SELECT_BUTTON_RELEASED ((gamepad_button_check_released(0, gp_select)) || (gamepad_button_check_released(vk_tab)))
 #macro RIGHT_BUTTON_RELEASED (keyboard_check_released(vk_right) || keyboard_check_released(ord("D")) || gamepad_button_check_released(0, gp_padr))
 #macro DOWN_BUTTON_RELEASED (keyboard_check_released(vk_down) || keyboard_check_released(ord("S")) || gamepad_button_check_released(0, gp_padd) || mouse_wheel_down())
 #macro LEFT_BUTTON_RELEASED (keyboard_check_released(vk_left) || keyboard_check_released(ord("A")) || gamepad_button_check_released(0, gp_padl))

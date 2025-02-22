@@ -18,4 +18,4 @@ inventory_add(inventory, _item);
 
 var _state = new NPCStateIdle(noone);
 
-npc_initialize("Kinsman", "Hail, Kinsman!", 100, _state);
+npc_initialize("Ally", "Hi neighbor!", 100, _state);

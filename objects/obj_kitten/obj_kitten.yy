@@ -3,18 +3,17 @@
   "%Name":"obj_kitten",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_kitten",
   "overriddenProperties":[],
   "parent":{
     "name":"characters",
-    "path":"folders/Objects/npc/characters.yy",
+    "path":"folders/Objects/dolls/characters.yy",
   },
   "parentObjectId":{
-    "name":"obj_npc",
-    "path":"objects/obj_npc/obj_npc.yy",
+    "name":"obj_doll",
+    "path":"objects/obj_doll/obj_doll.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

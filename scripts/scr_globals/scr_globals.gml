@@ -2,6 +2,8 @@
 /// @description Initializes the game's global variabls.
 function globals_initialize()
 {
+	global.player = 1; //The instance the player is currently controlling.
+	
 	global.playerMaxHP = 400;
 	global.playerHP = 400;
 	

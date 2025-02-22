@@ -9,11 +9,11 @@
   "overriddenProperties":[],
   "parent":{
     "name":"characters",
-    "path":"folders/Objects/npc/characters.yy",
+    "path":"folders/Objects/dolls/characters.yy",
   },
   "parentObjectId":{
-    "name":"obj_npc",
-    "path":"objects/obj_npc/obj_npc.yy",
+    "name":"obj_doll",
+    "path":"objects/obj_doll/obj_doll.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

@@ -10,8 +10,8 @@
   "name":"obj_speechBalloon",
   "overriddenProperties":[],
   "parent":{
-    "name":"npc",
-    "path":"folders/Objects/npc.yy",
+    "name":"dolls",
+    "path":"folders/Objects/dolls.yy",
   },
   "parentObjectId":null,
   "persistent":false,

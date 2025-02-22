@@ -33,7 +33,7 @@ if (keyboard_check(ord("5")))
 }
 
 //Player specific controls. 
-//Allows you to use an item.
+//If the player is not holding an item, allows them to use one.
 if (!instance_exists(myHeld)) && (global.cursorState == cursor.normal)
 {
 	//Resets angle. If it needs to be used its reset every step.

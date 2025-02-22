@@ -1,6 +1,6 @@
 /// @description Commands units depending on cursor state.
 var _list = ds_list_create();
-collision_point_list(mouse_x, mouse_y, obj_npc, false, true, _list, true);
+collision_point_list(mouse_x, mouse_y, DOLL, false, true, _list, true);
 
 switch (global.cursorState) {
     case cursor.normal:
