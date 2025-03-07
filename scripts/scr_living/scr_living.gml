@@ -39,7 +39,6 @@ function living_hurtbox_collision(_hurtbox)
 	}
 
 	hp -= _damage;
-	print("Damage taken! Damage: " + string(_damage) + " New HP: " + string(hp));
 	
 	if (variable_instance_exists(id, "hsp"))
 	{

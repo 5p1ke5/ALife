@@ -6,7 +6,6 @@
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_19CAF571","path":"rooms/room_winterIsland/room_winterIsland.yy",},
     {"name":"inst_2CA30D9D","path":"rooms/room_winterIsland/room_winterIsland.yy",},
     {"name":"inst_2E7D357D","path":"rooms/room_winterIsland/room_winterIsland.yy",},
     {"name":"inst_7C160450","path":"rooms/room_winterIsland/room_winterIsland.yy",},
@@ -51,6 +50,8 @@
     {"name":"inst_3F46936E","path":"rooms/room_winterIsland/room_winterIsland.yy",},
     {"name":"inst_79CF1DBA","path":"rooms/room_winterIsland/room_winterIsland.yy",},
     {"name":"inst_5F5CE7AF","path":"rooms/room_winterIsland/room_winterIsland.yy",},
+    {"name":"inst_7A13B4D1","path":"rooms/room_winterIsland/room_winterIsland.yy",},
+    {"name":"inst_FA78E55","path":"rooms/room_winterIsland/room_winterIsland.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -104,7 +105,8 @@
         {"$GMRInstance":"v1","%Name":"inst_14755936","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_14755936","objectId":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":640.0,"y":1120.0,},
       ],"layers":[],"name":"NPCs","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Player","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
-        {"$GMRInstance":"v1","%Name":"inst_19CAF571","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_19CAF571","objectId":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":480.0,"y":384.0,},
+        {"$GMRInstance":"v1","%Name":"inst_7A13B4D1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7A13B4D1","objectId":{"name":"obj_playerSpawner","path":"objects/obj_playerSpawner/obj_playerSpawner.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":416.0,"y":352.0,},
+        {"$GMRInstance":"v1","%Name":"inst_FA78E55","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_FA78E55","objectId":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":384.0,"y":352.0,},
       ],"layers":[],"name":"Player","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"tiles0","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"tiles0","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":200,"SerialiseWidth":200,"TileCompressedData":[
           -3021,-2147483648,1,1,-23,2,1,3,-175,-2147483648,1,17,-23,18,1,19,-26,-2147483648,1,1,-35,2,1,3,-112,

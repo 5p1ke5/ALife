@@ -300,6 +300,13 @@ function speechBalloon_initialize(_text, _maxTime, _owner, _name)
 	name = _name;
 }
 
+/// @function npc_name_random()
+/// @description returns a randomly generated name.
+function npc_name_random()
+{
+	return global.names[irandom(array_length(global.names))];
+}
+
 
 //enums
 enum npcStates
