@@ -21,6 +21,7 @@
 #macro ITEM_HAMMER  ItemMelee("Hammer", noone, spr_weaponHammerIcon, 1, "A heavy hammer for combat.", -1, aiType.melee, spr_weaponHammer,  spr_weaponHammerGuard, 5, 6, 9, 360, 5)
 #macro ITEM_AXE  ItemMelee("Axe", noone, spr_weaponAxeIcon, 1, "An axe that can cut down trees or people.", -1, aiType.melee, spr_weaponAxe,spr_weaponAxeGuard, 3, 4, 9, 135, 5)
 #macro ITEM_KNIFE  ItemMelee("Knife", noone, spr_weaponKnifeIcon, 1, "A pointy knife for stabbing.", -1, aiType.melee, spr_weaponKnife, spr_weaponKnifeGuard, 1, 1, 15, 135, 4)
+#macro ITEM_BOOMERANG	ItemInstancer("Boomerang", noone, spr_boomerangIcon, 1, "A boomerang that comes back when thrown.", -1, aiType.ranged, obj_boomerang, 5);
 #macro ITEM_FIRECRYSTAL ItemInstancer("Fire Crystal", noone, spr_fireCrystalIcon, 1, "Throw a fireball at enemies.", -1, aiType.ranged, obj_fireball, 4)
 #endregion
 

@@ -113,17 +113,19 @@ function camera_set_zoom(){
 	if (view_width != view_width_target and view_height != view_height_target){
 		view_width = lerp(view_width,view_width_target,zoom_divisor);
 		view_height = lerp(view_height,view_height_target,zoom_divisor);
-	}
+	}	
 }
+
 function keep_in_room(){
 	x = clamp(x,0,room_width-view_width);
 	y = clamp(y,0,room_height-view_height);
 }
+
 function enable_view(){
-	view_enabled = true;
+	//view_enabled = true;
 	view_visible[0] = true;
 }
 
 
 camera_init();
-enable_view();
+enable_view(); //this breaks the game in html5

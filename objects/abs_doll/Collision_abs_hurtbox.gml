@@ -7,7 +7,7 @@ if (object_is_ancestor(other.object_index, abs_blockable)) && instance_exists(my
 		//Angle of the attack relative to the parrying object.
 		var _attackAngle = point_direction(myHeld.x, myHeld.y, other.x, other.y);
 		
-		//If the angle for blocking is right parries the attack, applies knockback to attacker.
+		//If the angle for blocking is correct parries the attack, applies knockback to attacker.
 		if (abs(angle_difference(angle, _attackAngle)) < 90)
 		{
 			with(other)

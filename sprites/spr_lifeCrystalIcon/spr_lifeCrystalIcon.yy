@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"ranged",
-    "path":"folders/Sprites/inventory/icon/ranged.yy",
+    "name":"magic",
+    "path":"folders/Sprites/inventory/icon/magic.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
