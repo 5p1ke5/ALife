@@ -119,7 +119,7 @@ function player_control()
 					var _npc = ds_list_find_value(_list, _i);
 			
 					//If it's a member of the party can select and deselect.
-					var _indexA = ds_list_find_index(global.partyMembers, _npc)
+					var _indexA = ds_list_find_index(global.party, _npc)
 			
 					if (_indexA != -1)
 					{
@@ -155,9 +155,9 @@ function player_control()
 							state = _newState;
 						}
 				
-						if (ds_list_find_index(global.partyMembers, _npc) == -1)
+						if (ds_list_find_index(global.party, _npc) == -1)
 						{
-							ds_list_add(global.partyMembers, _npc)
+							ds_list_add(global.party, _npc)
 						}
 				
 						if (ds_list_find_index(global.selected, _npc) == -1)
@@ -214,9 +214,9 @@ function player_draw_gui()
 		draw_text(5, 35, "Item: " + _item.itemName);	
 	}
 
-	for (var _i = 0; _i < ds_list_size(global.partyMembers); _i++)
+	for (var _i = 0; _i < ds_list_size(global.party); _i++)
 	{
-		var _partyMember = ds_list_find_value(global.partyMembers, _i)
+		var _partyMember = ds_list_find_value(global.party, _i)
 	
 		//If one of the selected party members draws the text in yellow. Otherwise black.
 		if (ds_list_find_index(global.selected, _partyMember) != -1)

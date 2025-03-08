@@ -1,4 +1,4 @@
-/// @description Spawns an NPC and designates them as player.
+/// @description Spawns an doll and designates them as player.
 //TODO: Make it actually import stats (eg appearance etc)
 var _player = instance_create_layer(x, y, layer, DOLL);
 
@@ -18,7 +18,7 @@ with (_player)
 }
 
 
-
-
-
+party_add(_player);
 global.player = _player;
+
+serializeInstance(_player);

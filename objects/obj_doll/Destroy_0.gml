@@ -1,11 +1,11 @@
 /// @description Removes self from lists.
 
 //party members
-var _indexA = ds_list_find_index(global.partyMembers, id);
+var _indexA = ds_list_find_index(global.party, id);
 
 if (_indexA != -1)
 {
-	ds_list_delete(global.partyMembers, _indexA);
+	ds_list_delete(global.party, _indexA);
 }
 
 //selected units

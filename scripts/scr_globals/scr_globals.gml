@@ -32,8 +32,8 @@ function globals_initialize()
 	global.cursorState = cursor.normal;
 	
 	//Faction things
-	//Currently recruited allies.
-	global.partyMembers = ds_list_create();
+	global.party = ds_list_create(); //Currently recruited allies.
+	global.partySerialized = ds_list_create(); //Party members serialized between levels.
 	
 	
 	//Currently selected allies.

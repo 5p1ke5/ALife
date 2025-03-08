@@ -179,7 +179,7 @@ function doll_animate()
 function doll_draw()
 {
 	
-	if (ds_list_find_index(global.partyMembers, id) != -1)
+	if (ds_list_find_index(global.party, id) != -1)
 	{
 		draw_sprite_ext(spr_dollDropShadow, 0, x, y, image_xscale, image_yscale, image_angle, c_asian1, image_alpha);
 	}
