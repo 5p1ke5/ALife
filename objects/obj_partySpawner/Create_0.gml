@@ -13,6 +13,6 @@ for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 	with (_doll)
 	{
 		doll_initialize(_struct.maxHP, _struct.maxHP, _struct.maxPP, _struct.maxPP, _struct.faction, 
-		_struct.faceIndex, _struct.hairIndex, _struct.shirtIndex, _struct.pantsIndex, _struct.image_blend, _struct.hairColor, _struct.shirtColor, _struct.pantsColor);
+		_struct.faceIndex, _struct.hairIndex, _struct.shirtIndex, _struct.pantsIndex, _struct.image_blend, _struct.hairColor, _struct.shirtColor, _struct.pantsColor, _struct.inventory);
 	}
 }

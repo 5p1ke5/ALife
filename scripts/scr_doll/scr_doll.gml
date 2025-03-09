@@ -1,4 +1,4 @@
-/// @function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor) 
+/// @function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor, _inventory=undefined) 
 /// @description initializes variables for a doll object. Returns a struct with all doll objects.
 /// @param _maxHP maximum hp for this doll.
 /// @param _hp current hp
@@ -13,8 +13,10 @@
 /// @param _hairColor color value to blend hair with.
 /// @param _shirtColor color value to blend shirt with.
 /// @param _pantsColor color value to blend pants with.
-function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor) 
+/// @param _inventory an optional ds_list containing an inventory.
+function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor, _inventory = undefined) 
 {
+	
 	//Initializes instance variables.
 	living_initialize(_maxHP, _hp);
 	
@@ -45,7 +47,14 @@ function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIn
 	phys_initialize(DOLL_FRICT, 0, 0, true);
 
 	//The doll's inventory.
-	inventory = inventory_initialize();
+	if (_inventory == undefined)
+	{
+		inventory = inventory_initialize();
+	}
+	else
+	{
+		inventory = _inventory;	
+	}
 
 	//The item  currently being selected from inventory
 	inventoryIndex = 0;

@@ -28,3 +28,10 @@ function serialize_instance(_instance)
 	return _serializedInstance;
 	
 }
+
+///@function deserialize_doll(_x, _y, _depth, _struct)
+///@description Creates a doll at the given location and initializes it's values using the given struct (serialized instance of a doll object)
+function instance_deserialize_doll(_x, _y, _depth, _struct)
+{
+	
+}

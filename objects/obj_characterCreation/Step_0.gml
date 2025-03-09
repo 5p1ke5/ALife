@@ -39,6 +39,7 @@ switch (optionSelected)
 			options[optionSelected] =  "FACE: " + string(global.playerFaceIndex);
 		break;
 		
+		
 		case 1: //Hair
 			global.playerHairIndex += _increment;
 			
@@ -62,6 +63,7 @@ switch (optionSelected)
 			
 			options[optionSelected] = "HAIR: " + string(global.playerHairIndex);
 		break;
+		
 		
 		case 2: //Shirt
 			global.playerShirtIndex += _increment;
@@ -88,7 +90,7 @@ switch (optionSelected)
 		break;
 		
 		case 3: //Pants.
-		/*
+		/* We only have one pants right now. This can be uncommented when we get more.
 			global.playerPantsIndex += _increment;
 			
 			if (global.playerPantsIndex < 0)
@@ -115,34 +117,17 @@ switch (optionSelected)
 		case 4: //Exit
 			if (FACE_BUTTON_RELEASED)
 			{
-				////Serialize the variables for the array.
-				//var _struct = {
-				//	maxHP : PLAYER_STARTING_HP,
-				//	hp : maxHP,
-				//	maxPP : PLAYER_STARTING_PP,
-				//	pp : maxPP,
-				//	faction : other.faction,
-				//	faceIndex : other.faceIndex,
-				//	hairIndex : other.hairIndex,
-				//	shirtIndex : other.shirtIndex,
-				//	pantsIndex : other.pantsIndex,
-				//	hairColor : other.hairColor,
-				//	shirtColor : other.shirtColor,
-				//	pantsColor : other.pantsColor,
-				//	skinColor : other.image_blend,
-				//	inventory : ds_list_create(),
-				//	inventoryIndex : other.inventoryIndex,
-				//	ppRegen : other.ppRegen,
-				//	name : "Player",
-				//	text : "Hi, I'm the main character!",
-				//	level : 100
-				//	}
 				
+				//Creates a doll with the values from the character creation and then really quick serializes it.
 				var _doll = instance_create_depth(x, y, depth, obj_doll);
+				var _inventory = inventory_initialize();
+				
+				inventory_add(_inventory, new ITEM_SWORD);
+				
 				with (_doll)
 				{
 					doll_initialize(PLAYER_STARTING_HP, PLAYER_STARTING_HP, PLAYER_STARTING_PP, PLAYER_STARTING_PP, factions.player, 
-					other.faceIndex, other.hairIndex, other.shirtIndex, other.pantsIndex, other.image_blend, other.hairColor, other.shirtColor, other.pantsColor);	
+					other.faceIndex, other.hairIndex, other.shirtIndex, other.pantsIndex, other.image_blend, other.hairColor, other.shirtColor, other.pantsColor, _inventory);	
 				}
 				
 				var _struct = serialize_instance(_doll)
