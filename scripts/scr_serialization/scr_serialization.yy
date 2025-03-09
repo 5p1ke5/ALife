@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_serializeInstance",
+  "%Name":"scr_serialization",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_serializeInstance",
+  "name":"scr_serialization",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

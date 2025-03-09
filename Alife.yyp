@@ -115,7 +115,7 @@
     {"id":{"name":"scr_party","path":"scripts/scr_party/scr_party.yy",},},
     {"id":{"name":"scr_phys","path":"scripts/scr_phys/scr_phys.yy",},},
     {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},
-    {"id":{"name":"scr_serializeInstance","path":"scripts/scr_serializeInstance/scr_serializeInstance.yy",},},
+    {"id":{"name":"scr_serialization","path":"scripts/scr_serialization/scr_serialization.yy",},},
     {"id":{"name":"snd_musicOverworld","path":"sounds/snd_musicOverworld/snd_musicOverworld.yy",},},
     {"id":{"name":"snd_seMelee","path":"sounds/snd_seMelee/snd_seMelee.yy",},},
     {"id":{"name":"snd_seNPCHit","path":"sounds/snd_seNPCHit/snd_seNPCHit.yy",},},

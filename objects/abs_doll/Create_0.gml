@@ -9,4 +9,5 @@ var _hairColor = make_color_hsv(irandom(255), 255, 255);
 var _shirtColor = make_color_hsv(irandom(255), 255, 255);
 var _pantsColor = make_color_hsv(irandom(255), 255, 255);
 
+
 doll_initialize(15, 5, 3, 3, irandom(factions.neutral), _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor);
