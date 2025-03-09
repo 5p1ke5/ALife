@@ -33,7 +33,7 @@ function globals_initialize()
 	
 	//Faction things
 	global.party = ds_list_create(); //Currently recruited allies.
-	global.partySerialized = ds_list_create(); //Party members serialized between levels.
+	global.partySerialized = ds_list_create(); //Party members serialized between levels. Element 0 will be designated the player upon deserialization.
 	
 	
 	//Currently selected allies.

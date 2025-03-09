@@ -1,8 +1,8 @@
-///@function serializeInstance(_instance)
+///@function serialize_instance(_instance)
 ///@description Gets all variables from an instance, then saves them to a SerializedInstance() struct.
 ///@param _instance the instance to be serialized.
 ///@return A new serialized instance, or -1 if no valid instance was found.
-function serializeInstance(_instance)
+function serialize_instance(_instance)
 {
 	if !(instance_exists(_instance))
 	{
@@ -21,7 +21,8 @@ function serializeInstance(_instance)
 		
 	}
 	
-	print(_serializedInstance);	
+	print(_serializedInstance);
+	
 	return _serializedInstance;
 	
 }

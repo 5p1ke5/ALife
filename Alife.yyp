@@ -86,6 +86,7 @@
     {"id":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},},
     {"id":{"name":"obj_npcFriendly","path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},},
     {"id":{"name":"obj_npcNeutral","path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},},
+    {"id":{"name":"obj_partySpawner","path":"objects/obj_partySpawner/obj_partySpawner.yy",},},
     {"id":{"name":"obj_plant","path":"objects/obj_plant/obj_plant.yy",},},
     {"id":{"name":"obj_playerSpawner","path":"objects/obj_playerSpawner/obj_playerSpawner.yy",},},
     {"id":{"name":"obj_speechBalloon","path":"objects/obj_speechBalloon/obj_speechBalloon.yy",},},

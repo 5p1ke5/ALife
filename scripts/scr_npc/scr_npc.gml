@@ -25,8 +25,6 @@ function npc_initialize(_name, _text, _level, _npcState)
 	
 	//Timers. -1 means they've already 'rung' and are inactive.
 	attackTimer = -1;
-	
-	print(_name);
 }
 
 /// @function npc_behavior()

@@ -1,5 +1,5 @@
 /// @function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor) 
-/// @description initializes variables for a doll object.
+/// @description initializes variables for a doll object. Returns a struct with all doll objects.
 /// @param _maxHP maximum hp for this doll.
 /// @param _hp current hp
 /// @param _maxPP maximum pp for this doll.
@@ -44,7 +44,7 @@ function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIn
 	//initialize physics.
 	phys_initialize(DOLL_FRICT, 0, 0, true);
 
-	//Sprites. These ones are changed on the fly based on whether running or jumping.
+	//The doll's inventory.
 	inventory = inventory_initialize();
 
 	//The item  currently being selected from inventory
@@ -80,6 +80,7 @@ function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIn
 	
 	//Instance being targetted. For players this is set when they're clicked on. For NPCs it's whoever they want to attack.
 	target = noone;
+
 }
 
 /// @function instance_create_at_doll(_doll _object, _spd = 0)

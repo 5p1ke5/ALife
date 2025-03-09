@@ -19,6 +19,5 @@ with (_player)
 
 
 party_add(_player);
+serialize_instance(_player);
 global.player = _player;
-
-serializeInstance(_player);
