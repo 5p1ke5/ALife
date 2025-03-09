@@ -17,11 +17,13 @@ function serialize_instance(_instance)
 	{
 		var _var = variable_instance_get(_instance, _variableNameArray[_i]);
 		variable_struct_set(_serializedInstance,  _variableNameArray[_i], _var)
-		
-		
 	}
 	
-	print(_serializedInstance);
+	//Adding built-in variables.	
+	with(_serializedInstance)
+	{
+		image_blend = _instance.image_blend;	
+	}
 	
 	return _serializedInstance;
 	

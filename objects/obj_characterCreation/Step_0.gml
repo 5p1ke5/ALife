@@ -115,30 +115,39 @@ switch (optionSelected)
 		case 4: //Exit
 			if (FACE_BUTTON_RELEASED)
 			{
-				//Serialize the variables for the array.
-				var _struct = {
-					maxHP : PLAYER_STARTING_HP,
-					hp : maxHP,
-					maxPP : PLAYER_STARTING_PP,
-					pp : maxPP,
-					faction : other.faction,
-					faceIndex : other.faceIndex,
-					hairIndex : other.hairIndex,
-					shirtIndex : other.shirtIndex,
-					pantsIndex : other.pantsIndex,
-					hairColor : other.hairColor,
-					shirtColor : other.shirtColor,
-					pantsColor : other.pantsColor,
-					skinColor : other.image_blend,
-					inventory : ds_list_create(),
-					inventoryIndex : other.inventoryIndex,
-					ppRegen : other.ppRegen,
-					name : "Player",
-					text : "Hi, I'm the main character!",
-					level : 100
-					}
+				////Serialize the variables for the array.
+				//var _struct = {
+				//	maxHP : PLAYER_STARTING_HP,
+				//	hp : maxHP,
+				//	maxPP : PLAYER_STARTING_PP,
+				//	pp : maxPP,
+				//	faction : other.faction,
+				//	faceIndex : other.faceIndex,
+				//	hairIndex : other.hairIndex,
+				//	shirtIndex : other.shirtIndex,
+				//	pantsIndex : other.pantsIndex,
+				//	hairColor : other.hairColor,
+				//	shirtColor : other.shirtColor,
+				//	pantsColor : other.pantsColor,
+				//	skinColor : other.image_blend,
+				//	inventory : ds_list_create(),
+				//	inventoryIndex : other.inventoryIndex,
+				//	ppRegen : other.ppRegen,
+				//	name : "Player",
+				//	text : "Hi, I'm the main character!",
+				//	level : 100
+				//	}
 				
-				ds_list_add(global.partySerialized,_struct);
+				var _doll = instance_create_depth(x, y, depth, obj_doll);
+				with (_doll)
+				{
+					doll_initialize(PLAYER_STARTING_HP, PLAYER_STARTING_HP, PLAYER_STARTING_PP, PLAYER_STARTING_PP, factions.player, 
+					other.faceIndex, other.hairIndex, other.shirtIndex, other.pantsIndex, other.image_blend, other.hairColor, other.shirtColor, other.pantsColor);	
+				}
+				
+				var _struct = serialize_instance(_doll)
+				
+				ds_list_add(global.partySerialized, _struct);
 				room_goto(ROOM_INTRO_SCREEN);
 			}
 		break;
