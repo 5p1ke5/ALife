@@ -1,12 +1,14 @@
 /// @function party_initialize()
 /// @description Sets the global party array as an empty ds_list.
+/// @returns returns an empty ds_list.
 function party_initialize()
 {
-	global.party = ds_list_create();	
+	return ds_list_create();	
 }
 
 /// @function party_serialized_intialize()
 /// @description Sets the global serialized party array as an empty ds_list.
+/// @returns returns an empty ds_list.
 function party_serialized_intialize()
 {
 	global.partySerialized = ds_list_create();
