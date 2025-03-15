@@ -298,8 +298,8 @@
   ],
   "name":"room_hometown",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"test",
+    "path":"folders/Rooms/test.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

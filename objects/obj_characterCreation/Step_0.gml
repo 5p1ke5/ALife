@@ -130,7 +130,7 @@ switch (optionSelected)
 					other.faceIndex, other.hairIndex, other.shirtIndex, other.pantsIndex, other.image_blend, other.hairColor, other.shirtColor, other.pantsColor, _inventory);	
 				}
 				
-				var _struct = serialize_instance(_doll)
+				var _struct = serialize_instance_extended(_doll)
 				
 				ds_list_add(global.partySerialized, _struct);
 				room_goto(ROOM_INTRO_SCREEN);

@@ -1,7 +1,7 @@
 ///@function serialize_instance(_instance)
-///@description Gets all non-read only variables + id from an instance, then saves them to a SerializedInstance() struct. This lets you easily read all the variables from the struct into an object with the deserialize_instance function (id is used to find which instance is which).
+///@description Gets all instance from an instance, then saves them to a struct. This lets you easily read all the variables from the struct into an object with the deserialize_instance function (id is used to find which instance is which).
 ///@param _instance the instance to be serialized.
-///@return A new serialized instance, or -1 if no valid instance was found.
+///@return A struct with all instance variables.
 function serialize_instance(_instance)
 {
 	if !(instance_exists(_instance))
@@ -20,7 +20,23 @@ function serialize_instance(_instance)
 		variable_struct_set(_serializedInstance,  _variableNameArray[_i], _var)
 	}
 	
-	//Reads in all the built-in variables that are not read only.
+	print(_serializedInstance);
+	return _serializedInstance;
+	
+}
+
+
+
+///@function serialize_instance_extended(_instance)
+///@description Gets all writable variables + id from an instance, then saves them to a SerializedInstance() struct. This lets you easily read all the variables from the struct into an object with the deserialize_instance function (id is used to find which instance is which).
+///@param _instance the instance to be serialized.
+///@return A new serialized instance, or -1 if no valid instance was found.
+function serialize_instance_extended(_instance)
+{
+	//Get instance variables first.
+	var _serializedInstance = serialize_instance(_instance);
+	
+	//Reads in all the built-in variables that are writable.
 	with(_serializedInstance)
 	{
 		id = _instance.id;
@@ -53,16 +69,15 @@ function serialize_instance(_instance)
 		
 	}
 	
-	print(_serializedInstance);
 	return _serializedInstance;
 	
 }
 
-///@function serialize_instance_extended(_instance)
+///@function serialize_instance_all(_instance)
 ///@description Gets all variables from an instance, then saves them to a SerializedInstance() struct.
 ///@param _instance the instance to be serialized.
 ///@return A new serialized instance, or -1 if no valid instance was found.
-function serialize_instance_extended(_instance)
+function serialize_instance_all(_instance)
 {
 	//First gets all the variables that are not read-only + id.
 	var _serializedInstance = serialize_instance(_instance);
