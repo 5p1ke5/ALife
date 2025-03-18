@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"overworld",
-    "path":"folders/Sprites/overworld.yy",
+    "name":"furniture",
+    "path":"folders/Sprites/furniture.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

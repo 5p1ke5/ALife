@@ -37,7 +37,7 @@ function meter_draw(_x1, _y1, _x2, _y2, _bgColor, _fgColor, _outlineColor, _shad
 
 
 }
-/// @function slider_create(_bgcolor, _fgcolor, _outlineColor, _shadowColor, _shadowOffset, _val, _maxval)
+/// @function slider_initialize(_bgcolor, _fgcolor, _outlineColor, _shadowColor, _shadowOffset, _val, _maxval)
 /// @description initializes a slider.
 /// @param bgcolor the background color of the meter.
 /// @param fgcolor the color of the actual meter (part that moves)
@@ -46,7 +46,7 @@ function meter_draw(_x1, _y1, _x2, _y2, _bgColor, _fgColor, _outlineColor, _shad
 /// @param shadowOffset How far beneath the meter the drop shadow is.
 /// @param val The current value of the stat being represented.
 /// @param maxVal the maximum value of the stat being represented.
-function slider_create(_bgColor, _fgColor, _outlineColor, _shadowColor, _shadowOffset, _val, _maxVal) 
+function slider_initialize(_bgColor, _fgColor, _outlineColor, _shadowColor, _shadowOffset, _val, _maxVal) 
 {
 	bgColor = _bgColor;
 	fgColor = _fgColor;

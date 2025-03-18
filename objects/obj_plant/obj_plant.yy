@@ -9,12 +9,12 @@
   "name":"obj_plant",
   "overriddenProperties":[],
   "parent":{
-    "name":"overworld",
-    "path":"folders/Objects/overworld.yy",
+    "name":"furniture",
+    "path":"folders/Objects/furniture.yy",
   },
   "parentObjectId":{
-    "name":"obj_block",
-    "path":"objects/obj_block/obj_block.yy",
+    "name":"abs_furniture",
+    "path":"objects/abs_furniture/abs_furniture.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

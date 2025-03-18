@@ -3,8 +3,8 @@
   "%Name":"spr_tilesOverworld",
   "bboxMode":0,
   "bbox_bottom":735,
-  "bbox_left":0,
-  "bbox_right":319,
+  "bbox_left":16,
+  "bbox_right":335,
   "bbox_top":16,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"2d8bfc2e-ee5b-44df-8857-11fa675d2e58","name":"2d8bfc2e-ee5b-44df-8857-11fa675d2e58","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"d7d7e170-db3d-4079-85d9-511a2c769e21","name":"d7d7e170-db3d-4079-85d9-511a2c769e21","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":768,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"a54e414c-4cf7-4a6b-be49-d5df12b4e709","blendMode":0,"displayName":"default","isLocked":false,"name":"a54e414c-4cf7-4a6b-be49-d5df12b4e709","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"48a774ee-4275-4d9e-911e-de2406e23bf9","blendMode":0,"displayName":"default","isLocked":false,"name":"48a774ee-4275-4d9e-911e-de2406e23bf9","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_tilesOverworld",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"2d8bfc2e-ee5b-44df-8857-11fa675d2e58","path":"sprites/spr_tilesOverworld/spr_tilesOverworld.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"d8ecd481-921f-4179-a32b-29e301c7cd92","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d7d7e170-db3d-4079-85d9-511a2c769e21","path":"sprites/spr_tilesOverworld/spr_tilesOverworld.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"cafe7162-17a6-4ee8-94cd-2dad36e76447","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

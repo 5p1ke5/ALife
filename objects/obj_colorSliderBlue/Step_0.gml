@@ -9,19 +9,18 @@ if (UP_BUTTON_RELEASED) || (DOWN_BUTTON_RELEASED)
 	switch (optionSelected)
 	{
 		case 0: //Skin
-			val = color_get_blue(global.playerSkinColor);
+			val = color_get_red(owner.image_blend);
 		break;
 		case 1: //Hair
-			val = color_get_blue(global.playerHairColor);
+			val = color_get_red(owner.hairColor);
 		break;
 		case 2: //Shirt
-			val = color_get_blue(global.playerShirtColor);
+			val = color_get_red(owner.shirtColor);
 		break;
 		case 3: //Pants
-			val = color_get_blue(global.playerPantsColor);
+			val = color_get_red(owner.pantsColor);
 		break;
 		default: 
 		break;
-		
 	}
 }

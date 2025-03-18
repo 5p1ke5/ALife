@@ -1,17 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_playerSpawner",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_house3",
+  "eventList":[],
   "managed":true,
-  "name":"obj_playerSpawner",
+  "name":"obj_house3",
   "overriddenProperties":[],
   "parent":{
-    "name":"dolls",
-    "path":"folders/Objects/dolls.yy",
+    "name":"houses",
+    "path":"folders/Objects/furniture/houses.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"abs_furniture",
+    "path":"objects/abs_furniture/abs_furniture.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -29,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_house3",
+    "path":"sprites/spr_house3/spr_house3.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

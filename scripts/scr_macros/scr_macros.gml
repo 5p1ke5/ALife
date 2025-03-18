@@ -51,7 +51,7 @@
 #macro TEXT_BALLOON_SPEED 5
 #macro TEXT_BALLOON_MAXW 100
 #endregion
-
+window_mouse_get_delta_x()
 #region	//Controls.
 #macro ANY_BUTTON (keyboard_check(vk_anykey))
 #macro RIGHT_BUTTON (keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr))
@@ -61,7 +61,7 @@
 #macro A_BUTTON (keyboard_check(vk_space) || gamepad_button_check(0, gp_face1))
 #macro B_BUTTON (keyboard_check(ord("Q")) || gamepad_button_check(0, gp_face2))
 #macro X_BUTTON (keyboard_check(ord("E")) || gamepad_button_check(0, gp_face3))
-#macro Y_BUTTON (keyboard_check(ord("C")) || gamepad_button_check(0, gp_face4))
+#macro Y_BUTTON (keyboard_check(ord("R")) || gamepad_button_check(0, gp_face4))
 #macro FACE_BUTTON (A_BUTTON || B_BUTTON || X_BUTTON || Y_BUTTON) 
 #macro START_BUTTON ((gamepad_button_check(0, gp_start)) || (keyboard_check(vk_enter)))
 #macro SELECT_BUTTON ((gamepad_button_check(0, gp_select)) || (keyboard_check(vk_tab)))
@@ -78,7 +78,7 @@
 #macro A_BUTTON_PRESSED (keyboard_check_pressed(vk_space) || gamepad_button_check_pressed(0, gp_face1))
 #macro B_BUTTON_PRESSED (keyboard_check_pressed(ord("Q")) || gamepad_button_check_pressed(0, gp_face2))
 #macro X_BUTTON_PRESSED (keyboard_check_pressed(ord("E")) || gamepad_button_check_pressed(0, gp_face3))
-#macro Y_BUTTON_PRESSED (keyboard_check_pressed(ord("C")) || gamepad_button_check_pressed(0, gp_face4))
+#macro Y_BUTTON_PRESSED (keyboard_check_pressed(ord("R")) || gamepad_button_check_pressed(0, gp_face4))
 #macro MOUSE_LEFT_BUTTON_PRESSED mouse_check_button_pressed(mb_left)
 #macro MOUSE_RIGHT_BUTTON_PRESSED mouse_check_button_pressed(mb_right)
 
@@ -92,7 +92,7 @@
 #macro A_BUTTON_RELEASED (keyboard_check_released(vk_space) || gamepad_button_check_released(0, gp_face1))
 #macro B_BUTTON_RELEASED (keyboard_check_released(ord("Q")) || gamepad_button_check_released(0, gp_face2))
 #macro X_BUTTON_RELEASED (keyboard_check_released(ord("E")) || gamepad_button_check_released(0, gp_face3))
-#macro Y_BUTTON_RELEASED (keyboard_check_released(ord("C")) || gamepad_button_check_released(0, gp_face4))
+#macro Y_BUTTON_RELEASED (keyboard_check_released(ord("R")) || gamepad_button_check_released(0, gp_face4))
 #macro FACE_BUTTON_RELEASED (A_BUTTON_RELEASED || B_BUTTON_RELEASED || X_BUTTON_RELEASED || Y_BUTTON_RELEASED) 
 #macro MOUSE_LEFT_BUTTON_RELEASED mouse_check_button_pressed(mb_left)
 #macro MOUSE_RIGHT_BUTTON_RELEASED mouse_check_button_pressed(mb_right)
@@ -126,17 +126,6 @@ enum factions
 {
 	player, neutral, enemy	
 }
-
-//Used to index modes and also stores a sprite value...Once I make the sprites
-//enum cursor
-//{
-//	normal = spr_cursor,
-//	follow = spr_cursorFollow,
-//	attack = spr_cursorAttack,
-//	move = spr_cursorMove,
-//	select = spr_cursorSelect
-//}
-
 
 enum cursor
 {

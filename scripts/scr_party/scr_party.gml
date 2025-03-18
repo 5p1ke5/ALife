@@ -11,7 +11,7 @@ function party_initialize()
 /// @returns returns an empty ds_list.
 function party_serialized_intialize()
 {
-	global.partySerialized = ds_list_create();
+	return ds_list_create();
 }
 
 

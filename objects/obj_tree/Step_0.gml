@@ -1,5 +1,4 @@
 /// @description Sets depth, if in death state rotates until it's at a 45 degree angle, then stops and fades away.
-depth = -y;
 
 if (!living)
 {
