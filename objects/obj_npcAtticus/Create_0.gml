@@ -18,4 +18,4 @@ inventory_add(inventory, _item);
 
 var _state = new NPCStateIdle(noone);
 
-npc_initialize("Atticus", "Hi neighbor!", 100, _state);
+npc_initialize("Atticus", ["Hail, traveller!", "Let me know if there's anything you need."], 100, _state);

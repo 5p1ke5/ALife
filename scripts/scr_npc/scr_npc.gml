@@ -1,13 +1,14 @@
 /// @function npc_initialize(_name, _Text)
 /// @description initializes NPC variables.
 /// @param _name the name of the NPC. Will also be put in the text box.
-/// @param _text the text that will be put in the npcs speech balloon.
+/// @param _texts[] an array containing the text that will go in the NPC speech balloon.
 /// @param _level How quickly the NPC reacts. Lower is stronger, with 0 being strongest. 100 is easy.
 /// @param _npcState npcState struct. Should be initialzed with the NPCState constructor and the correct npcStates. enum
-function npc_initialize(_name, _text, _level, _npcState)
+function npc_initialize(_name, _texts, _level, _npcState)
 {
 	name = _name;
-	text = _text;
+	texts = _texts;
+	textIndex = 0; //Current indext in the text array.
 	level = _level;
 
 	//This will contain a reference to any dialogue balloon the NPC creates.
@@ -205,10 +206,17 @@ function NPCStateMove(_target): NPCState(_target) constructor
 
 /// @function npc_speak(_text)
 /// @description generates a speech balloon for the npc.
-/// @param _text The text to be put in the balloon.
-function npc_speak(_text)
-{
-
+function npc_speak()
+{	
+	var _text = texts[textIndex];
+	
+	//Increments textIndex and wraps around if necessary.
+	textIndex++;
+	if (textIndex > array_length(texts) - 1)
+	{
+		textIndex = 0;	
+	}
+	
 	//Creates speech balloon object.
 	var _name = name;
 	

@@ -18,4 +18,4 @@ inventory_add(inventory, _item);
 
 var _state = new NPCStateIdle(noone);
 
-npc_initialize("Bandit", "Grr we're bandits!", 100, _state);
+npc_initialize("Bandit", ["I'll crush you!"], 100, _state);

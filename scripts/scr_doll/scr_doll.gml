@@ -16,7 +16,7 @@
 /// @param _inventory an optional ds_list containing an inventory.
 function doll_initialize(_maxHP, _hp, _maxPP, _pp, _faction, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor, _inventory = undefined) 
 {
-	
+	method_call
 	//Initializes instance variables.
 	living_initialize(_maxHP, _hp);
 	
