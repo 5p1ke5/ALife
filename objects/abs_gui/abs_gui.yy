@@ -1,13 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"abs_menu",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"abs_gui",
+  "eventList":[],
   "managed":true,
-  "name":"abs_menu",
+  "name":"abs_gui",
   "overriddenProperties":[],
   "parent":{
     "name":"abstract",
@@ -18,7 +14,7 @@
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
-  "physicsGroup":0,
+  "physicsGroup":1,
   "physicsKinematic":false,
   "physicsLinearDamping":0.1,
   "physicsObject":false,

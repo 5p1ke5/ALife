@@ -52,8 +52,34 @@ function npc_behavior()
 	{
 		state.Perform(id)	
 	}
+	
+	//Open dropdown menu.
+	if (position_meeting(mouse_x, mouse_y, id) && MOUSE_RIGHT_BUTTON_RELEASED_NOT_GUI)
+	{
+		npc_create_dropdown();
+		//var _buttonA = {};
+		
+		//with (_buttonA)
+		//{
+		//	var _method = method(self, npc_speak);
+		//	gui_button_initialize("TALK", _method, "hello", _dropdown);	
+		//}
+		//var _buttonB = {};
+		//var _buttonC = {};
+		//var _buttonD = {};
+		
+		//var _dropdown = gui_dropdown_create(x, y, depth, [_buttonA, _buttonB, _buttonC, _buttonD], c_blue, c_aqua, id);
+		
+	}
 }
 
+///@function npc_create_dropdown()
+function npc_create_dropdown()
+{
+	
+
+	var _dropdown = gui_dropdown_create(x, y, depth, [], c_blue, c_aqua, id);
+}
 
 /// @function npc_sense_actors()
 /// @description Gets a list of all objects within range of the NPC, adds them to senseList and senseListEnemies.
