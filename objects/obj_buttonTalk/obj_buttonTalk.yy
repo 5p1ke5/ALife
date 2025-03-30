@@ -1,22 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_button",
+  "%Name":"obj_buttonTalk",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":10,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":7,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_button",
+  "name":"obj_buttonTalk",
   "overriddenProperties":[],
   "parent":{
     "name":"dropdown buttons",
     "path":"folders/Objects/gui/dropdown buttons.yy",
   },
   "parentObjectId":{
-    "name":"abs_gui",
-    "path":"objects/abs_gui/abs_gui.yy",
+    "name":"obj_button",
+    "path":"objects/obj_button/obj_button.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

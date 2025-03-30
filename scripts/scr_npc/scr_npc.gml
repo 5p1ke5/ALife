@@ -56,29 +56,16 @@ function npc_behavior()
 	//Open dropdown menu.
 	if (position_meeting(mouse_x, mouse_y, id) && MOUSE_RIGHT_BUTTON_RELEASED_NOT_GUI)
 	{
-		npc_create_dropdown();
-		//var _buttonA = {};
-		
-		//with (_buttonA)
-		//{
-		//	var _method = method(self, npc_speak);
-		//	gui_button_initialize("TALK", _method, "hello", _dropdown);	
-		//}
-		//var _buttonB = {};
-		//var _buttonC = {};
-		//var _buttonD = {};
-		
-		//var _dropdown = gui_dropdown_create(x, y, depth, [_buttonA, _buttonB, _buttonC, _buttonD], c_blue, c_aqua, id);
-		
+		print(npc_create_dropdown());
 	}
 }
 
 ///@function npc_create_dropdown()
+///@description Creates a dropdown at the mouse position. Returns the created dropdown.
 function npc_create_dropdown()
 {
-	
-
-	var _dropdown = gui_dropdown_create(x, y, depth, [], c_blue, c_aqua, id);
+	var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth, [obj_buttonTalk, obj_buttonRecruit, obj_buttonDismiss], self);
+	return _dropdown;
 }
 
 /// @function npc_sense_actors()

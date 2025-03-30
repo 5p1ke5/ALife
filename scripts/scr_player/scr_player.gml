@@ -15,7 +15,7 @@ function player_control()
 		angle = -1;
 
 		//Use item. Call's the item's Use method.
-		if (MOUSE_LEFT_BUTTON_PRESSED)
+		if (MOUSE_LEFT_BUTTON_PRESSED_NOT_GUI)
 		{
 			angle = point_direction(x, y, mouse_x, mouse_y);
 	
@@ -102,7 +102,7 @@ function player_control()
 	}
 	
 	
-	if (MOUSE_LEFT_BUTTON_RELEASED)
+	if (MOUSE_LEFT_BUTTON_RELEASED_NOT_GUI)
 	{
 		var _list = ds_list_create();
 		collision_point_list(mouse_x, mouse_y, DOLL, false, true, _list, true);

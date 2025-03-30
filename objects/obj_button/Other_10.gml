@@ -1,2 +1,1 @@
-/// @description Calls method (usually when clicked)
-gui_button_method();
+/// @description Calls method (usually when clicked, should be overriden)

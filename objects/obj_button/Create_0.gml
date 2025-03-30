@@ -1,9 +1,1 @@
-/// @description Initialize variables.
-
-//By default just does an empty method with no parameters.
-var _method = function()
-{
-	
-}
-
-gui_button_initialize("Foo", _method);
+gui_button_initialize("NA", c_blue, c_aqua, c_aqua, noone);
