@@ -15,6 +15,16 @@ function party_serialized_intialize()
 }
 
 
+///@function party_serialize()
+///@description Serializes all party members into a ds_list. Returns that list of serialized party members.
+function party_serialize()
+{
+	var _partySerialized = ds_list_create();
+	
+	return _partySerialized;
+}
+
+
 /// @function party_add()
 /// @description adds an instance reference to the party member list.
 /// @param _instance The instance to be added to the list.

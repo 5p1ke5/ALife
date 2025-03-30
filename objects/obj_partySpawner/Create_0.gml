@@ -4,11 +4,28 @@
 //Reinitializes party, clearing the list.
 global.party = party_initialize();
 
+//Attempts to spawn party at the spawn point defined in globals. -1,-1 is considered 'blank' and in that case just spawns the party at the instance's coordinates.
+if (global.spawnX == -1 && global.spawnY == -1)
+{
+	var _spawnX = x;
+	var _spawnY = y;
+}
+else
+{
+	var _spawnX = global.spawnX;
+	var _spawnY = global.spawnY;
+}
+
+//resets global spawn variables.
+global.spawnX = -1;
+global.spawnY = -1;
+
+
 for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 {
 	var _struct = ds_list_find_value(global.partySerialized, _i);
 	
-	var _doll = instance_deserialize_doll(x, y, depth, _struct);
+	var _doll = instance_deserialize_doll(_spawnX, _spawnY, depth, _struct);
 
 	
 	if (_i == 0)

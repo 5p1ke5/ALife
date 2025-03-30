@@ -4,9 +4,9 @@ function globals_initialize()
 {
 	global.player = -1; //The instance the player is currently controlling. Will be set on room load.
 	
-	//Coordinates teh party will be spawned at on room transition.
-	global.spawnX = 0;
-	global.spawnY = 0;
+	//Coordinates teh party will be spawned at on room transition. -1, -1 is considered 'blank' and will result in the party being spawned at the spawn point's coordinates.
+	global.spawnX = -1;
+	global.spawnY = -1;
 	
 	//Cursor things.
 	global.cursors[0] = spr_cursor;
