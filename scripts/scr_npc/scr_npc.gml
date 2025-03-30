@@ -80,6 +80,16 @@ function npc_create_dropdown()
 	//If they are in the player's faction they can be dismissed.
 	else
 	{
+		if (instanceof(state) == "NPCStateFollow")
+		{
+			array_push(_buttons, obj_buttonMove);
+			array_push(_buttons, obj_buttonAttack);
+		}
+		else
+		{
+			array_push(_buttons, obj_buttonFollow);	
+		}
+		
 		array_push(_buttons, obj_buttonDismiss);
 	}
 	
@@ -210,7 +220,7 @@ function NPCStateIdle(_target): NPCState(_target) constructor
 }
 
 ///@function NPCStateMove(_target): NPCState(_target) constructor
-///@description state for when NPC is moving towards a given point.
+///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait.
 ///@param _target Point2 for the target to move towards.
 function NPCStateMove(_target): NPCState(_target) constructor
 {

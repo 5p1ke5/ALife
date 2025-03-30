@@ -69,23 +69,11 @@ function player_control()
 	}
 	
 	
-	///Code for commanding party units.
-	//Allows you to perform commands using hotkeys.
-	if (keyboard_check(ord("1")))
+
+	//Cancels out of cursor.	
+	if (MOUSE_RIGHT_BUTTON)
 	{
 		global.cursorState = cursor.normal;
-		cursor_sprite = global.cursors[global.cursorState];
-	}
-
-	if (keyboard_check(ord("2")))
-	{
-		global.cursorState = cursor.select;
-		cursor_sprite = global.cursors[global.cursorState];
-	}
-
-	if (keyboard_check(ord("3")))
-	{
-		global.cursorState = cursor.follow;
 		cursor_sprite = global.cursors[global.cursorState];
 	}
 
@@ -94,13 +82,6 @@ function player_control()
 		global.cursorState = cursor.attack;
 		cursor_sprite = global.cursors[global.cursorState];
 	}
-
-	if (keyboard_check(ord("5")))
-	{
-		global.cursorState = cursor.move;
-		cursor_sprite = global.cursors[global.cursorState];
-	}
-	
 	
 	if (MOUSE_LEFT_BUTTON_RELEASED_NOT_GUI)
 	{
@@ -139,36 +120,6 @@ function player_control()
 				}
 			break;
 	
-			case cursor.follow:
-				//Check if mouse is an NPC and if so adds them to the party list and makes them follow the player..
-				for (var _i = 0; _i < ds_list_size(_list); _i++)
-				{
-					var _npc = ds_list_find_value(_list, _i);
-			
-					if (_npc.faction == factions.player)
-					{
-						var _playerID = id;
-						with (_npc)
-						{
-							_newState = new NPCStateFollow(_playerID);
-				
-							state = _newState;
-						}
-				
-						if (ds_list_find_index(global.party, _npc) == -1)
-						{
-							ds_list_add(global.party, _npc)
-						}
-				
-						if (ds_list_find_index(global.selected, _npc) == -1)
-						{
-							ds_list_add(global.selected, _npc)
-						} 
-						break;
-					}
-				}
-			break;
-	
 			case cursor.attack:
 				//Order all selected npcs to attack
 				//for testing purposes i'm making it so it swaps control to first npc in list.
@@ -181,20 +132,16 @@ function player_control()
 			case cursor.move:
 				//Order all selected NPCs to move.
 				var _point = new Point2(mouse_x, mouse_y);
+				
 				var _newState = new NPCStateMove(_point);
-		
-				print(string(_point));
-				for (var _i = 0; _i < ds_list_size(global.selected); _i++)
+			
+				with (global.selectedUnit)
 				{
-					var _npc = ds_list_find_value(global.selected, _i);
-			
-					with (_npc)
-					{
-						state = _newState;
-						print(string(state));
-					}
-			
+					state = _newState;
 				}
+				
+				global.cursorState = cursor.normal;
+				cursor_sprite = global.cursors[global.cursorState];
 		
 			break;
 		}
