@@ -56,15 +56,34 @@ function npc_behavior()
 	//Open dropdown menu.
 	if (position_meeting(mouse_x, mouse_y, id) && MOUSE_RIGHT_BUTTON_RELEASED_NOT_GUI)
 	{
-		print(npc_create_dropdown());
+		npc_create_dropdown();
 	}
 }
 
 ///@function npc_create_dropdown()
-///@description Creates a dropdown at the mouse position. Returns the created dropdown.
+///@description Destroys all other dropdowns, then creates a dropdown at the mouse position. Returns the created dropdown.
 function npc_create_dropdown()
 {
-	var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth, [obj_buttonTalk, obj_buttonRecruit, obj_buttonDismiss], self);
+	instance_destroy(obj_dropdown);
+	
+	var _buttons = array_create(0);
+	array_push(_buttons, obj_buttonTalk);
+	
+	//If the npc is not in the player's party but is in the player's faction, they can be recruited.
+	if (ds_list_find_index(global.party, id) == -1)
+	{
+		if (faction == factions.player)
+		{
+			array_push(_buttons, obj_buttonRecruit);
+		}
+	}
+	//If they are in the player's faction they can be dismissed.
+	else
+	{
+		array_push(_buttons, obj_buttonDismiss);
+	}
+	
+	var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth, _buttons, self);
 	return _dropdown;
 }
 

@@ -1,1 +1,2 @@
-/// @description Calls method (usually when clicked, should be overriden)
+/// @description By default just deletes the dropdowns (and the buttons with it). Most buttons will inherit and add functionality.
+instance_destroy(obj_dropdown);

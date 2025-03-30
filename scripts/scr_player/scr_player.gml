@@ -27,7 +27,7 @@ function player_control()
 		}
 	
 		//Alt use of item. Call's item's AltUse method.
-		else if (MOUSE_RIGHT_BUTTON)
+		else if (MOUSE_RIGHT_BUTTON_NOT_GUI)
 		{
 			angle = point_direction(x, y, mouse_x, mouse_y);
 		

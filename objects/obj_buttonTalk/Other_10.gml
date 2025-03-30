@@ -9,3 +9,5 @@ if (instance_exists(owner))
 		}
 	}
 }
+
+event_inherited();
