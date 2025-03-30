@@ -24,8 +24,9 @@ function npc_initialize(_name, _texts, _level, _npcState)
 	//List of enemies that have been sensed. If not empty is engaging enemies in combat.
 	senseListEnemies =  ds_list_create();
 	
-	//Timers. -1 means they've already 'rung' and are inactive.
+	//When attack timer <0 the NPC can attack again.
 	attackTimer = -1;
+	
 }
 
 /// @function npc_behavior()
@@ -41,7 +42,7 @@ function npc_behavior()
 		attackTimer--;
 	}
 
-	//Dealing with enemies usually state.
+	//If the NPC senses enemies they will be in a fighting state.
 	//This can itself be overriden if the unit is in certain states.
 	if (ds_list_size(senseListEnemies) > 0) 
 	&&  (instanceof(state) != "NPCStateMove")
@@ -53,7 +54,7 @@ function npc_behavior()
 		state.Perform(id)	
 	}
 	
-	//Open dropdown menu.
+	//If right clicked opens dropdown for that NPC.
 	if (position_meeting(mouse_x, mouse_y, id) && MOUSE_RIGHT_BUTTON_RELEASED_NOT_GUI)
 	{
 		npc_create_dropdown();
@@ -64,6 +65,7 @@ function npc_behavior()
 ///@description Destroys all other dropdowns, then creates a dropdown at the mouse position. Returns the created dropdown.
 function npc_create_dropdown()
 {
+	//Destroys all currently existing dropdowns.
 	instance_destroy(obj_dropdown);
 	
 	var _buttons = array_create(0);
@@ -93,7 +95,7 @@ function npc_create_dropdown()
 		array_push(_buttons, obj_buttonDismiss);
 	}
 	
-	var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth, _buttons, self);
+	var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth - 5, _buttons, self);
 	return _dropdown;
 }
 
@@ -105,7 +107,7 @@ function npc_sense_actors()
 	senseList = ds_list_create();
 	senseListEnemies =  ds_list_create();
 	
-	//Adds sensed NPCs to the list + player.
+	//Adds sensed NPCs to the list
 	var _npcsFound = collision_circle_list(x, y, CLOSE_RANGE, abs_doll, false, true, senseList, true);
 	
 	//Add sensed enemies to the list of sensed enemies.
@@ -130,6 +132,23 @@ function npc_sense_actors()
 		}
 	}
 	
+	
+	///Maybe add something like.. 
+	/*
+	
+	sort senseListEnemies by distance to this unit
+	
+	if (state = instanceof("NPCStateAttack")
+		for (...)
+		{
+			if npc == target
+			{
+				put them at position 0
+			}
+		}
+	}
+	*/
+	
 }
 
 ///@function NPCState(_state, _target) constructor
@@ -153,7 +172,6 @@ function NPCStateFollow(_target): NPCState(_target) constructor
 {
 	static Perform = function(_user)
 	{
-		
 		var _target = target;
 		with (_user)
 		{
@@ -326,6 +344,10 @@ function npc_fight_itemUse(_item, _target)
 			}
 	        break;
 			
+		case aiType.ranged:
+		
+			break;
+			
 	    default: //Tries to run away.
 				doll_movement(-sign(_target.x - x), -sign(_target.y - y));
 	        break;
@@ -340,7 +362,6 @@ function npc_fight_itemUse(_item, _target)
 /// @param _name The name of the npc that created this balloon.
 function speechBalloon_initialize(_text, _maxTime, _owner, _name) 
 {
-
 	text = _text;
 	maxTime = _maxTime;
 	time = maxTime;
@@ -353,11 +374,4 @@ function speechBalloon_initialize(_text, _maxTime, _owner, _name)
 function npc_name_random()
 {
 	return global.names[irandom(array_length(global.names) - 1)];
-}
-
-
-//enums
-enum npcStates
-{
-	idle, move, attack, defend, follow, passive
 }

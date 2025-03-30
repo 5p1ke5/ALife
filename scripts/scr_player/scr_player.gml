@@ -70,11 +70,11 @@ function player_control()
 	
 	
 
-	//Cancels out of cursor.	
+	//Cancels out of cursor, untargets.	
 	if (MOUSE_RIGHT_BUTTON)
 	{
-		global.cursorState = cursor.normal;
-		cursor_sprite = global.cursors[global.cursorState];
+		global.selectedUnit = noone;
+		cursor_state_set(cursor.normal);
 	}
 
 	if (keyboard_check(ord("4")))
@@ -83,6 +83,8 @@ function player_control()
 		cursor_sprite = global.cursors[global.cursorState];
 	}
 	
+	
+	///TODO: Maybe move this to a function?
 	if (MOUSE_LEFT_BUTTON_RELEASED_NOT_GUI)
 	{
 		var _list = ds_list_create();
@@ -92,32 +94,6 @@ function player_control()
 		{
 			case cursor.normal:
 	
-			break;
-	
-			case cursor.select:
-				for (var _i = 0; _i < ds_list_size(_list); _i++)
-				{
-					var _npc = ds_list_find_value(_list, _i);
-			
-					//If it's a member of the party can select and deselect.
-					var _indexA = ds_list_find_index(global.party, _npc)
-			
-					if (_indexA != -1)
-					{
-						//If not part of selection selects; if not deselects.
-						var _indexB = ds_list_find_index(global.selected, _npc);
-						if (_indexB == -1)
-						{
-							//Adds to list
-							ds_list_add(global.selected, _npc);
-							break;
-						}
-				
-						//removes from list. Either way breaks.
-						ds_list_delete(global.selected, _indexB);
-						break;
-					}
-				}
 			break;
 	
 			case cursor.attack:
@@ -130,9 +106,8 @@ function player_control()
 			break;
 	
 			case cursor.move:
-				//Order all selected NPCs to move.
+				//Order currently selected NPCs to move.
 				var _point = new Point2(mouse_x, mouse_y);
-				
 				var _newState = new NPCStateMove(_point);
 			
 				with (global.selectedUnit)
@@ -140,9 +115,8 @@ function player_control()
 					state = _newState;
 				}
 				
-				global.cursorState = cursor.normal;
-				cursor_sprite = global.cursors[global.cursorState];
-		
+				global.selectedUnit = noone;
+				cursor_state_set(cursor.normal);
 			break;
 		}
 	}

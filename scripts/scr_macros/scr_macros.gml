@@ -133,6 +133,16 @@ enum factions
 	player, neutral, enemy	
 }
 
+enum npcStates
+{
+	idle,
+	move, 
+	attack, 
+	defend, 
+	follow, 
+	passive
+}
+
 enum cursor
 {
 	normal,
@@ -140,6 +150,15 @@ enum cursor
 	attack,
 	move,
 	select
+}
+
+enum aiType
+{
+	na, 
+	melee, 
+	ranged, 
+	consumable, 
+	special
 }
 
 #endregion

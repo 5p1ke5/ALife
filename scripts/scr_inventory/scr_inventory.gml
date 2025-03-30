@@ -194,12 +194,6 @@ function ItemMelee(_itemName,  _inventory, _icon, _amount, _description, _value,
 	}
 }
 
-enum aiType
-{
-	na, melee, ranged, consumable, special
-}
-
-
 
 
 /// @function ItemInstancer(_itemName,  _inventory, _icon, _amount, _description, _value, _ai, _object, _spd = 0)  
