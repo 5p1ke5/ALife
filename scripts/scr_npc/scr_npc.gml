@@ -192,7 +192,7 @@ function NPCStateFollow(_target): NPCState(_target) constructor
 ///@function NPCStateIdle(_target): NPCState(_target) constructor
 ///@description state for when NPC is idle. Just makes them sort of mill about.
 ///@param _target Point2 that refers to the NPC's home area (unimplimented cna just be null).
-function NPCStateIdle(_target): NPCState(_target) constructor
+function NPCStateIdle(_target = noone): NPCState(_target) constructor
 {
 	//How long the NPC waits between switching between standing still and moving around.
 	passiveTimer = -1;

@@ -25,13 +25,21 @@ for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 {
 	var _struct = ds_list_find_value(global.partySerialized, _i);
 	
-	var _doll = instance_deserialize_doll(_spawnX, _spawnY, depth, _struct);
+	var _doll = instance_deserialize_doll(_spawnX, _spawnY, depth, _struct, new NPCStateIdle());
 
 	
 	if (_i == 0)
 	{
-		global.player = _doll;	
+		global.player = _doll;
+	}	
+	else
+	{
+		with (_doll)
+		{
+			state = new NPCStateFollow(global.player);	
+		}
 	}
+		
 
 	//Adds them to the party.	
 	party_add(_doll);

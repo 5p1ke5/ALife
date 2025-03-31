@@ -21,6 +21,14 @@ function party_serialize()
 {
 	var _partySerialized = ds_list_create();
 	
+	
+	for (var _i = 0; _i < ds_list_size(global.party); _i++) 
+	{
+		var _serializedDoll = serialize_instance_extended(ds_list_find_value(global.party, _i));
+		
+		ds_list_add(_partySerialized, _serializedDoll);
+	}
+	
 	return _partySerialized;
 }
 
