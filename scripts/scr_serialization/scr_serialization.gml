@@ -114,9 +114,9 @@ function serialize_instance_all(_instance)
 ///@param _y Y coordinate to place the doll at.
 ///@param _depth Depth to place the doll at.
 ///@param _struct The struct containing a serialized instance of a doll. Select variables will be taken from this and used to initialize the doll.
-///@param _NPCState the NPC's state is usually not copied over and instead reset usually so needs to be passed as a parameter. If need be can just be something like "NPCIdle"
+///@param [_NPCState] the NPC's state is usually not copied over and instead reset usually so needs to be passed as a parameter. Defaults to NPCIdle.
 ///@return Returns a reference to the created doll.
-function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCState)
+function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCState = new NPCStateIdle())
 {
 	var _doll = instance_create_depth(_x, _y, _depth, obj_doll);
 	

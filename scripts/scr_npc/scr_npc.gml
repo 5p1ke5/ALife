@@ -26,7 +26,6 @@ function npc_initialize(_name, _texts, _level, _npcState)
 	
 	//When attack timer <0 the NPC can attack again.
 	attackTimer = -1;
-	
 }
 
 /// @function npc_behavior()

@@ -25,7 +25,7 @@ for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 {
 	var _struct = ds_list_find_value(global.partySerialized, _i);
 	
-	var _doll = instance_deserialize_doll(_spawnX, _spawnY, depth, _struct, new NPCStateIdle());
+	var _doll = instance_deserialize_doll(_spawnX, _spawnY, depth, _struct);
 
 	
 	if (_i == 0)
