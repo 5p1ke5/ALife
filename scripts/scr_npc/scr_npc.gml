@@ -252,6 +252,23 @@ function npc_fight_itemUse(_item, _target)
 
 
 
+///@function npc_exit_state()
+///@description Attempts to exit the npc's current state. Can only exit state if npcStates array has more than 1 item.
+///@returns The next state in the array or noone if there is only 1 item in the array.
+function npc_exit_state()
+{
+	//State can only be exited if the number of items in npcState is greater than 1.
+	if (array_length(npcStates) > 1)
+	{
+		array_delete(npcStates, 0, 1); //If so, deletes the current state from the npcStates arra
+		return npcStates[0];
+	}
+	
+	return noone;
+}
+
+
+
 ///@function NPCState() constructor
 ///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
 function NPCState() constructor
@@ -337,7 +354,7 @@ function NPCStateIdle(): NPCState() constructor
 }
 
 ///@function NPCStateMove(_target): NPCState(_target) constructor
-///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait.
+///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point.
 ///@param _target Point2 for the target to move towards.
 function NPCStateMove(_target): NPCState(_target) constructor
 {
