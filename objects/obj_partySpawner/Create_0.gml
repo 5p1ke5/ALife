@@ -36,8 +36,9 @@ for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 	{
 		with (_doll)
 		{
+			//Resets npcStates so it only contains a commands to follow the player.
 			var _state = new NPCStateFollow(global.player);
-			array_insert(npcStates, 0, _state)
+			npcStates = array_create(1, _state);
 		}
 	}
 		

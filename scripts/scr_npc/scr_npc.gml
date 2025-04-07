@@ -252,12 +252,10 @@ function npc_fight_itemUse(_item, _target)
 
 
 
-///@function NPCState(_state, _target) constructor
+///@function NPCState() constructor
 ///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
-///@param _target reference to a variable holding an object or a point struct, depending on current state.
-function NPCState( _target) constructor
+function NPCState() constructor
 {
-	target = _target;
 	
 	//Performs whatever action the state is associated with. Should usually be overwritten.
 	static Perform = function(_user)
@@ -269,10 +267,12 @@ function NPCState( _target) constructor
 ///@function NPCStateFollow(_target): NPCState(_target) constructor
 ///@description state for when NPC is following an object (usually another doll.)
 ///@param _target reference ot an object to follow.
-function NPCStateFollow(_target): NPCState(_target) constructor
+function NPCStateFollow(_target): NPCState() constructor
 {
+	target = _target;
 	static Perform = function(_user)
 	{
+		//Creates a temporary variable holding the target from this struct so it can be used by the user.
 		var _target = target;
 		with (_user)
 		{
@@ -290,10 +290,9 @@ function NPCStateFollow(_target): NPCState(_target) constructor
 	}
 }
 
-///@function NPCStateIdle(_target): NPCState(_target) constructor
+///@function NPCStateIdle(): NPCState(_target) constructor
 ///@description state for when NPC is idle. Just makes them sort of mill about.
-///@param _target Point2 that refers to the NPC's home area (unimplimented cna just be null).
-function NPCStateIdle(_target = noone): NPCState(_target) constructor
+function NPCStateIdle(): NPCState() constructor
 {
 	//How long the NPC waits between switching between standing still and moving around.
 	passiveTimer = -1;
