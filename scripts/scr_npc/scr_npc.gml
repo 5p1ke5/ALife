@@ -3,7 +3,7 @@
 /// @param _name the name of the NPC. Will also be put in the text box.
 /// @param _texts[] an array containing the text that will go in the NPC speech balloon.
 /// @param _level How quickly the NPC reacts. Lower is stronger, with 0 being strongest. 100 is easy.
-/// @param _npcState npcState struct. Should be initialzed with the NPCState constructor and the correct npcStates. enum
+/// @param _npcState npcState struct. Should be initialzed with the NPCState constructor and the correct npcStates. Can also be an array of NPCStates.
 function npc_initialize(_name, _texts, _level, _npcState)
 {
 	name = _name;
@@ -16,7 +16,15 @@ function npc_initialize(_name, _texts, _level, _npcState)
 	myBalloon = noone;
 	
 	//What the NPC is trying to do. Think of it as what they have instead of controller input.
-	state = _npcState;
+	//If its a struct makes it an array with just that struct. 
+	if (is_struct(_npcState))
+	{
+		npcStates = array_create(1, _npcState)	
+	}
+	else //Otherwise assumes its an array and makes that array the npcStates array.
+	{
+		npcStates = _npcState;
+	}
 	
 	//List of other npcs being sensed.
 	senseList = ds_list_create();
@@ -44,13 +52,13 @@ function npc_behavior()
 	//If the NPC senses enemies they will be in a fighting state.
 	//This can itself be overriden if the unit is in certain states.
 	if (ds_list_size(senseListEnemies) > 0) 
-	&&  (instanceof(state) != "NPCStateMove")
+	&&  (instanceof(npcStates[0]) != "NPCStateMove")
 	{
 		npc_fight(ds_list_find_value(senseListEnemies, 0));
 	}
 	else //Otherwise performs state action as ordered.
 	{
-		state.Perform(id)	
+		npcStates[0].Perform(id)	
 	}
 	
 	//If right clicked opens dropdown for that NPC.
@@ -81,7 +89,7 @@ function npc_create_dropdown()
 	//If they are in the player's faction they can be dismissed.
 	else
 	{
-		if (instanceof(state) == "NPCStateFollow")
+		if (instanceof(npcStates[0]) == "NPCStateFollow")
 		{
 			array_push(_buttons, obj_buttonMove);
 			array_push(_buttons, obj_buttonAttack);
@@ -137,7 +145,7 @@ function npc_sense_actors()
 	
 	sort senseListEnemies by distance to this unit
 	
-	if (state = instanceof("NPCStateAttack")
+	if (npcStates[0] = instanceof("NPCStateAttack")
 		for (...)
 		{
 			if npc == target
@@ -148,117 +156,6 @@ function npc_sense_actors()
 	}
 	*/
 	
-}
-
-///@function NPCState(_state, _target) constructor
-///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
-///@param _target reference to a variable holding an object or a point struct, depending on current state.
-function NPCState( _target) constructor
-{
-	target = _target;
-	
-	//Performs whatever action the state is associated with. Should usually be overwritten.
-	static Perform = function(_user)
-	{
-		print(target);
-	}
-}
-
-///@function NPCStateFollow(_target): NPCState(_target) constructor
-///@description state for when NPC is following an object (usually another doll.)
-///@param _target reference ot an object to follow.
-function NPCStateFollow(_target): NPCState(_target) constructor
-{
-	static Perform = function(_user)
-	{
-		var _target = target;
-		with (_user)
-		{
-			var _hDir = 0;
-			var _vDir = 0;
-			
-			if (distance_to_object(_target) > CLOSE_RANGE)
-			{
-				_hDir = sign(_target.x - x);
-				_vDir = sign(_target.y - y);
-			}
-			
-			doll_movement(_hDir, _vDir);
-		}
-	}
-}
-
-///@function NPCStateIdle(_target): NPCState(_target) constructor
-///@description state for when NPC is idle. Just makes them sort of mill about.
-///@param _target Point2 that refers to the NPC's home area (unimplimented cna just be null).
-function NPCStateIdle(_target = noone): NPCState(_target) constructor
-{
-	//How long the NPC waits between switching between standing still and moving around.
-	passiveTimer = -1;
-	
-	//Directions the state is telling the NPC to move to. If both are 0 just doesn't move.
-	stateHDir = 0;
-	stateVDir = 0;
-	
-	static Perform = function(_user)
-	{
-		//Increments timer, makes doll move in chosen direction.
-		if (passiveTimer > -1)
-		{
-			passiveTimer--;
-			
-			var _hDir = stateHDir;
-			var _vDir = stateVDir;
-			with (_user)
-			{
-				doll_movement(_hDir, _vDir);
-			}
-		}
-		else
-		{
-			//Reset timer.
-			passiveTimer = PASSIVE_TIME;
-			
-			//Either picks a new direction to move in or stays still till timer goes off next.
-			var _move = choose(true, false);
-			if (_move)
-			{
-				//Might need to set to irandom.
-				stateHDir = irandom_range(-1, 1);
-				stateVDir = irandom_range(-1, 1);
-			}
-			else
-			{
-				stateHDir = 0;
-				stateVDir = 0;
-			}
-		}
-	}
-}
-
-///@function NPCStateMove(_target): NPCState(_target) constructor
-///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait.
-///@param _target Point2 for the target to move towards.
-function NPCStateMove(_target): NPCState(_target) constructor
-{
-	static Perform = function(_user)
-	{
-		//Moves towards target point until right at it.
-		var _target = target;
-		with (_user)
-		{
-			var _hDir = 0;
-			var _vDir = 0;
-			
-			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
-			{
-				_hDir = sign(_target.x - x);
-				_vDir = sign(_target.y - y);
-			}
-			
-			doll_movement(_hDir, _vDir);
-		}
-	}
 }
 
 
@@ -352,6 +249,121 @@ function npc_fight_itemUse(_item, _target)
 	        break;
 	}
 }
+
+
+
+///@function NPCState(_state, _target) constructor
+///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
+///@param _target reference to a variable holding an object or a point struct, depending on current state.
+function NPCState( _target) constructor
+{
+	target = _target;
+	
+	//Performs whatever action the state is associated with. Should usually be overwritten.
+	static Perform = function(_user)
+	{
+		print(target);
+	}
+}
+
+///@function NPCStateFollow(_target): NPCState(_target) constructor
+///@description state for when NPC is following an object (usually another doll.)
+///@param _target reference ot an object to follow.
+function NPCStateFollow(_target): NPCState(_target) constructor
+{
+	static Perform = function(_user)
+	{
+		var _target = target;
+		with (_user)
+		{
+			var _hDir = 0;
+			var _vDir = 0;
+			
+			if (distance_to_object(_target) > CLOSE_RANGE)
+			{
+				_hDir = sign(_target.x - x);
+				_vDir = sign(_target.y - y);
+			}
+			
+			doll_movement(_hDir, _vDir);
+		}
+	}
+}
+
+///@function NPCStateIdle(_target): NPCState(_target) constructor
+///@description state for when NPC is idle. Just makes them sort of mill about.
+///@param _target Point2 that refers to the NPC's home area (unimplimented cna just be null).
+function NPCStateIdle(_target = noone): NPCState(_target) constructor
+{
+	//How long the NPC waits between switching between standing still and moving around.
+	passiveTimer = -1;
+	
+	//Directions the state is telling the NPC to move to. If both are 0 just doesn't move.
+	stateHDir = 0;
+	stateVDir = 0;
+	
+	static Perform = function(_user)
+	{
+		//Increments timer, makes doll move in chosen direction.
+		if (passiveTimer > -1)
+		{
+			passiveTimer--;
+			
+			var _hDir = stateHDir;
+			var _vDir = stateVDir;
+			with (_user)
+			{
+				doll_movement(_hDir, _vDir);
+			}
+		}
+		else
+		{
+			//Reset timer.
+			passiveTimer = PASSIVE_TIME;
+			
+			//Either picks a new direction to move in or stays still till timer goes off next.
+			var _move = choose(true, false);
+			if (_move)
+			{
+				stateHDir = irandom_range(-1, 1);
+				stateVDir = irandom_range(-1, 1);
+			}
+			else
+			{
+				stateHDir = 0;
+				stateVDir = 0;
+			}
+		}
+	}
+}
+
+///@function NPCStateMove(_target): NPCState(_target) constructor
+///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait.
+///@param _target Point2 for the target to move towards.
+function NPCStateMove(_target): NPCState(_target) constructor
+{
+	static Perform = function(_user)
+	{
+		//Moves towards target point until right at it.
+		var _target = target;
+		with (_user)
+		{
+			var _hDir = 0;
+			var _vDir = 0;
+			
+			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
+			{
+				_hDir = sign(_target.x - x);
+				_vDir = sign(_target.y - y);
+			}
+			
+			doll_movement(_hDir, _vDir);
+		}
+	}
+}
+
+
+
 
 /// @function speechBalloon_initialize(_text, _time, _owner, _name) 
 /// @description Creates a specch balloon object.

@@ -5,9 +5,10 @@ if (instance_exists(owner))
 	{
 		with (owner.creator)
 		{
+			//Resets npcStates array and has them just follow the player.
 			_newState = new NPCStateFollow(global.player);
 				
-			state = _newState;
+			npcStates = array_create(1, _newState);
 		}
 				
 		if (ds_list_find_index(global.party, owner.creator) == -1)

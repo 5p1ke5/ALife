@@ -112,7 +112,7 @@ function player_control()
 			
 				with (global.selectedUnit)
 				{
-					state = _newState;
+					array_insert(npcStates, 0, _newState);
 				}
 				
 				global.selectedUnit = noone;

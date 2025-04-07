@@ -7,7 +7,7 @@ if (instance_exists(owner))
 		{
 			_newState = new NPCStateIdle(noone);
 				
-			state = _newState;
+			npcStates = array_create(1, _newState);
 		}
 		
 		if (ds_list_find_index(global.party, owner.creator) != -1)

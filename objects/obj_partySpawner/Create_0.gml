@@ -36,7 +36,8 @@ for (var _i = 0; _i < ds_list_size(global.partySerialized); _i++)
 	{
 		with (_doll)
 		{
-			state = new NPCStateFollow(global.player);	
+			var _state = new NPCStateFollow(global.player);
+			array_insert(npcStates, 0, _state)
 		}
 	}
 		

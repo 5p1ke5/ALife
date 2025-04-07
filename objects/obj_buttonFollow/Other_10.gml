@@ -7,7 +7,7 @@ if (instance_exists(owner))
 		{
 			_newState = new NPCStateFollow(global.player);
 				
-			state = _newState;
+			npcStates = array_create(1, _newState);
 		}
 				
 	}

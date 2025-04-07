@@ -133,15 +133,15 @@ enum factions
 	player, neutral, enemy	
 }
 
-enum npcStates
-{
-	idle,
-	move, 
-	attack, 
-	defend, 
-	follow, 
-	passive
-}
+//enum npcStates
+//{
+//	idle,
+//	move, 
+//	attack, 
+//	defend, 
+//	follow, 
+//	passive
+//}
 
 enum cursor
 {
