@@ -160,10 +160,15 @@ function npc_sense_actors()
 
 
 
-/// @function npc_speak(_text)
-/// @description generates a speech balloon for the npc.
+/// @function npc_speak()
+/// @description Checks if a speechballoon can be generated and if so generates a speech ballon. Returns a reference to the current speech balloon.
 function npc_speak()
 {	
+	if (instance_exists(myBalloon))
+	{
+		return myBalloon;	
+	}
+	
 	var _text = texts[textIndex];
 	
 	//Increments textIndex and wraps around if necessary.
@@ -385,13 +390,39 @@ function NPCStateMove(_target): NPCState() constructor
 	}
 }
 
-///@function NPCStateTalkTo(_target): NPCState() constructor
+///@function NPCStateTalkTo(_target): NPCStateMove(_target) constructor
 ///@description Goes to a location or towards a target while talking.
 ///@param _target a Point2 or an Instance to go towards while talking.
 ///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
-function NPCStateTalkTo(_target): NPCState() constructor
+function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) constructor
 {
-	
+	static Perform = function(_user)
+	{
+		//Moves towards target point until right at it.
+		var _target = target;
+		with (_user)
+		{
+			var _hDir = 0;
+			var _vDir = 0;
+			
+			
+			//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
+			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
+			{
+				_hDir = sign(_target.x - x);
+				_vDir = sign(_target.y - y);
+			}
+			
+			doll_movement(_hDir, _vDir);
+			
+			myBalloon = npc_speak();
+			
+			//If textIndex == 0 that means the NPC is done with their dialogue.
+			if (textIndex == 0)
+			{
+				npc_exit_state();	
+			}
+	}
 }
 
 ///@function NPCStateLoop(_states): NPCState() constructor
