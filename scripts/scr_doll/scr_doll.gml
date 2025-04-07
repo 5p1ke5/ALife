@@ -125,7 +125,7 @@ function instance_create_at_doll( _doll, _object, _spd)
 }
 
 /// @function doll_movement(_hDir, _vDir)
-/// @description Makes doll move in response to hDir and vDir, setting hsp and vsp. Usually should be put in step event.
+/// @description Makes doll move in response to hDir and vDir, setting hsp and vsp. Usually should be run in the step event.
 /// @param _hDir Horizontal direction. -1 (Left), 0 (None) or 1 (Right).
 /// @param _vDir Vertical direction. -1(Up), 0 (None), or 1(Down)
 function doll_movement(_hDir, _vDir)
@@ -143,28 +143,6 @@ function doll_movement(_hDir, _vDir)
 		vFacing = sign(vDir);
 		vsp = phys_force_add(vsp, vDir * accel, maxSpeed);
 	}
-}
-
-/// @function Jump(_x1, _y1, _z1, _x2, _y2, _z2) constructor
-/// @description data structure for a jump struct.
-/// @param _x1 starting x coordinate.
-/// @param _y1 starting y coordinate.
-/// @param _z1 starting z coordinate.
-/// @param _x2 destination x coordinate.
-/// @param _y2 destination y coordinate.
-/// @param _z2 destination z coordinate.
-function Jump(_x1, _y1, _z1, _x2, _y2, _z2) constructor
-{
-	x1 = _x1;
-	y1 = _y1;
-	z1 = _z1;
-	x2 = _x2;
-	y2 = _y2;
-	z2 = _z2;
-	angle = point_direction(x1, y1, x2, y2);
-	
-	hsp = dsin(angle + 90) * 2;
-	vsp = dcos(angle + 90) * 2;
 }
 
 /// @function doll_animate()

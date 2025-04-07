@@ -300,8 +300,7 @@ function NPCStateFollow(_target): NPCState() constructor
 			{
 				_hDir = sign(_target.x - x);
 				_vDir = sign(_target.y - y);
-			}
-			else 
+			} 
 			
 			doll_movement(_hDir, _vDir);
 		}
@@ -384,6 +383,15 @@ function NPCStateMove(_target): NPCState() constructor
 			doll_movement(_hDir, _vDir);
 		}
 	}
+}
+
+///@function NPCStateTalkTo(_target): NPCState() constructor
+///@description Goes to a location or towards a target while talking.
+///@param _target a Point2 or an Instance to go towards while talking.
+///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
+function NPCStateTalkTo(_target): NPCState() constructor
+{
+	
 }
 
 ///@function NPCStateLoop(_states): NPCState() constructor

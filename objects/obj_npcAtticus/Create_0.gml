@@ -17,8 +17,6 @@ var _item = new ITEM_SWORD;
 inventory_add(inventory, _item);
 
 //an array of states.
-
-//TODO: This breaks the game. Why?
 var _states = [
 	new NPCStateMove( new Point2(800, 2660)),
 	new NPCStateMove( new Point2(500, 2660)),
