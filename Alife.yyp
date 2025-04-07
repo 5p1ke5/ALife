@@ -139,7 +139,6 @@
     {"id":{"name":"scr_message","path":"scripts/scr_message/scr_message.yy",},},
     {"id":{"name":"scr_meter","path":"scripts/scr_meter/scr_meter.yy",},},
     {"id":{"name":"scr_npc","path":"scripts/scr_npc/scr_npc.yy",},},
-    {"id":{"name":"scr_NPCStates","path":"scripts/scr_NPCStates/scr_NPCStates.yy",},},
     {"id":{"name":"scr_party","path":"scripts/scr_party/scr_party.yy",},},
     {"id":{"name":"scr_phys","path":"scripts/scr_phys/scr_phys.yy",},},
     {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},

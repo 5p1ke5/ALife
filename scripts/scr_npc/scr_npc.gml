@@ -281,8 +281,8 @@ function NPCState() constructor
 	}
 }
 
-///@function NPCStateFollow(_target): NPCState(_target) constructor
-///@description state for when NPC is following an object (usually another doll.)
+///@function NPCStateFollow(_target): NPCState() constructor
+///@description state for when NPC is following an object (usually another doll.) No exit condition.
 ///@param _target reference ot an object to follow.
 function NPCStateFollow(_target): NPCState() constructor
 {
@@ -301,14 +301,15 @@ function NPCStateFollow(_target): NPCState() constructor
 				_hDir = sign(_target.x - x);
 				_vDir = sign(_target.y - y);
 			}
+			else 
 			
 			doll_movement(_hDir, _vDir);
 		}
 	}
 }
 
-///@function NPCStateIdle(): NPCState(_target) constructor
-///@description state for when NPC is idle. Just makes them sort of mill about.
+///@function NPCStateIdle(): NPCState() constructor
+///@description state for when NPC is idle. Just makes them sort of mill about. No exit condition.
 function NPCStateIdle(): NPCState() constructor
 {
 	//How long the NPC waits between switching between standing still and moving around.
@@ -353,11 +354,12 @@ function NPCStateIdle(): NPCState() constructor
 	}
 }
 
-///@function NPCStateMove(_target): NPCState(_target) constructor
-///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point.
+///@function NPCStateMove(_target): NPCState() constructor
+///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
-function NPCStateMove(_target): NPCState(_target) constructor
+function NPCStateMove(_target): NPCState() constructor
 {
+	target = _target;
 	static Perform = function(_user)
 	{
 		//Moves towards target point until right at it.
@@ -367,16 +369,46 @@ function NPCStateMove(_target): NPCState(_target) constructor
 			var _hDir = 0;
 			var _vDir = 0;
 			
+			
+			//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
 			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
 			{
 				_hDir = sign(_target.x - x);
 				_vDir = sign(_target.y - y);
+			}
+			else//If NPC gets to their location attempts to exit state.
+			{
+				npc_exit_state();
 			}
 			
 			doll_movement(_hDir, _vDir);
 		}
 	}
 }
+
+///@function NPCStateLoop(_states): NPCState() constructor
+///@description replaces the executing NPC's npcStates array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
+///@param _states the new states array that will be looped through.
+function NPCStateLoop(_states): NPCState() constructor
+{
+	states = [];
+	array_copy(states, 0, _states, 0, array_length(_states));
+	
+	//Replaces the _user's states array with the NPCStateLoop's own, appends a copy of this struct to the end.
+	static Perform = function(_user)
+	{
+		var _states = states;
+		array_push(_states, new NPCStateLoop(states)); //Appends of a copy of this data structure to the end, causing it to loop.
+		
+		show_debug_message(string(states));
+		
+		with (_user)
+		{
+			npcStates = _states;
+		}
+	}
+}
+
 
 
 

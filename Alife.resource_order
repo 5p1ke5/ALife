@@ -101,7 +101,6 @@
     {"name":"scr_message","order":11,"path":"scripts/scr_message/scr_message.yy",},
     {"name":"scr_meter","order":12,"path":"scripts/scr_meter/scr_meter.yy",},
     {"name":"scr_npc","order":13,"path":"scripts/scr_npc/scr_npc.yy",},
-    {"name":"scr_NPCStates","order":22,"path":"scripts/scr_NPCStates/scr_NPCStates.yy",},
     {"name":"scr_party","order":14,"path":"scripts/scr_party/scr_party.yy",},
     {"name":"scr_phys","order":15,"path":"scripts/scr_phys/scr_phys.yy",},
     {"name":"scr_player","order":16,"path":"scripts/scr_player/scr_player.yy",},
