@@ -161,12 +161,12 @@ function npc_sense_actors()
 
 
 /// @function npc_speak()
-/// @description Checks if a speechballoon can be generated and if so generates a speech ballon. Returns a reference to the current speech balloon.
+/// @description Checks if a speechballoon can be generated and if so generates a speech ballon. Returns the current textIndex
 function npc_speak()
 {	
 	if (instance_exists(myBalloon))
 	{
-		return myBalloon;	
+		return textIndex;
 	}
 	
 	var _text = texts[textIndex];
@@ -191,9 +191,49 @@ function npc_speak()
 		speechBalloon_initialize(_text, string_length(_text) * TEXT_BALLOON_SPEED, other, _name);
 	}
 	
-	return _balloon;
+	myBalloon = _balloon;
+	
+	return textIndex;
 }
 
+
+/// @function npc_speak_ext(_texts, _textIndex)
+/// @description Checks if a speechballoon can be generated and if so generates a speech ballon. This one you can pass an array of texts and an index. Returns the current textIndex.
+/// @param _texts An array of strings to be read into the players speach.
+/// @param _textIndex the index in the text array to display.
+function npc_speak_ext(_texts, _textIndex)
+{
+	if (instance_exists(myBalloon))
+	{
+		return _textIndex;
+	}
+	
+	var _text = _texts[_textIndex];
+	
+	//Increments textIndex and wraps around if necessary.
+	_textIndex++;
+	if (_textIndex > array_length(_texts) - 1)
+	{
+		_textIndex = 0;	
+	}
+	
+	//Creates speech balloon object.
+	var _name = name;
+	
+	draw_set_font(fnt_speech);
+	var _balloonHeight = string_height_ext(_text, string_height(_text), TEXT_BALLOON_MAXW);
+	draw_set_font(fnt_default);
+	
+	var _balloon = instance_create_depth(x, y - 32 - _balloonHeight, depth, obj_speechBalloon);
+	with (_balloon)
+	{
+		speechBalloon_initialize(_text, string_length(_text) * TEXT_BALLOON_SPEED, other, _name);
+	}
+	
+	myBalloon = _balloon;
+	
+	return _textIndex;
+}
 
 /// @function npc_fight(_target)
 /// @description NPC behavior when they're targetting an enemy. Causes them to pursue and cast spells at the target.
@@ -396,17 +436,25 @@ function NPCStateMove(_target): NPCState() constructor
 ///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
 function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) constructor
 {
+	dialogue = _dialogue;
+	textIndex = 0;
 	static Perform = function(_user)
 	{
+		//Get variables from state for use in the NPC.
+		var _dialogue = dialogue;
+		var _textIndex = textIndex;
+		
+		
 		//Moves towards target point until right at it.
 		var _target = target;
 		with (_user)
 		{
+			
+			//I thiiiink I can make these next 10 lines to something like npc_moveTo(_target)
 			var _hDir = 0;
 			var _vDir = 0;
 			
 			
-			//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
 			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
 			{
 				_hDir = sign(_target.x - x);
@@ -415,15 +463,30 @@ function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) const
 			
 			doll_movement(_hDir, _vDir);
 			
-			myBalloon = npc_speak();
+			
+			//If an array was passed reads through that
+			if (_dialogue != noone)
+			{
+				_textIndex = npc_speak_ext(_dialogue, _textIndex);
+			}
+			else //Otherwise uses the npc's current dialogue.
+			{
+				npc_speak();
+			}
+			
 			
 			//If textIndex == 0 that means the NPC is done with their dialogue.
-			if (textIndex == 0)
+			if (_dialogue == noone && textIndex == 0) || (_dialogue != noone && _textIndex == 0)
 			{
 				npc_exit_state();	
 			}
+		}
+		
+		//Sets the NPCStateTalkTo's textIndex to equal the updated value. If the value wasn't updated it just stays the same.
+		textIndex = _textIndex;
 	}
 }
+
 
 ///@function NPCStateLoop(_states): NPCState() constructor
 ///@description replaces the executing NPC's npcStates array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.

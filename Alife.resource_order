@@ -76,6 +76,7 @@
     {"name":"obj_npcElliot","order":5,"path":"objects/obj_npcElliot/obj_npcElliot.yy",},
     {"name":"obj_npcEnemy","order":1,"path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},
     {"name":"obj_npcFriendly","order":3,"path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},
+    {"name":"obj_npcMayor","order":6,"path":"objects/obj_npcMayor/obj_npcMayor.yy",},
     {"name":"obj_npcNeutral","order":2,"path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},
     {"name":"obj_partySpawner","order":4,"path":"objects/obj_partySpawner/obj_partySpawner.yy",},
     {"name":"obj_speechBalloon","order":5,"path":"objects/obj_speechBalloon/obj_speechBalloon.yy",},

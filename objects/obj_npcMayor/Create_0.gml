@@ -19,9 +19,12 @@ inventory_add(inventory, _item);
 //an array of states.
 
 var _states = [
-	new NPCStateTalkTo(global.player,  ["Oh my god its the player character!! I'm your biggest fan!", "I love your work!"]),
-	new NPCStateMove(new Point2(500, 500))
+	new NPCStateTalkTo
+	(
+		new Point2(500, 2600),  
+		["Hi there!", "Welcome to Heimdall village!", "My name is Prinz.", "I hope you like our tiny town."]
+	)
 	]
 	
 
-npc_initialize("Elliot", ["I'm gonna tell all my friends I met you!"], 100, _states);
+npc_initialize("Prinz", ["I'm gonna tell all my friends I met you!"], 100, _states);

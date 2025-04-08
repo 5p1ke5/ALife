@@ -108,6 +108,7 @@
     {"id":{"name":"obj_npcElliot","path":"objects/obj_npcElliot/obj_npcElliot.yy",},},
     {"id":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},},
     {"id":{"name":"obj_npcFriendly","path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},},
+    {"id":{"name":"obj_npcMayor","path":"objects/obj_npcMayor/obj_npcMayor.yy",},},
     {"id":{"name":"obj_npcNeutral","path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},},
     {"id":{"name":"obj_panel","path":"objects/obj_panel/obj_panel.yy",},},
     {"id":{"name":"obj_partySpawner","path":"objects/obj_partySpawner/obj_partySpawner.yy",},},
