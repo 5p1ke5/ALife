@@ -73,6 +73,7 @@
     {"name":"obj_meleeGuard","order":3,"path":"objects/obj_meleeGuard/obj_meleeGuard.yy",},
     {"name":"obj_meleeSwing","order":4,"path":"objects/obj_meleeSwing/obj_meleeSwing.yy",},
     {"name":"obj_npcAtticus","order":4,"path":"objects/obj_npcAtticus/obj_npcAtticus.yy",},
+    {"name":"obj_npcElf","order":7,"path":"objects/obj_npcElf/obj_npcElf.yy",},
     {"name":"obj_npcElliot","order":5,"path":"objects/obj_npcElliot/obj_npcElliot.yy",},
     {"name":"obj_npcEnemy","order":1,"path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},
     {"name":"obj_npcFriendly","order":3,"path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},

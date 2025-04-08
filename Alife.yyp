@@ -105,6 +105,7 @@
     {"id":{"name":"obj_meleeSwing","path":"objects/obj_meleeSwing/obj_meleeSwing.yy",},},
     {"id":{"name":"obj_message","path":"objects/obj_message/obj_message.yy",},},
     {"id":{"name":"obj_npcAtticus","path":"objects/obj_npcAtticus/obj_npcAtticus.yy",},},
+    {"id":{"name":"obj_npcElf","path":"objects/obj_npcElf/obj_npcElf.yy",},},
     {"id":{"name":"obj_npcElliot","path":"objects/obj_npcElliot/obj_npcElliot.yy",},},
     {"id":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},},
     {"id":{"name":"obj_npcFriendly","path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},},
