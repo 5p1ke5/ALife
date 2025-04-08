@@ -1,3 +1,4 @@
+#region //NPC functions.
 /// @function npc_initialize(_name, _Text)
 /// @description initializes NPC variables.
 /// @param _name the name of the NPC. Will also be put in the text box.
@@ -288,19 +289,22 @@ function npc_fight_itemUse(_item, _target)
 	switch (_ai) 
 	{
 	    case aiType.melee: 
-			//Approaches, attacks when in range.
+			//Approaches
 			var _range = (sprite_get_bbox_right(_item.sprite) - sprite_get_bbox_left(_item.sprite)) * 2;
 			
 			if (_dist > _range) 
 			{
 				doll_movement(sign(_target.x - x), sign(_target.y - y));
 			}
+			//Attacks if in range.
 			else if (!instance_exists(myHeld)) 
 			{
 				if (attackTimer < 0)
 				{
 					angle = point_direction(x, y, _target.x, _target.y);
+					
 					_item.Use(id);
+					
 					attackTimer = (_item.arc / _item.spd) + irandom_range( round(sqrt(level)), level);
 				}
 			}
@@ -333,7 +337,18 @@ function npc_exit_state()
 	return noone;
 }
 
+/// @function npc_name_random()
+/// @description returns a randomly generated name.
+function npc_name_random()
+{
+	return global.names[irandom(array_length(global.names) - 1)];
+}
 
+#endregion
+
+
+
+#region //NPCState structs.
 
 ///@function NPCState() constructor
 ///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
@@ -359,16 +374,7 @@ function NPCStateFollow(_target): NPCState() constructor
 		var _target = target;
 		with (_user)
 		{
-			var _hDir = 0;
-			var _vDir = 0;
-			
-			if (distance_to_object(_target) > CLOSE_RANGE)
-			{
-				_hDir = sign(_target.x - x);
-				_vDir = sign(_target.y - y);
-			} 
-			
-			doll_movement(_hDir, _vDir);
+			npc_move_to(_target);
 		}
 	}
 }
@@ -431,22 +437,14 @@ function NPCStateMove(_target): NPCState() constructor
 		var _target = target;
 		with (_user)
 		{
-			var _hDir = 0;
-			var _vDir = 0;
+			npc_move_to(_target);
 			
-			
-			//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
-			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
+			if (distance_to_point(_target.x, _target.y) < CLOSE_RANGE)
 			{
-				_hDir = sign(_target.x - x);
-				_vDir = sign(_target.y - y);
-			}
-			else//If NPC gets to their location attempts to exit state.
-			{
+				//If NPC gets to their location attempts to exit state.
 				npc_exit_state();
 			}
 			
-			doll_movement(_hDir, _vDir);
 		}
 	}
 }
@@ -470,20 +468,7 @@ function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) const
 		var _target = target;
 		with (_user)
 		{
-			
-			//I thiiiink I can make these next 10 lines to something like npc_moveTo(_target)
-			var _hDir = 0;
-			var _vDir = 0;
-			
-			
-			if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
-			{
-				_hDir = sign(_target.x - x);
-				_vDir = sign(_target.y - y);
-			}
-			
-			doll_movement(_hDir, _vDir);
-			
+			npc_move_to(_target);
 			
 			//If an array was passed reads through that
 			if (_dialogue != noone)
@@ -523,8 +508,6 @@ function NPCStateLoop(_states): NPCState() constructor
 		var _states = states;
 		array_push(_states, new NPCStateLoop(states)); //Appends of a copy of this data structure to the end, causing it to loop.
 		
-		show_debug_message(string(states));
-		
 		with (_user)
 		{
 			npcStates = _states;
@@ -533,6 +516,32 @@ function NPCStateLoop(_states): NPCState() constructor
 }
 
 
+/// @function NPCStateAwaitTarget(_target) : NPCState() constructor
+/// @description Has the NPC stand still until a target gets close enough, then attempts to exit state.
+/// @param _target An instance or point2 or something with x and y. 
+/// @param _range How close the NPC has to be to _target to go to the next state.
+function NPCStateAwaitTarget(_target, _range = CLOSE_RANGE) : NPCState() constructor
+{
+	target = _target;
+	range = _range;
+	
+	static Perform = function(_user)
+	{
+		var _target = target;
+		var _range = range;
+		
+		with (_user)
+		{
+			//If the target gets close enough attempts to go to next state.
+			if (distance_to_point(_target.x, _target.y) < _range)
+			{
+				npc_exit_state();
+			}
+		}
+	}
+}
+
+#endregion
 
 
 
@@ -551,9 +560,3 @@ function speechBalloon_initialize(_text, _maxTime, _owner, _name)
 	name = _name;
 }
 
-/// @function npc_name_random()
-/// @description returns a randomly generated name.
-function npc_name_random()
-{
-	return global.names[irandom(array_length(global.names) - 1)];
-}
