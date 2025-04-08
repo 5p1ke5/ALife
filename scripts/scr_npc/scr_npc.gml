@@ -235,6 +235,27 @@ function npc_speak_ext(_texts, _textIndex)
 	return _textIndex;
 }
 
+
+/// @function npc_move_to(_target)
+/// @description makes the npc move towards a target (Can be an instance or a Point2)
+/// @param _target Instance or Point2 or anything with a .x and .y value to move towards.
+function npc_move_to(_target)
+{
+	var _hDir = 0;
+	var _vDir = 0;
+			
+			
+	//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
+	if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
+	{
+		_hDir = sign(_target.x - x);
+		_vDir = sign(_target.y - y);
+	}
+			
+	doll_movement(_hDir, _vDir);
+}
+
+
 /// @function npc_fight(_target)
 /// @description NPC behavior when they're targetting an enemy. Causes them to pursue and cast spells at the target.
 /// @param _target The target the npc is attacking.
