@@ -330,7 +330,7 @@ function npc_exit_state()
 	//State can only be exited if the number of items in npcState is greater than 1.
 	if (array_length(npcStates) > 1)
 	{
-		array_delete(npcStates, 0, 1); //If so, deletes the current state from the npcStates arra
+		array_shift(npcStates); //If so, deletes the current state from the npcStates arra
 		return npcStates[0];
 	}
 	

@@ -112,8 +112,6 @@ function instance_create_at_doll( _doll, _object, _spd)
 			owner = _doll
 			angle = _angle;
 			
-			//TODO: Include some way to cancel out of defining these perhaps??
-			//maybe make it into instance_create_at_doll(_doll _object, _spd/_hsp, _vsp) and have it pick by checking # of args? dunno
 			if (_spd != undefined)
 			{
 				hsp = dsin(_angle + 90) * _spd;
