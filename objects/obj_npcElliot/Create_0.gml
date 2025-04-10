@@ -18,10 +18,7 @@ inventory_add(inventory, _item);
 
 //an array of states.
 
-var _states = [
-	new NPCStateTalkTo(global.player,  ["Oh my god its the player character!! I'm your biggest fan!", "I love your work!"]),
-	new NPCStateMove(new Point2(500, 500))
-	]
+var _states = [new NPCStateIdle()];
 	
 
 npc_initialize("Elliot", ["I'm gonna tell all my friends I met you!"], 100, _states);
