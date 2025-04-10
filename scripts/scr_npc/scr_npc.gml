@@ -428,24 +428,38 @@ function NPCStateIdle(): NPCState() constructor
 ///@function NPCStateMove(_target): NPCState() constructor
 ///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
-function NPCStateMove(_target): NPCState() constructor
+///@param _duration Time for the NPC to wait at the given point.
+function NPCStateMove(_target, _duration = -1): NPCState() constructor
 {
 	target = _target;
+	duration = _duration;
+	maxDuration = duration;
 	static Perform = function(_user)
 	{
-		//Moves towards target point until right at it.
 		var _target = target;
+		var _duration = duration;
+		var _maxDuration = maxDuration;
 		with (_user)
 		{
+			//Moves towards target point until right at it.
 			npc_move_to(_target);
 			
+			//If NPC gets to their location waits for duration (if any) and then attempt to exit state.
 			if (distance_to_point(_target.x, _target.y) < CLOSE_RANGE)
 			{
-				//If NPC gets to their location attempts to exit state.
-				npc_exit_state();
+				if (_duration > -1)
+				{
+					_duration--;	
+				}
+				else
+				{
+					_duration = _maxDuration;
+					npc_exit_state();
+				}
 			}
-			
 		}
+		
+		duration = _duration;
 	}
 }
 
@@ -529,12 +543,14 @@ function NPCStateLoop(_states): NPCState() constructor
 	//Replaces the _user's states array with the NPCStateLoop's own, appends a copy of this struct to the end.
 	static Perform = function(_user)
 	{
-		var _states = states;
+		var _states = []
+		array_copy(_states, 0, states, 0, array_length(states));
+		
 		array_push(_states, new NPCStateLoop(states)); //Appends of a copy of this data structure to the end, causing it to loop.
 		
 		with (_user)
 		{
-			npcStates = _states;
+			array_copy(npcStates, 0, _states, 0, array_length(_states));
 		}
 	}
 }

@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_npcElliot",
+  "%Name":"obj_npcKai",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_npcElliot",
+  "name":"obj_npcKai",
   "overriddenProperties":[],
   "parent":{
     "name":"characters",

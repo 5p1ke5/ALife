@@ -125,6 +125,10 @@ window_mouse_get_delta_x()
 #macro c_brunette make_color_rgb(150, 70, 0)
 #macro c_lightBrunette make_color_rgb(200, 125, 0)
 #macro c_ginger make_color_rgb(220, 110,0)
+
+
+//colors colors
+#macro c_violet make_color_rgb(210, 64, 115)
 #endregion
 
 #region //enums
