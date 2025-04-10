@@ -494,6 +494,17 @@ function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) const
 }
 
 
+
+/// @function NPCStateAwaitTarget(_target) : NPCState() constructor
+function NPCStateSetDialogue(_dialogue, _target = noone) : NPCStateTalkTo(_target, _dialogue) constructor
+{
+	dialogue = _dialogue;
+	target = _target;
+	
+	
+}
+
+
 ///@function NPCStateLoop(_states): NPCState() constructor
 ///@description replaces the executing NPC's npcStates array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
 ///@param _states the new states array that will be looped through.
