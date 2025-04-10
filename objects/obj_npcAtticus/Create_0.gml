@@ -20,6 +20,7 @@ inventory_add(inventory, _item);
 var _states = 
 [
 	new NPCStateTalkTo(global.player,  ["Hail, traveller! Welcome to Harrowgate Village. Use WASD to move.", "You can interact with people by right-clicking on them.", "Talk to me if you need help!"]),
+	new NPCStateSetDialogue(["I used to be a soldier in the king's army. But that was long ago.", "Now I'm just a guardsman in a comfy little village."]),
 	new NPCStateMove(new Point2(480, 2656))
 ];
 

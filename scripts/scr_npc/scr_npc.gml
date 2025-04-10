@@ -495,13 +495,26 @@ function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) const
 
 
 
-/// @function NPCStateAwaitTarget(_target) : NPCState() constructor
-function NPCStateSetDialogue(_dialogue, _target = noone) : NPCStateTalkTo(_target, _dialogue) constructor
+/// @function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
+/// @description Sets the NPC's current texts array and resets the textIndex. Attempts to exit state. Should usually have another state right after.
+function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
 {
 	dialogue = _dialogue;
-	target = _target;
 	
-	
+	static Perform = function(_user)
+	{
+		var _dialogue = dialogue;
+		
+		with (_user)
+		{
+			//Sets dialogue to the passed value, resets text index.
+			texts = _dialogue;
+			textIndex = 0;
+			
+			//Attemps to exit state.
+			npc_exit_state();
+		}
+	}
 }
 
 
