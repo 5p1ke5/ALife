@@ -132,15 +132,15 @@ function doll_movement(_hDir, _vDir)
 	if (hDir != 0) 
 	{
 		hFacing = sign(hDir);
-		hsp = phys_force_add(hsp, hDir * accel, maxSpeed);
 	}
+		hsp = phys_force_add(hsp, hDir * accel, maxSpeed);
 
 	vDir = _vDir;
 	if (vDir != 0) 
 	{
 		vFacing = sign(vDir);
-		vsp = phys_force_add(vsp, vDir * accel, maxSpeed);
 	}
+		vsp = phys_force_add(vsp, vDir * accel, maxSpeed);
 }
 
 /// @function doll_animate()
@@ -206,4 +206,5 @@ function doll_draw()
 			draw_sprite_ext(spr_playerPantsUp0, image_index, x, y, image_xscale, image_yscale, image_angle, pantsColor, image_alpha);	
 		}
 	}
+	//draw_text(x, y, string("hDir {0}\nvDir {1}\nhsp {2}\nvsp {3}", hDir, vDir, hsp, vsp));
 }

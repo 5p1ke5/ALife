@@ -139,24 +139,6 @@ function npc_sense_actors()
 			}
 		}
 	}
-	
-	
-	///Maybe add something like.. 
-	/*
-	
-	sort senseListEnemies by distance to this unit
-	
-	if (npcStates[0] = instanceof("NPCStateAttack")
-		for (...)
-		{
-			if npc == target
-			{
-				put them at position 0
-			}
-		}
-	}
-	*/
-	
 }
 
 
@@ -249,8 +231,14 @@ function npc_move_to(_target)
 	//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
 	if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
 	{
-		_hDir = sign(_target.x - x);
-		_vDir = sign(_target.y - y);
+		//_hDir = sign(_target.x - x);
+		//_vDir = sign(_target.y - y);
+		var _angle = point_direction(x, y, _target.x, _target.y);
+		
+		_hDir = lengthdir_x(1, _angle)
+		_vDir = lengthdir_y(1, _angle)
+		
+		//show_debug_message("{0} - hDir {1} - vDir {2} - angle {3}", name, _hDir, _vDir, _angle);
 	}
 			
 	doll_movement(_hDir, _vDir);
