@@ -348,6 +348,12 @@ function NPCState() constructor
 	{
 		print(target);
 	}
+	
+	//Returns a copy of this NPCState.
+	static Copy = function()
+	{
+		return new NPCState();
+	}
 }
 
 ///@function NPCStateFollow(_target): NPCState() constructor
