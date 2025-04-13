@@ -59,6 +59,7 @@ function npc_behavior()
 	}
 	else //Otherwise performs state action as ordered.
 	{
+		show_debug_message("States: {0}, current state: {1}", npcStates, instanceof(npcStates[0]));
 		npcStates[0].Perform(id)	
 	}
 	
@@ -229,7 +230,7 @@ function npc_move_to(_target)
 			
 			
 	//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
-	if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE)
+	if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE/2)
 	{
 		//_hDir = sign(_target.x - x);
 		//_vDir = sign(_target.y - y);
@@ -319,6 +320,7 @@ function npc_exit_state()
 	if (array_length(npcStates) > 1)
 	{
 		array_shift(npcStates); //If so, deletes the current state from the npcStates arra
+		show_debug_message("Exit State, states: {0}.", npcStates);
 		return npcStates[0];
 	}
 	
@@ -346,13 +348,7 @@ function NPCState() constructor
 	//Performs whatever action the state is associated with. Should usually be overwritten.
 	static Perform = function(_user)
 	{
-		print(target);
-	}
-	
-	//Returns a copy of this NPCState.
-	static Copy = function()
-	{
-		return new NPCState();
+		print("Called!");
 	}
 }
 
@@ -447,7 +443,6 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 				}
 				else
 				{
-					_duration = _maxDuration;
 					npc_exit_state();
 				}
 			}
@@ -457,12 +452,13 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 	}
 }
 
-///@function NPCStateTalkTo(_target): NPCStateMove(_target) constructor
+///@function NPCStateTalkTo(_target, _dialogue = noone): NPCState() constructor
 ///@description Goes to a location or towards a target while talking.
 ///@param _target a Point2 or an Instance to go towards while talking.
 ///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
-function NPCStateTalkTo(_target, _dialogue = noone): NPCStateMove(_target) constructor
+function NPCStateTalkTo(_target, _dialogue = noone): NPCState() constructor
 {
+	target = _target;
 	dialogue = _dialogue;
 	textIndex = 0;
 	static Perform = function(_user)
@@ -531,20 +527,27 @@ function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
 ///@param _states the new states array that will be looped through.
 function NPCStateLoop(_states): NPCState() constructor
 {
+	
+	//serializes the passed array into a serializedStates array. 
 	states = [];
-	array_copy(states, 0, _states, 0, array_length(_states));
+	for (var _i = 0; _i < array_length(_states); _i++)
+	{
+		array_push(states, variable_clone(_states[_i]))
+	}
 	
 	//Replaces the _user's states array with the NPCStateLoop's own, appends a copy of this struct to the end.
 	static Perform = function(_user)
 	{
-		var _states = []
-		array_copy(_states, 0, states, 0, array_length(states));
+		var _states = states;
 		
-		array_push(_states, new NPCStateLoop(states)); //Appends of a copy of this data structure to the end, causing it to loop.
+		array_push(_states, new NPCStateLoop(_states)); //Appends of a copy of this data structure to the end, causing it to loop.
+		
 		
 		with (_user)
 		{
-			array_copy(npcStates, 0, _states, 0, array_length(_states));
+			npcStates = [];
+			npcStates = _states;
+		
 		}
 	}
 }
