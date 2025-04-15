@@ -222,23 +222,18 @@ function npc_speak_ext(_texts, _textIndex)
 /// @function npc_move_to(_target)
 /// @description makes the npc move towards a target (Can be an instance or a Point2)
 /// @param _target Instance or Point2 or anything with a .x and .y value to move towards.
-function npc_move_to(_target)
+/// @param _range How close the npc has to move to the target. Defaults to CLOSE_RANGE/2 (25 px)
+function npc_move_to(_target, _range = CLOSE_RANGE/2)
 {
 	var _hDir = 0;
 	var _vDir = 0;
 			
-			
-	//Todo: Make this so NPCs actually figure out the angle to their target instead of like 8 possible directions
-	if (distance_to_point(_target.x, _target.y) > CLOSE_RANGE/2)
+	if (distance_to_point(_target.x, _target.y) > _range)
 	{
-		//_hDir = sign(_target.x - x);
-		//_vDir = sign(_target.y - y);
 		var _angle = point_direction(x, y, _target.x, _target.y);
 		
 		_hDir = lengthdir_x(1, _angle)
 		_vDir = lengthdir_y(1, _angle)
-		
-		//show_debug_message("{0} - hDir {1} - vDir {2} - angle {3}", name, _hDir, _vDir, _angle);
 	}
 			
 	doll_movement(_hDir, _vDir);
