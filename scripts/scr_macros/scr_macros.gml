@@ -4,6 +4,12 @@
 #macro ROOM_INTRO_SCREEN room_overworld
 #endregion
 
+#region //grid things
+#macro GRID_CELL_WIDTH 16
+#macro GRID_CELL_HEIGHT 16
+#endregion
+
+
 //player constants
 #region
 #macro PLAYER_STARTING_HP 400
@@ -51,7 +57,7 @@
 #macro TEXT_BALLOON_SPEED 5
 #macro TEXT_BALLOON_MAXW 100
 #endregion
-window_mouse_get_delta_x()
+
 #region	//Controls.
 #macro ANY_BUTTON (keyboard_check(vk_anykey))
 #macro RIGHT_BUTTON (keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr))

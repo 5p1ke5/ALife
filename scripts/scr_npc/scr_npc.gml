@@ -59,7 +59,6 @@ function npc_behavior()
 	}
 	else //Otherwise performs state action as ordered.
 	{
-		show_debug_message("States: {0}, current state: {1}", npcStates, instanceof(npcStates[0]));
 		npcStates[0].Perform(id)	
 	}
 	
@@ -319,8 +318,7 @@ function npc_exit_state()
 	//State can only be exited if the number of items in npcState is greater than 1.
 	if (array_length(npcStates) > 1)
 	{
-		array_shift(npcStates); //If so, deletes the current state from the npcStates arra
-		show_debug_message("Exit State, states: {0}.", npcStates);
+		array_shift(npcStates); //If so, deletes the current state from the npcStates array
 		return npcStates[0];
 	}
 	
@@ -415,7 +413,7 @@ function NPCStateIdle(): NPCState() constructor
 	}
 }
 
-///@function NPCStateMove(_target): NPCState() constructor
+///@function NPCStateMove(_target, _duration = -1): NPCState() constructor
 ///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
@@ -423,12 +421,50 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 {
 	target = _target;
 	duration = _duration;
-	maxDuration = duration;
+	
+	//These will be defined the first time Perform runs.
+	mpPath = path_add();
+	motionPathed = false;
+	path = [];
+	
 	static Perform = function(_user)
 	{
 		var _target = target;
 		var _duration = duration;
-		var _maxDuration = maxDuration;
+		
+		//Initializes motionPath if necessary. Maybe just move this to initialization? Except it doesn't have the user's current location at that point...
+		if (path_get_number(mpPath) == 0)
+		{
+			motionPathed = mp_grid_path(global.mpGrid, mpPath, _user.x, _user.y, _target.x, _target.y, true);
+			
+			show_debug_message("Motion Pathed?: {0}", motionPathed)
+			
+			for (var _i = 0; _i < path_get_number(mpPath) ; _i++) 
+			{
+				show_debug_message("mpPath[{0}]: {1}, {2}", _i, path_get_x(mpPath, _i), path_get_y(mpPath, _i));
+				
+				
+				//Doesn't activate on first element
+				if (_i != 0)
+				{
+					//Removes consecutive duplicates.
+					if (path_get_x(mpPath, _i) != path_get_x(mpPath, _i - 1)) &&  (path_get_y(mpPath, _i) != path_get_y(mpPath, _i - 1))
+					{
+						array_push(path, new Point2(path_get_x(mpPath, _i), path_get_y(mpPath, _i)));	
+					}
+				}
+				else //For first element just adds the new element.
+				{
+					array_push(path, new Point2(path_get_x(mpPath, _i), path_get_y(mpPath, _i)));
+				}
+			}
+			
+			for (var _i = 0; _i < array_length(path) ; _i++) 
+			{
+				show_debug_message("Path[{0}]: {1}", _i, path[_i]);
+			}
+		}
+		
 		with (_user)
 		{
 			//Moves towards target point until right at it.

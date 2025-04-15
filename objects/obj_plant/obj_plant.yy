@@ -32,7 +32,7 @@
   "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
-  "solid":false,
+  "solid":true,
   "spriteId":{
     "name":"spr_weed",
     "path":"sprites/spr_weed/spr_weed.yy",

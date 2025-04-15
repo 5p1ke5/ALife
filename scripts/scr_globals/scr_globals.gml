@@ -26,6 +26,8 @@ function globals_initialize()
 	global.selected = ds_list_create();
 	global.selectedUnit = noone;
 	
+	//The movement planning grid.
+	global.mpGrid = noone;
 	
 	#region
 	global.names = ["Paula", "Nicole", "Martha", "Edna", "Kylie", "Brittany", "Marissa", "Alyssa", "Jeanie", "Carla", "Bethany", "Demi", "Tiffany", "Sophia", "Martina", "Tiana", "Tina", "Leslie", "Taina", "Louise", "Lulu", "Ava", "Beverly", "Joan", "Natalya", "Elise", "Iris", "Amanda", "Natty", "Catty", "Moira", "RoseCorey", "Chris", "Alex", "Norman", "Maxwell", "Steve", "Stephen", "Carlos", "Logan", "Joshua", "Josh", "Miguel", "Mcduff", "Oliver", "Morgan", "Nick", "Jimmy", "Bimmy", "Juan", "Carlito", "Tyrell", "Dmitri", "Daivon", "Riley", "Marcus", "Razwell", "Blorkus", "Dongus", "Darius", "McVile", "Razor", "Monster", "Collin"];

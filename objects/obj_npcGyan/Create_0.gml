@@ -27,4 +27,4 @@ var _states =
 	
 var _loop = new NPCStateLoop(_states);	
 
-npc_initialize("Gyan", ["Watch out, it's dangerous out in the woods.", "There are outlaws living in the wilderness."], 100, _loop);
+npc_initialize("Gyan", ["Watch out, it's dangerous in the wilderness.", "There are outlaws living in the forest."], 100, _loop);

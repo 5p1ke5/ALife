@@ -146,6 +146,7 @@
     {"id":{"name":"scr_phys","path":"scripts/scr_phys/scr_phys.yy",},},
     {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},
     {"id":{"name":"scr_point","path":"scripts/scr_point/scr_point.yy",},},
+    {"id":{"name":"scr_room","path":"scripts/scr_room/scr_room.yy",},},
     {"id":{"name":"scr_serialization","path":"scripts/scr_serialization/scr_serialization.yy",},},
     {"id":{"name":"scr_transition","path":"scripts/scr_transition/scr_transition.yy",},},
     {"id":{"name":"snd_musicOverworld","path":"sounds/snd_musicOverworld/snd_musicOverworld.yy",},},

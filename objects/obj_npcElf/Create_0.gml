@@ -20,15 +20,15 @@ inventory_add(inventory, _item);
 
 var _states = 
 	[
-	new NPCStateAwaitTarget(global.player),
-	new NPCStateTalkTo
-		(global.player, 
-		[
-		"Help! The bandits kidnapped my brother!",
-		"Can you save him for me?",
-		"He's deeper in the forest. Come with me!"
-		]),
-	new NPCStateMove(new Point2(1472, 2700))
+	//new NPCStateAwaitTarget(global.player),
+	//new NPCStateTalkTo
+	//	(global.player, 
+	//	[
+	//	"Help! The bandits kidnapped my brother!",
+	//	"Can you save him for me?",
+	//	"He's deeper in the forest. Come with me!"
+	//	]),
+	new NPCStateMove(new Point2(2000, 2600))
 	]
 	
 
