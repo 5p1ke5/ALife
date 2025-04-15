@@ -432,37 +432,19 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 		var _target = target;
 		var _duration = duration;
 		
-		//Initializes motionPath if necessary. Maybe just move this to initialization? Except it doesn't have the user's current location at that point...
+		//Initializes motionPath if necessary. 
 		if (path_get_number(mpPath) == 0)
 		{
 			motionPathed = mp_grid_path(global.mpGrid, mpPath, _user.x, _user.y, _target.x, _target.y, true);
 			
-			show_debug_message("Motion Pathed?: {0}", motionPathed)
-			
+			//Pushes mpPath coordinates to array 'path' as Point2s
 			for (var _i = 0; _i < path_get_number(mpPath) ; _i++) 
 			{
-				show_debug_message("mpPath[{0}]: {1}, {2}", _i, path_get_x(mpPath, _i), path_get_y(mpPath, _i));
+				show_debug_message("mpPath[{0}]: {1}, {2}", _i, path_get_point_x(mpPath, _i), path_get_point_y(mpPath, _i));
 				
-				
-				//Doesn't activate on first element
-				if (_i != 0)
-				{
-					//Removes consecutive duplicates.
-					if (path_get_x(mpPath, _i) != path_get_x(mpPath, _i - 1)) &&  (path_get_y(mpPath, _i) != path_get_y(mpPath, _i - 1))
-					{
-						array_push(path, new Point2(path_get_x(mpPath, _i), path_get_y(mpPath, _i)));	
-					}
-				}
-				else //For first element just adds the new element.
-				{
-					array_push(path, new Point2(path_get_x(mpPath, _i), path_get_y(mpPath, _i)));
-				}
+				array_push(path, new Point2(path_get_point_x(mpPath, _i), path_get_point_y(mpPath, _i)));	
 			}
-			
-			for (var _i = 0; _i < array_length(path) ; _i++) 
-			{
-				show_debug_message("Path[{0}]: {1}", _i, path[_i]);
-			}
+			show_debug_message(string(path))
 		}
 		
 		with (_user)
