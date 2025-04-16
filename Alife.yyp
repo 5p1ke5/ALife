@@ -177,6 +177,7 @@
     {"id":{"name":"spr_dollHairs","path":"sprites/spr_dollHairs/spr_dollHairs.yy",},},
     {"id":{"name":"spr_dollHairsUp","path":"sprites/spr_dollHairsUp/spr_dollHairsUp.yy",},},
     {"id":{"name":"spr_dollHand","path":"sprites/spr_dollHand/spr_dollHand.yy",},},
+    {"id":{"name":"spr_dollMask","path":"sprites/spr_dollMask/spr_dollMask.yy",},},
     {"id":{"name":"spr_dollShirts","path":"sprites/spr_dollShirts/spr_dollShirts.yy",},},
     {"id":{"name":"spr_dollShirtsBack","path":"sprites/spr_dollShirtsBack/spr_dollShirtsBack.yy",},},
     {"id":{"name":"spr_dollUp","path":"sprites/spr_dollUp/spr_dollUp.yy",},},

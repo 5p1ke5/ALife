@@ -232,8 +232,8 @@ function npc_move_to(_target, _range = CLOSE_RANGE/2)
 	{
 		var _angle = point_direction(x, y, _target.x, _target.y);
 		
-		_hDir = lengthdir_x(1, _angle)
-		_vDir = lengthdir_y(1, _angle)
+		_hDir = lengthdir_x(2, _angle)
+		_vDir = lengthdir_y(2, _angle)
 	}
 			
 	doll_movement(_hDir, _vDir);
@@ -454,9 +454,9 @@ function NPCStateMove(_target, _duration = -1, _user = other): NPCState() constr
 			{
 				//Moves towards each point until right at it, then removes it from the array.
 				var _point = array_first(_path);
-				npc_move_to(_point, 1);
+				npc_move_to(_point, 0);
 			
-				if (distance_to_point(_point.x, _point.y) < MELEE)
+				if (distance_to_point(_point.x, _point.y) <= 2)
 				{
 					array_shift(_path);
 				}

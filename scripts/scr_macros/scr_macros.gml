@@ -38,7 +38,7 @@
 #region //Doll physics things.
 #macro DOLL_FRICT 0.01
 #macro DOLL_LUNGE 4
-#macro DOLL_ACCEL 0.2
+#macro DOLL_ACCEL 0.1
 #macro DOLL_MAX_SPEED 2.5
 #endregion
 
