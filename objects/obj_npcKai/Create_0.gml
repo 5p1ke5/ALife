@@ -20,9 +20,9 @@ inventory_add(inventory, _item);
 
 var _states = 
 [
-	new NPCStateAwaitTarget(global.player), 
-	new NPCStateTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
-	new NPCStateMove(new Point2(x, y))
+	new NPCCommandAwaitTarget(global.player), 
+	new NPCCommandTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
+	new NPCCommandMove(new Point2(x, y))
 ];
 	
 

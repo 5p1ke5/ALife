@@ -108,15 +108,15 @@ function serialize_instance_all(_instance)
 	return _serializedInstance;
 }
 
-///@function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCState)
+///@function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCCommand)
 ///@description Creates a doll at the given location and initializes it's values using the given struct (serialized instance of a doll object)
 ///@param _x X coordinate to place the doll at.
 ///@param _y Y coordinate to place the doll at.
 ///@param _depth Depth to place the doll at.
 ///@param _struct The struct containing a serialized instance of a doll. Select variables will be taken from this and used to initialize the doll.
-///@param [_NPCState] the NPC's state is usually not copied over and instead reset usually so needs to be passed as a parameter. Defaults to NPCIdle.
+///@param [_NPCCommand] the NPC's state is usually not copied over and instead reset usually so needs to be passed as a parameter. Defaults to NPCIdle.
 ///@return Returns a reference to the created doll.
-function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCState = new NPCStateIdle())
+function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCCommand = new NPCCommandIdle())
 {
 	var _doll = instance_create_depth(_x, _y, _depth, obj_doll);
 	
@@ -125,7 +125,7 @@ function instance_deserialize_doll(_x, _y, _depth, _struct, _NPCState = new NPCS
 		doll_initialize(_struct.maxHP, _struct.maxHP, _struct.maxPP, _struct.maxPP, _struct.faction, 
 		_struct.faceIndex, _struct.hairIndex, _struct.shirtIndex, _struct.pantsIndex, _struct.image_blend, _struct.hairColor, _struct.shirtColor, _struct.pantsColor, _struct.inventory);
 		
-		npc_initialize(_struct.name, _struct.texts, _struct.level, _NPCState)
+		npc_initialize(_struct.name, _struct.texts, _struct.level, _NPCCommand)
 	}
 	
 	return _doll;

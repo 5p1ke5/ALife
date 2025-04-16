@@ -6,9 +6,9 @@ if (instance_exists(owner))
 		with (owner.creator)
 		{
 			//Won't talk if already talking.
-			if (instanceof(npcStates[0]) != "NPCStateTalkTo")
+			if (instanceof(npcCommands[0]) != "NPCCommandTalkTo")
 			{
-				array_insert(npcStates, 0, new NPCStateTalkTo(global.player));	
+				array_insert(npcCommands, 0, new NPCCommandTalkTo(global.player));	
 			}
 		}
 	}

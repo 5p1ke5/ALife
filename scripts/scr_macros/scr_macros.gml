@@ -143,7 +143,7 @@ enum factions
 	player, neutral, enemy	
 }
 
-//enum npcStates
+//enum npcCommands
 //{
 //	idle,
 //	move, 

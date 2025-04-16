@@ -4,7 +4,7 @@
 /// @param _name the name of the NPC. Will also be put in the text box.
 /// @param _texts[] an array containing the text that will go in the NPC speech balloon.
 /// @param _level How quickly the NPC reacts. Lower is stronger, with 0 being strongest. 100 is easy.
-/// @param _npcState npcState struct. Should be initialzed with the NPCState constructor and the correct npcStates. Can also be an array of NPCStates.
+/// @param _npcState npcState struct. Should be initialzed with the NPCCommand constructor and the correct npcCommands. Can also be an array of NPCCommands.
 function npc_initialize(_name, _texts, _level, _npcState)
 {
 	name = _name;
@@ -20,11 +20,11 @@ function npc_initialize(_name, _texts, _level, _npcState)
 	//If its a struct makes it an array with just that struct. 
 	if (is_struct(_npcState))
 	{
-		npcStates = array_create(1, _npcState)	
+		npcCommands = array_create(1, _npcState)	
 	}
-	else //Otherwise assumes its an array and makes that array the npcStates array.
+	else //Otherwise assumes its an array and makes that array the npcCommands array.
 	{
-		npcStates = _npcState;
+		npcCommands = _npcState;
 	}
 	
 	//List of other npcs being sensed.
@@ -53,13 +53,13 @@ function npc_behavior()
 	//If the NPC senses enemies they will be in a fighting state.
 	//This can itself be overriden if the unit is in certain states.
 	if (ds_list_size(senseListEnemies) > 0) 
-	&&  (instanceof(npcStates[0]) != "NPCStateMove")
+	&&  (instanceof(npcCommands[0]) != "NPCCommandMove")
 	{
 		npc_fight(ds_list_find_value(senseListEnemies, 0));
 	}
 	else //Otherwise performs state action as ordered.
 	{
-		npcStates[0].Perform(id)	
+		npcCommands[0].Perform(id)	
 	}
 	
 	//If right clicked opens dropdown for that NPC.
@@ -90,7 +90,7 @@ function npc_create_dropdown()
 	//If they are in the player's faction they can be dismissed.
 	else
 	{
-		if (instanceof(npcStates[0]) == "NPCStateFollow")
+		if (instanceof(npcCommands[0]) == "NPCCommandFollow")
 		{
 			array_push(_buttons, obj_buttonMove);
 			array_push(_buttons, obj_buttonAttack);
@@ -306,15 +306,15 @@ function npc_fight_itemUse(_item, _target)
 
 
 ///@function npc_exit_state()
-///@description Attempts to exit the npc's current state. Can only exit state if npcStates array has more than 1 item.
+///@description Attempts to exit the npc's current state. Can only exit state if npcCommands array has more than 1 item.
 ///@returns The next state in the array or noone if there is only 1 item in the array.
 function npc_exit_state()
 {
 	//State can only be exited if the number of items in npcState is greater than 1.
-	if (array_length(npcStates) > 1)
+	if (array_length(npcCommands) > 1)
 	{
-		array_shift(npcStates); //If so, deletes the current state from the npcStates array
-		return npcStates[0];
+		array_shift(npcCommands); //If so, deletes the current state from the npcCommands array
+		return npcCommands[0];
 	}
 	
 	return noone;
@@ -331,11 +331,11 @@ function npc_name_random()
 
 
 
-#region //NPCState structs.
+#region //NPCCommand structs.
 
-///@function NPCState() constructor
+///@function NPCCommand() constructor
 ///@description struct that describes the current state of the NPC associated with it. Children define specific states below.
-function NPCState() constructor
+function NPCCommand() constructor
 {
 	
 	//Performs whatever action the state is associated with. Should usually be overwritten.
@@ -345,10 +345,10 @@ function NPCState() constructor
 	}
 }
 
-///@function NPCStateFollow(_target): NPCState() constructor
+///@function NPCCommandFollow(_target): NPCCommand() constructor
 ///@description state for when NPC is following an object (usually another doll.) No exit condition.
 ///@param _target reference ot an object to follow.
-function NPCStateFollow(_target): NPCState() constructor
+function NPCCommandFollow(_target): NPCCommand() constructor
 {
 	target = _target;
 	static Perform = function(_user)
@@ -362,9 +362,9 @@ function NPCStateFollow(_target): NPCState() constructor
 	}
 }
 
-///@function NPCStateIdle(): NPCState() constructor
+///@function NPCCommandIdle(): NPCCommand() constructor
 ///@description state for when NPC is idle. Just makes them sort of mill about. No exit condition.
-function NPCStateIdle(): NPCState() constructor
+function NPCCommandIdle(): NPCCommand() constructor
 {
 	//How long the NPC waits between switching between standing still and moving around.
 	passiveTimer = -1;
@@ -409,11 +409,11 @@ function NPCStateIdle(): NPCState() constructor
 }
 
 
-///@function NPCStateMove(_target): NPCState() constructor
-///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
+///@function NPCCommandMove(_target): NPCCommand() constructor
+///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcCommands exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
-function NPCStateMove(_target, _duration = -1): NPCState() constructor
+function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 {
 	target = _target;
 	duration = _duration;
@@ -444,11 +444,11 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 	}
 }
 
-///@function NPCStateMovePath(_target, _duration = -1): NPCState() constructor
+///@function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 ///@description state for when NPC is moving towards a given point. This version uses motion planning and paths.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
-function NPCStateMovePath(_target, _duration = -1): NPCState() constructor
+function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 {
 	target = _target;
 	duration = _duration;
@@ -516,11 +516,11 @@ function NPCStateMovePath(_target, _duration = -1): NPCState() constructor
 	}
 }
 
-///@function NPCStateTalkTo(_target, _dialogue = noone): NPCState() constructor
+///@function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 ///@description Goes to a location or towards a target while talking.
 ///@param _target a Point2 or an Instance to go towards while talking.
 ///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
-function NPCStateTalkTo(_target, _dialogue = noone): NPCState() constructor
+function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 {
 	target = _target;
 	dialogue = _dialogue;
@@ -556,16 +556,16 @@ function NPCStateTalkTo(_target, _dialogue = noone): NPCState() constructor
 			}
 		}
 		
-		//Sets the NPCStateTalkTo's textIndex to equal the updated value. If the value wasn't updated it just stays the same.
+		//Sets the NPCCommandTalkTo's textIndex to equal the updated value. If the value wasn't updated it just stays the same.
 		textIndex = _textIndex;
 	}
 }
 
 
 
-/// @function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
+/// @function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 /// @description Sets the NPC's current texts array and resets the textIndex. Attempts to exit state. Should usually have another state right after.
-function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
+function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 {
 	dialogue = _dialogue;
 	
@@ -586,10 +586,10 @@ function NPCStateSetDialogue(_dialogue) : NPCStateIdle() constructor
 }
 
 
-///@function NPCStateLoop(_states): NPCState() constructor
-///@description replaces the executing NPC's npcStates array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
+///@function NPCCommandLoop(_states): NPCCommand() constructor
+///@description replaces the executing NPC's npcCommands array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
 ///@param _states the new states array that will be looped through.
-function NPCStateLoop(_states): NPCState() constructor
+function NPCCommandLoop(_states): NPCCommand() constructor
 {
 	
 	//serializes the passed array into a serializedStates array. 
@@ -599,29 +599,29 @@ function NPCStateLoop(_states): NPCState() constructor
 		array_push(states, variable_clone(_states[_i]))
 	}
 	
-	//Replaces the _user's states array with the NPCStateLoop's own, appends a copy of this struct to the end.
+	//Replaces the _user's states array with the NPCCommandLoop's own, appends a copy of this struct to the end.
 	static Perform = function(_user)
 	{
 		var _states = states;
 		
-		array_push(_states, new NPCStateLoop(_states)); //Appends of a copy of this data structure to the end, causing it to loop.
+		array_push(_states, new NPCCommandLoop(_states)); //Appends of a copy of this data structure to the end, causing it to loop.
 		
 		
 		with (_user)
 		{
-			npcStates = [];
-			npcStates = _states;
+			npcCommands = [];
+			npcCommands = _states;
 		
 		}
 	}
 }
 
 
-/// @function NPCStateAwaitTarget(_target) : NPCState() constructor
+/// @function NPCCommandAwaitTarget(_target) : NPCCommand() constructor
 /// @description Has the NPC stand still until a target gets close enough, then attempts to exit state.
 /// @param _target An instance or point2 or something with x and y. 
 /// @param _range How close the NPC has to be to _target to go to the next state.
-function NPCStateAwaitTarget(_target, _range = CLOSE_RANGE) : NPCState() constructor
+function NPCCommandAwaitTarget(_target, _range = CLOSE_RANGE) : NPCCommand() constructor
 {
 	target = _target;
 	range = _range;

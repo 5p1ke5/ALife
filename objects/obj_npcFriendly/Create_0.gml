@@ -16,6 +16,6 @@ doll_initialize(5, 5, 3, 3, factions.player, _faceIndex, _hairIndex, _shirtIndex
 var _item = new ITEM_SWORD;
 inventory_add(inventory, _item);
 
-var _state = new NPCStateIdle(noone);
+var _state = new NPCCommandIdle(noone);
 
 npc_initialize("Ally", ["Hi neighbor!"], 100, _state);

@@ -20,19 +20,18 @@ inventory_add(inventory, _item);
 
 var _states = 
 	[
-	//new NPCStateAwaitTarget(global.player),
-	//new NPCStateTalkTo
+	//new NPCCommandAwaitTarget(global.player),
+	//new NPCCommandTalkTo
 	//	(global.player, 
 	//	[
 	//	"Help! The bandits kidnapped my brother!",
 	//	"Can you save him for me?",
 	//	"He's deeper in the forest. Come with me!"
 	//	]),
-	new NPCStateMovePath(new Point2(800, 2500), 2),
-	new NPCStateMovePath(new Point2(800, 2700), 2),
-	new NPCStateMovePath(new Point2(2300, 2600), 2)
+	new NPCCommandMovePath(new Point2(800, 2500), 2),
+	new NPCCommandMovePath(new Point2(800, 2700), 2),
+	new NPCCommandMovePath(new Point2(2300, 2600), 2)
 	]
 
-var _loop = new NPCStateLoop(_states);
 
-npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _loop);
+npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _states);

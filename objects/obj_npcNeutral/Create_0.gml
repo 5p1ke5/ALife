@@ -14,6 +14,6 @@ doll_initialize(5, 5, 3, 3, factions.neutral, _faceIndex, _hairIndex, _shirtInde
 
 
 
-var _state = new NPCStateIdle(noone);
+var _state = new NPCCommandIdle(noone);
 
 npc_initialize("Villager", ["We're just townsfolk!"], 100, _state);

@@ -5,9 +5,9 @@ if (instance_exists(owner))
 	{
 		with (owner.creator)
 		{
-			_newState = new NPCStateFollow(global.player);
+			_newState = new NPCCommandFollow(global.player);
 				
-			npcStates = array_create(1, _newState);
+			npcCommands = array_create(1, _newState);
 		}
 				
 	}
