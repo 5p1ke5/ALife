@@ -505,6 +505,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 				{
 					npc_move_to(_target, 0);
 					_duration--;	
+					show_debug_message("Duration: {0}", _duration);
 				}
 				else
 				{
@@ -513,6 +514,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 				}
 			}
 		}
+		
 		duration = _duration;
 	}
 }
