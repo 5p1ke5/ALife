@@ -412,7 +412,7 @@ function NPCStateIdle(): NPCState() constructor
 ///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
-function NPCStateMove(_target, _duration = -1): NPCState() constructor
+function NPCStateMove(_target, _duration = -1, _user = other): NPCState() constructor
 {
 	target = _target;
 	duration = _duration;
@@ -422,6 +422,7 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 	motionPathed = false;
 	path = [];
 	
+	show_debug_message(string("{0}, {1}", other.x, other.y))
 	static Perform = function(_user)
 	{
 		var _target = target;
@@ -442,13 +443,26 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 			show_debug_message(string(path))
 		}
 		
+		//Is this passed by reference? Double check I might not need this
+		var _path = path;
+		
 		with (_user)
 		{
-			//Moves towards target point until right at it.
-			npc_move_to(_target);
 			
-			//If NPC gets to their location waits for duration (if any) and then attempt to exit state.
-			if (distance_to_point(_target.x, _target.y) < CLOSE_RANGE)
+			//If the array has elements the unit is still navigating the given path.
+			if (array_length(_path) > 0)
+			{
+				//Moves towards each point until right at it, then removes it from the array.
+				var _point = array_first(_path);
+				npc_move_to(_point, 1);
+			
+				if (distance_to_point(_point.x, _point.y) < MELEE)
+				{
+					array_shift(_path);
+				}
+			
+			}
+			else //Otherwise the instance is at the goal and attempts to exit state.
 			{
 				if (_duration > -1)
 				{
@@ -460,7 +474,7 @@ function NPCStateMove(_target, _duration = -1): NPCState() constructor
 				}
 			}
 		}
-		
+		path = _path;
 		duration = _duration;
 	}
 }
