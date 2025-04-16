@@ -466,15 +466,16 @@ function NPCStateMove(_target, _duration = -1, _user = other): NPCState() constr
 			{
 				if (_duration > -1)
 				{
+					npc_move_to(_target, 0);
 					_duration--;	
 				}
 				else
 				{
+					npc_move_to(_target, 0);
 					npc_exit_state();
 				}
 			}
 		}
-		path = _path;
 		duration = _duration;
 	}
 }

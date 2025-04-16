@@ -28,7 +28,7 @@ var _states =
 	//	"Can you save him for me?",
 	//	"He's deeper in the forest. Come with me!"
 	//	]),
-	new NPCStateMove(new Point2(2000, 2600))
+	new NPCStateMove(new Point2(800, 2500), 2)
 	]
 	
 
