@@ -408,11 +408,47 @@ function NPCStateIdle(): NPCState() constructor
 	}
 }
 
-///@function NPCStateMove(_target, _duration = -1): NPCState() constructor
+
+///@function NPCStateMove(_target): NPCState() constructor
 ///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcStates exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
-function NPCStateMove(_target, _duration = -1, _user = other): NPCState() constructor
+function NPCStateMove(_target, _duration = -1): NPCState() constructor
+{
+	target = _target;
+	duration = _duration;
+	static Perform = function(_user)
+	{
+		var _target = target;
+		var _duration = duration;
+		with (_user)
+		{
+			//Moves towards target point until right at it.
+			npc_move_to(_target);
+			
+			//If NPC gets to their location waits for duration (if any) and then attempt to exit state.
+			if (distance_to_point(_target.x, _target.y) < CLOSE_RANGE)
+			{
+				if (_duration > -1)
+				{
+					_duration--;	
+				}
+				else
+				{
+					npc_exit_state();
+				}
+			}
+		}
+		
+		duration = _duration;
+	}
+}
+
+///@function NPCStateMovePath(_target, _duration = -1): NPCState() constructor
+///@description state for when NPC is moving towards a given point. This version uses motion planning and paths.
+///@param _target Point2 for the target to move towards.
+///@param _duration Time for the NPC to wait at the given point.
+function NPCStateMovePath(_target, _duration = -1): NPCState() constructor
 {
 	target = _target;
 	duration = _duration;
