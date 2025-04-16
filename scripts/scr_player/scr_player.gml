@@ -108,11 +108,11 @@ function player_control()
 			case cursor.move:
 				//Order currently selected NPCs to move.
 				var _point = new Point2(mouse_x, mouse_y);
-				var _newState = new NPCCommandMove(_point);
+				var _newCommand = new NPCCommandMove(_point);
 			
 				with (global.selectedUnit)
 				{
-					array_insert(npcCommands, 0, _newState);
+					array_insert(npcCommands, 0, _newCommand);
 				}
 				
 				global.selectedUnit = noone;

@@ -18,7 +18,7 @@ inventory_add(inventory, _item);
 
 //an array of states.
 
-var _states = 
+var _commands = 
 	[
 	//new NPCCommandAwaitTarget(global.player),
 	//new NPCCommandTalkTo
@@ -34,4 +34,4 @@ var _states =
 	]
 
 
-npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _states);
+npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _commands);

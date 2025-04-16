@@ -5,9 +5,9 @@ if (instance_exists(owner))
 	{
 		with (owner.creator)
 		{
-			_newState = new NPCCommandIdle(noone);
+			_newCommand = new NPCCommandIdle(noone);
 				
-			npcCommands = array_create(1, _newState);
+			npcCommands = array_create(1, _newCommand);
 		}
 		
 		if (ds_list_find_index(global.party, owner.creator) != -1)

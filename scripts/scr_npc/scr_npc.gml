@@ -1,11 +1,12 @@
 #region //NPC functions.
-/// @function npc_initialize(_name, _Text)
+
+/// @function npc_initialize(_name, _texts, _level, _npcCommands)
 /// @description initializes NPC variables.
 /// @param _name the name of the NPC. Will also be put in the text box.
 /// @param _texts[] an array containing the text that will go in the NPC speech balloon.
 /// @param _level How quickly the NPC reacts. Lower is stronger, with 0 being strongest. 100 is easy.
-/// @param _npcState npcState struct. Should be initialzed with the NPCCommand constructor and the correct npcCommands. Can also be an array of NPCCommands.
-function npc_initialize(_name, _texts, _level, _npcState)
+/// @param _npcCommands npcState struct. Should be initialzed with the NPCCommand constructor and the correct npcCommands. Can also be an array of NPCCommands.
+function npc_initialize(_name, _texts, _level, _npcCommands)
 {
 	name = _name;
 	texts = _texts;
@@ -18,13 +19,13 @@ function npc_initialize(_name, _texts, _level, _npcState)
 	
 	//What the NPC is trying to do. Think of it as what they have instead of controller input.
 	//If its a struct makes it an array with just that struct. 
-	if (is_struct(_npcState))
+	if (is_struct(_npcCommands))
 	{
-		npcCommands = array_create(1, _npcState)	
+		npcCommands = array_create(1, _npcCommands)	
 	}
 	else //Otherwise assumes its an array and makes that array the npcCommands array.
 	{
-		npcCommands = _npcState;
+		npcCommands = _npcCommands;
 	}
 	
 	//List of other npcs being sensed.
@@ -305,10 +306,10 @@ function npc_fight_itemUse(_item, _target)
 
 
 
-///@function npc_exit_state()
-///@description Attempts to exit the npc's current state. Can only exit state if npcCommands array has more than 1 item.
-///@returns The next state in the array or noone if there is only 1 item in the array.
-function npc_exit_state()
+///@function npc_exit_command()
+///@description Attempts to exit the npc's current command. Can only exit command if npcCommands array has more than 1 item.
+///@returns The next command in the array or noone if there is only 1 item in the array.
+function npc_exit_command()
 {
 	//State can only be exited if the number of items in npcState is greater than 1.
 	if (array_length(npcCommands) > 1)
@@ -370,8 +371,8 @@ function NPCCommandIdle(): NPCCommand() constructor
 	passiveTimer = -1;
 	
 	//Directions the state is telling the NPC to move to. If both are 0 just doesn't move.
-	stateHDir = 0;
-	stateVDir = 0;
+	commandHDir = 0;
+	commandVDir = 0;
 	
 	static Perform = function(_user)
 	{
@@ -380,8 +381,8 @@ function NPCCommandIdle(): NPCCommand() constructor
 		{
 			passiveTimer--;
 			
-			var _hDir = stateHDir;
-			var _vDir = stateVDir;
+			var _hDir = commandHDir;
+			var _vDir = commandVDir;
 			with (_user)
 			{
 				doll_movement(_hDir, _vDir);
@@ -396,13 +397,13 @@ function NPCCommandIdle(): NPCCommand() constructor
 			var _move = choose(true, false);
 			if (_move)
 			{
-				stateHDir = irandom_range(-1, 1);
-				stateVDir = irandom_range(-1, 1);
+				commandHDir = irandom_range(-1, 1);
+				commandVDir = irandom_range(-1, 1);
 			}
 			else
 			{
-				stateHDir = 0;
-				stateVDir = 0;
+				commandHDir = 0;
+				commandVDir = 0;
 			}
 		}
 	}
@@ -435,7 +436,7 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 				}
 				else
 				{
-					npc_exit_state();
+					npc_exit_command();
 				}
 			}
 		}
@@ -508,7 +509,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 				else
 				{
 					npc_move_to(_target, 0);
-					npc_exit_state();
+					npc_exit_command();
 				}
 			}
 		}
@@ -552,7 +553,7 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 			//If textIndex == 0 that means the NPC is done with their dialogue.
 			if (_dialogue == noone && textIndex == 0) || (_dialogue != noone && _textIndex == 0)
 			{
-				npc_exit_state();	
+				npc_exit_command();	
 			}
 		}
 		
@@ -580,7 +581,7 @@ function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 			textIndex = 0;
 			
 			//Attemps to exit state.
-			npc_exit_state();
+			npc_exit_command();
 		}
 	}
 }
@@ -589,28 +590,28 @@ function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 ///@function NPCCommandLoop(_states): NPCCommand() constructor
 ///@description replaces the executing NPC's npcCommands array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
 ///@param _states the new states array that will be looped through.
-function NPCCommandLoop(_states): NPCCommand() constructor
+function NPCCommandLoop(_commands): NPCCommand() constructor
 {
 	
 	//serializes the passed array into a serializedStates array. 
-	states = [];
-	for (var _i = 0; _i < array_length(_states); _i++)
+	commands = [];
+	for (var _i = 0; _i < array_length(_commands); _i++)
 	{
-		array_push(states, variable_clone(_states[_i]))
+		array_push(commands, variable_clone(_commands[_i]))
 	}
 	
 	//Replaces the _user's states array with the NPCCommandLoop's own, appends a copy of this struct to the end.
 	static Perform = function(_user)
 	{
-		var _states = states;
+		var _commands = commands;
 		
-		array_push(_states, new NPCCommandLoop(_states)); //Appends of a copy of this data structure to the end, causing it to loop.
+		array_push(_commands, new NPCCommandLoop(_commands)); //Appends of a copy of this data structure to the end, causing it to loop.
 		
 		
 		with (_user)
 		{
 			npcCommands = [];
-			npcCommands = _states;
+			npcCommands = _commands;
 		
 		}
 	}
@@ -636,7 +637,7 @@ function NPCCommandAwaitTarget(_target, _range = CLOSE_RANGE) : NPCCommand() con
 			//If the target gets close enough attempts to go to next state.
 			if (distance_to_point(_target.x, _target.y) < _range)
 			{
-				npc_exit_state();
+				npc_exit_command();
 			}
 		}
 	}

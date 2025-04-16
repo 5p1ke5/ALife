@@ -18,7 +18,7 @@ inventory_add(inventory, _item);
 
 //an array of states.
 
-var _states = 
+var _commands = 
 [
 	new NPCCommandAwaitTarget(global.player), 
 	new NPCCommandTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
@@ -26,4 +26,4 @@ var _states =
 ];
 	
 
-npc_initialize("Kai", ["I've always dreamed of being an adventurer."], 100, _states);
+npc_initialize("Kai", ["I've always dreamed of being an adventurer."], 100, _commands);

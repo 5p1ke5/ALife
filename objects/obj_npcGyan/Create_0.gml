@@ -18,13 +18,13 @@ inventory_add(inventory, _item);
 
 //an array of states.
 
-var _states = 
+var _commands = 
 [
 	new NPCCommandMove(new Point2(865, 2792), 3 * game_get_speed(gamespeed_fps)),
 	new NPCCommandMove(new Point2(1056, 2816), 3 * game_get_speed(gamespeed_fps)),
 	new NPCCommandMove(new Point2(900, 2848), 3 * game_get_speed(gamespeed_fps)),
 ];
 	
-var _loop = new NPCCommandLoop(_states);	
+var _loop = new NPCCommandLoop(_commands);	
 
 npc_initialize("Gyan", ["Watch out, it's dangerous in the wilderness.", "There are outlaws living in the forest."], 100, _loop);

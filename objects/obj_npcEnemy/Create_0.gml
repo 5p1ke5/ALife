@@ -16,6 +16,6 @@ doll_initialize(5, 5, 3, 3, factions.enemy, _faceIndex, _hairIndex, _shirtIndex,
 var _item = new ITEM_SWORD;
 inventory_add(inventory, _item);
 
-var _state = new NPCCommandIdle(noone);
+var _command = new NPCCommandIdle();
 
-npc_initialize("Bandit", ["I'll crush you!"], 100, _state);
+npc_initialize("Bandit", ["I'll crush you!"], 100, _command);

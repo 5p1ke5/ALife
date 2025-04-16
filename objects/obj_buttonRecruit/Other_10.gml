@@ -6,9 +6,9 @@ if (instance_exists(owner))
 		with (owner.creator)
 		{
 			//Resets npcCommands array and has them just follow the player.
-			_newState = new NPCCommandFollow(global.player);
+			_newCommand = new NPCCommandFollow(global.player);
 				
-			npcCommands = array_create(1, _newState);
+			npcCommands = array_create(1, _newCommand);
 		}
 				
 		if (ds_list_find_index(global.party, owner.creator) == -1)
