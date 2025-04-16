@@ -30,8 +30,9 @@ var _states =
 	//	]),
 	new NPCStateMovePath(new Point2(800, 2500), 2),
 	new NPCStateMovePath(new Point2(800, 2700), 2),
-	new NPCStateMovePath(new Point2(2400, 2700), 2)
+	new NPCStateMovePath(new Point2(2300, 2600), 2)
 	]
-	
 
-npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _states);
+var _loop = new NPCStateLoop(_states);
+
+npc_initialize("Sasha", ["I'm gonna tell all my friends I met you!"], 100, _loop);

@@ -1,2 +1,2 @@
-/// @description Insert description here
-mp_grid_draw(global.mpGrid);
+/// @description Can draw the grid if needed.
+//mp_grid_draw(global.mpGrid);
