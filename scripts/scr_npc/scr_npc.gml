@@ -445,6 +445,15 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
+/// @function NPCCommandFight(_target, _range)
+/// @description makes thes calling NPC fight the target. Attempts to exit when the target is dead or out of range if _range > 0.
+function NPCCommandFight(_target, _range): NPCCommand() constructor
+{
+	
+}
+
+
+
 ///@function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 ///@description state for when NPC is moving towards a given point. This version uses motion planning and paths.
 ///@param _target Point2 for the target to move towards.
