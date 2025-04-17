@@ -410,7 +410,7 @@ function NPCCommandIdle(): NPCCommand() constructor
 }
 
 
-///@function NPCCommandMove(_target): NPCCommand() constructor
+///@function NPCCommandMove(_target, _duration)
 ///@description state for when NPC is moving towards a given point. Once the NPC gets there they just wait so this can also be used to make an NPC wait at a given point. If the NPC has more than one item in npcCommands exits upon reaching the point.
 ///@param _target Point2 for the target to move towards.
 ///@param _duration Time for the NPC to wait at the given point.
@@ -445,11 +445,83 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
+
+
+///@function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
+///@description state for when NPC is moving towards a given point. This version uses motion planning and paths.
+///@param _target Point2 for the target to move towards.
+///@param _duration Time for the NPC to wait at the given point.
+function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
+{
+	target = _target;
+	duration = _duration;
+	
+	//These will be defined the first time Perform runs.
+	mpPath = path_add();
+	motionPathed = false;
+	path = [];
+	
+	//show_debug_message(string("{0}, {1}", other.x, other.y))
+	static Perform = function(_user)
+	{
+		var _target = target;
+		var _duration = duration;
+		
+		//Initializes motionPath if necessary. 
+		if (path_get_number(mpPath) == 0)
+		{
+			motionPathed = mp_grid_path(global.mpGrid, mpPath, _user.x, _user.y, _target.x, _target.y, true);
+			
+			//Pushes mpPath coordinates to array 'path' as Point2s
+			for (var _i = 0; _i < path_get_number(mpPath) ; _i++) 
+			{
+				array_push(path, new Point2(path_get_point_x(mpPath, _i), path_get_point_y(mpPath, _i)));	
+			}
+		}
+		
+		//Is this passed by reference? Double check I might not need this
+		var _path = path;
+		
+		with (_user)
+		{
+			
+			//If the array has elements the unit is still navigating the given path.
+			if (array_length(_path) > 0)
+			{
+				//Moves towards each point until right at it, then removes it from the array.
+				var _point = array_first(_path);
+				npc_move_to(_point, 0);
+			
+				if (distance_to_point(_point.x, _point.y) <= 2)
+				{
+					array_shift(_path);
+				}
+			
+			}
+			else //Otherwise the instance is at the goal and attempts to exit state.
+			{
+				if (_duration > -1)
+				{
+					npc_move_to(_target, 0);
+					_duration--;	
+				}
+				else
+				{
+					npc_move_to(_target, 0);
+					npc_exit_command();
+				}
+			}
+		}
+		
+		duration = _duration;
+	}
+}
+
 /// @function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true)
 /// @description Takes _globalVarName as the string of a variable name and checks it. If true, inserts NPCCommand1 next in npcCommands (Position 1), if false inserts NPCCommand2. Then exits state.
 /// @param _globalVarName the string version of a variable.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
-/// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns false.
+/// @param _NPCCommand2 the NPCCommand that gets inserted at index 1 if the comparison returns false.
 /// @param _checkVal The value to be checked against. Defaults to 'true' so if not filled in it just treates _globalVarName as a boolean.
 function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
 {
@@ -537,6 +609,51 @@ function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value): NPCComma
 }
 
 
+/// @function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _value = true)
+/// @description Checks the value of an instance's instance variable, 
+/// @param _instance The instance containing the variable to check. If no variable is passed just treats it as a boolean. If the instance can't be found defaults to _NPCCommand2.
+/// @param _instanceVarName A string containing the name of the instance variable to check.
+/// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
+/// @param _NPCCommand2 the NPCCommand that gets inserted at index 1 if the comparison returns false.
+/// @param _checkVal The value to set the instance variable to.
+function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
+{
+	instance = _instance;
+	instanceVarName = _instanceVarName;
+	value = _value;
+	
+	npcCommand1 = _npcCommand1;
+	npcCommand2 = _npcCommand2;
+	checkVal = _checkVal;
+	
+	static Perform = function (_user)
+	{
+		//Defaults to npcCommand2 (false). This one also gets passed if the instance can't be found.
+		var _command = npcCommand2;
+		
+		if (instance_exists(instance))
+		{
+			//Gets the value using the string name.
+			var _value = variable_instance_get(instance, instanceVarName);
+			var _check = (_value == checkVal);
+	
+			//If _check returns true sets _command to npcCommand1 instead.
+			if (_check)
+			{
+				_command = npcCommand1;
+			}
+		}
+		
+		
+		//Inserts the new commands in the array.
+		with (_user)
+		{
+			array_insert(npcCommands, 1, _command);	
+			npc_exit_command();
+		}
+	}
+}
+
 
 
 /// @function NPCCommandFight(_target)
@@ -560,82 +677,6 @@ function NPCCommandFight(_target): NPCCommand() constructor
 				npc_exit_command();
 			}
 		}
-	}
-}
-
-
-
-///@function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
-///@description state for when NPC is moving towards a given point. This version uses motion planning and paths.
-///@param _target Point2 for the target to move towards.
-///@param _duration Time for the NPC to wait at the given point.
-function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
-{
-	target = _target;
-	duration = _duration;
-	
-	//These will be defined the first time Perform runs.
-	mpPath = path_add();
-	motionPathed = false;
-	path = [];
-	
-	show_debug_message(string("{0}, {1}", other.x, other.y))
-	static Perform = function(_user)
-	{
-		var _target = target;
-		var _duration = duration;
-		
-		//Initializes motionPath if necessary. 
-		if (path_get_number(mpPath) == 0)
-		{
-			motionPathed = mp_grid_path(global.mpGrid, mpPath, _user.x, _user.y, _target.x, _target.y, true);
-			
-			//Pushes mpPath coordinates to array 'path' as Point2s
-			for (var _i = 0; _i < path_get_number(mpPath) ; _i++) 
-			{
-				show_debug_message("mpPath[{0}]: {1}, {2}", _i, path_get_point_x(mpPath, _i), path_get_point_y(mpPath, _i));
-				
-				array_push(path, new Point2(path_get_point_x(mpPath, _i), path_get_point_y(mpPath, _i)));	
-			}
-			show_debug_message(string(path))
-		}
-		
-		//Is this passed by reference? Double check I might not need this
-		var _path = path;
-		
-		with (_user)
-		{
-			
-			//If the array has elements the unit is still navigating the given path.
-			if (array_length(_path) > 0)
-			{
-				//Moves towards each point until right at it, then removes it from the array.
-				var _point = array_first(_path);
-				npc_move_to(_point, 0);
-			
-				if (distance_to_point(_point.x, _point.y) <= 2)
-				{
-					array_shift(_path);
-				}
-			
-			}
-			else //Otherwise the instance is at the goal and attempts to exit state.
-			{
-				if (_duration > -1)
-				{
-					npc_move_to(_target, 0);
-					_duration--;	
-					show_debug_message("Duration: {0}", _duration);
-				}
-				else
-				{
-					npc_move_to(_target, 0);
-					npc_exit_command();
-				}
-			}
-		}
-		
-		duration = _duration;
 	}
 }
 

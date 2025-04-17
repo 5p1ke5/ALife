@@ -20,11 +20,9 @@ inventory_add(inventory, _item);
 
 var _commands = 
 [
-	new NPCCommandMove(new Point2(800, 2700), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandCheckGlobal("storyTalkedToAtticus", new NPCCommandSetDialogue("So you talked to Atticus. He used to be a powerful knight, he knows his stuff."), new NPCCommandSetDialogue("Have you talked to Atticus yet?")),
-	new NPCCommandMove(new Point2(1000, 2700), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandCheckGlobal("storyTalkedToAtticus", new NPCCommandSetDialogue("So you talked to Atticus. He used to be a powerful knight, he knows his stuff."), new NPCCommandSetDialogue("Have you talked to Atticus yet?")),
-	new NPCCommandMove(new Point2(900, 2600), 1 * game_get_speed(gamespeed_fps))
+	new NPCCommandMove(new Point2(x + 100, y), 1 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(x, y), 1 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(x - 100, y + 100), 1 * game_get_speed(gamespeed_fps))
 ];
 
 var _loop = new NPCCommandLoop(_commands);
