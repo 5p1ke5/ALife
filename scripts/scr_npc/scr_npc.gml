@@ -445,15 +445,15 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
-/// @function NPCCommandCheckGlobal(_globalVariableName, _npcCommand1, _npcCommand2, _checkVal = true)
-/// @description Takes _globalVariableName as the string of a variable name and checks it. If true, inserts NPCCommand1 next in npcCommands (Position 1), if false inserts NPCCommand2. Then exits state.
-/// @param _globalVariableName the string version of a variable.
+/// @function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true)
+/// @description Takes _globalVarName as the string of a variable name and checks it. If true, inserts NPCCommand1 next in npcCommands (Position 1), if false inserts NPCCommand2. Then exits state.
+/// @param _globalVarName the string version of a variable.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns false.
-/// @param _checkVal The value to be checked against. Defaults to 'true' so if not filled in it just treates _globalVariableName as a boolean.
-function NPCCommandCheckGlobal(_globalVariableName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
+/// @param _checkVal The value to be checked against. Defaults to 'true' so if not filled in it just treates _globalVarName as a boolean.
+function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
 {
-	globalVarName = _globalVariableName;
+	globalVarName = _globalVarName;
 	npcCommand1 = _npcCommand1;
 	npcCommand2 = _npcCommand2;
 	checkVal = _checkVal;
@@ -476,11 +476,13 @@ function NPCCommandCheckGlobal(_globalVariableName, _npcCommand1, _npcCommand2, 
 }
 
 
-/// @function NPCCommandSetGlobal(_globalVariableName, _value)
+/// @function NPCCommandSetGlobalVar(_globalVarName, _value)
 /// @description Sets the given global variable and then attempts to exit.
-function NPCCommandSetGlobal(_globalVariableName, _value): NPCCommand() constructor
+/// @param _globalVarName A string containing the name of the global variable to be set.
+/// @param _value The value to set the global variable to.
+function NPCCommandSetGlobalVar(_globalVarName, _value): NPCCommand() constructor
 {
-	globalVarName = _globalVariableName;
+	globalVarName = _globalVarName;
 	value = _value;
 	
 	executed = false; //This will be set to true after the variable has been set so it doesn't get reset if the command can't be exited.
@@ -499,8 +501,41 @@ function NPCCommandSetGlobal(_globalVariableName, _value): NPCCommand() construc
 			npc_exit_command();
 		}
 	}
-	
 }
+
+///@function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value)
+///@description Attempts to set a variable on an instance to the given value.
+/// @param _instance The instance containing the variable to be set.
+/// @param _instanceVarName A string containing the name of the instance variable to be set.
+/// @param _value The value to set the instance variable to.
+function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value): NPCCommand() constructor
+{
+	instance = _instance;
+	instanceVarName = _instanceVarName;
+	value = _value;
+	
+	executed = false;
+	
+	static Perform = function(_user)
+	{
+		if !(executed)
+		{
+			//Checks if the instance exists. If so changes the variable
+			if (instance_exists(instance))
+			{
+				variable_instance_set(instance, instanceVarName, value);	
+			} //If not does nothing and tries to exit state.
+			
+			executed = true;
+		}
+		
+		with (_user)
+		{
+			npc_exit_command();	
+		}
+	}
+}
+
 
 
 
