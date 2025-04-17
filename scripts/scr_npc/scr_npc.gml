@@ -445,11 +445,28 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
-/// @function NPCCommandFight(_target, _range)
-/// @description makes thes calling NPC fight the target. Attempts to exit when the target is dead or out of range if _range > 0.
-function NPCCommandFight(_target, _range): NPCCommand() constructor
+/// @function NPCCommandFight(_target)
+/// @description makes thes calling NPC fight the target. Attempts to exit when the target is dead.
+function NPCCommandFight(_target): NPCCommand() constructor
 {
+	target = _target;
 	
+	static Perform = function(_user)
+	{
+		var _target = target;
+		
+		with (_user)
+		{
+			if (instance_exists(_target))
+			{
+				npc_fight(_target);	
+			}
+			else
+			{
+				npc_exit_command();
+			}
+		}
+	}
 }
 
 
