@@ -76,6 +76,7 @@
     {"name":"obj_npcEnemy","order":1,"path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},
     {"name":"obj_npcFriendly","order":3,"path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},
     {"name":"obj_npcGyan","order":6,"path":"objects/obj_npcGyan/obj_npcGyan.yy",},
+    {"name":"obj_npcJohnny","order":8,"path":"objects/obj_npcJohnny/obj_npcJohnny.yy",},
     {"name":"obj_npcKai","order":5,"path":"objects/obj_npcKai/obj_npcKai.yy",},
     {"name":"obj_npcNeutral","order":2,"path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},
     {"name":"obj_partySpawner","order":4,"path":"objects/obj_partySpawner/obj_partySpawner.yy",},

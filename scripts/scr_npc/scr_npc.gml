@@ -445,6 +445,65 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
+/// @function NPCCommandCheckGlobal(_globalVariableName, _npcCommand1, _npcCommand2, _checkVal = true)
+/// @description Takes _globalVariableName as the string of a variable name and checks it. If true, inserts NPCCommand1 next in npcCommands (Position 1), if false inserts NPCCommand2. Then exits state.
+/// @param _globalVariableName the string version of a variable.
+/// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
+/// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns false.
+/// @param _checkVal The value to be checked against. Defaults to 'true' so if not filled in it just treates _globalVariableName as a boolean.
+function NPCCommandCheckGlobal(_globalVariableName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
+{
+	globalVarName = _globalVariableName;
+	npcCommand1 = _npcCommand1;
+	npcCommand2 = _npcCommand2;
+	checkVal = _checkVal;
+	
+	static Perform = function(_user)
+	{
+		//Gets the value using the string name.
+		var _value = variable_global_get(globalVarName);
+		var _check = (_value == checkVal);
+		
+		var _command = _check ? npcCommand1 : npcCommand2;
+		
+		
+		with (_user)
+		{
+			array_insert(npcCommands, 1, _command);	
+			npc_exit_command();
+		}
+	}
+}
+
+
+/// @function NPCCommandSetGlobal(_globalVariableName, _value)
+/// @description Sets the given global variable and then attempts to exit.
+function NPCCommandSetGlobal(_globalVariableName, _value): NPCCommand() constructor
+{
+	globalVarName = _globalVariableName;
+	value = _value;
+	
+	executed = false; //This will be set to true after the variable has been set so it doesn't get reset if the command can't be exited.
+	
+	static Perform = function(_user)
+	{
+		//Sets the variable as directed, then attempts to exit state.
+		if !(executed)
+		{
+			variable_global_set(globalVarName, value);
+			executed = true;
+		}
+		
+		with (_user)
+		{
+			npc_exit_command();
+		}
+	}
+	
+}
+
+
+
 /// @function NPCCommandFight(_target)
 /// @description makes thes calling NPC fight the target. Attempts to exit when the target is dead.
 function NPCCommandFight(_target): NPCCommand() constructor
@@ -592,8 +651,9 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 
 
 
-/// @function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
+/// @function NPCCommandSetDialogue(_dialogue)
 /// @description Sets the NPC's current texts array and resets the textIndex. Attempts to exit state. Should usually have another state right after.
+/// @param _dialogue an array or string. This will be set as the npc's texts array. If its just a string is first converted to a 1-element array.
 function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 {
 	dialogue = _dialogue;
@@ -604,8 +664,15 @@ function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
 		
 		with (_user)
 		{
-			//Sets dialogue to the passed value, resets text index.
-			texts = _dialogue;
+			//Sets dialogue to the passed value, resets text index. 
+			if (is_array(_dialogue))
+			{
+				texts = _dialogue;
+			}
+			else //If it's not an array turns the passed value into a 1-element array.
+			{
+				texts = array_create(1, _dialogue);	
+			}
 			textIndex = 0;
 			
 			//Attemps to exit state.

@@ -109,6 +109,7 @@
     {"id":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},},
     {"id":{"name":"obj_npcFriendly","path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},},
     {"id":{"name":"obj_npcGyan","path":"objects/obj_npcGyan/obj_npcGyan.yy",},},
+    {"id":{"name":"obj_npcJohnny","path":"objects/obj_npcJohnny/obj_npcJohnny.yy",},},
     {"id":{"name":"obj_npcKai","path":"objects/obj_npcKai/obj_npcKai.yy",},},
     {"id":{"name":"obj_npcNeutral","path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},},
     {"id":{"name":"obj_panel","path":"objects/obj_panel/obj_panel.yy",},},
