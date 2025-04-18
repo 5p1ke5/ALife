@@ -328,6 +328,13 @@ function npc_name_random()
 	return global.names[irandom(array_length(global.names) - 1)];
 }
 
+/// @function npc_check_target(_target)
+/// @description check if the target exists as either a struct or instance. Returns true or false.
+/// @param the target to be checked.
+function npc_check_target(_target)
+{
+	return (instance_exists(_target) || instanceof(_target) != undefined)
+}
 #endregion
 
 
@@ -356,7 +363,7 @@ function NPCCommandFollow(_target): NPCCommand() constructor
 	{
 
 		//If target no longer exists attempts to exit state.
-		if (!instance_exists(target) && instanceof(target) == undefined)
+		if !(npc_check_target(target))
 		{
 			with (_user)
 			{
@@ -432,7 +439,7 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	static Perform = function(_user)
 	{
 		//If target no longer exists attempts to exit state.
-		if (!instance_exists(target) && instanceof(target) == undefined)
+		if !(npc_check_target(target))
 		{
 			with (_user)
 			{
@@ -486,7 +493,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 	static Perform = function(_user)
 	{
 		//If target no longer exists attempts to exit state.
-		if (!instance_exists(target) && instanceof(target) == undefined)
+		if !(npc_check_target(target))
 		{
 			with (_user)
 			{
