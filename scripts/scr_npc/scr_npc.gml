@@ -548,27 +548,59 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 	}
 }
 
-/// @function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true)
+/// @function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true, _comparison = compare.equals)
 /// @description Takes _globalVarName as the string of a variable name and checks it. If true, inserts NPCCommand1 next in npcCommands (Position 1), if false inserts NPCCommand2. Then exits state.
 /// @param _globalVarName the string version of a variable.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
 /// @param _NPCCommand2 the NPCCommand that gets inserted at index 1 if the comparison returns false.
 /// @param _checkVal The value to be checked against. Defaults to 'true' so if not filled in it just treates _globalVarName as a boolean.
-function NPCCommandCheckGlobal(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
+/// @oaram _comparison The comparison sign (<, >, =) to use. Wants an enum. Defaults to equals.
+function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _checkVal = true, _comparison = compare.equals): NPCCommand() constructor
 {
 	globalVarName = _globalVarName;
 	npcCommand1 = _npcCommand1;
 	npcCommand2 = _npcCommand2;
 	checkVal = _checkVal;
+	comparison = _comparison;
 	
 	static Perform = function(_user)
 	{
 		//Gets the value using the string name.
 		var _value = variable_global_get(globalVarName);
-		var _check = (_value == checkVal);
 		
-		var _command = _check ? npcCommand1 : npcCommand2;
+		//Checks the compare value but defaults 
+		switch (comparison) 
+		{
+			case compare.greaterThan:
+			    var _check = (_value > checkVal);
+				show_debug_message("{0} > {1}", _value, checkVal);
+		        break;
+		    case compare.lessThan:
+		        var _check = (_value < checkVal);
+				show_debug_message("{0} < {1}", _value, checkVal);
+		        break;
+		    case compare.greaterThanOrEqual:
+		        var _check = (_value >= checkVal);
+				show_debug_message("{0} >= {1}", _value, checkVal);
+		        break;
+		    case compare.lessThanOrEqual:
+		        var _check = (_value <= checkVal);
+				show_debug_message("{0} <= {1}", _value, checkVal);
+		        break;
+		    default:
+		        var _check = (_value == checkVal);
+				show_debug_message("{0} == {1}", _value, checkVal);
+		        break;
+		}
 		
+		if (_check)
+		{
+			var _command = npcCommand1;
+		}
+		else
+		{
+			var _command = npcCommand2;	
+		}
 		
 		with (_user)
 		{
