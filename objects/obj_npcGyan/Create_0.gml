@@ -6,7 +6,7 @@ var _hairIndex = 12;
 var _shirtIndex = 6;
 var _pantsIndex = 0;
 var _skinColor = c_black3;
-var _hairColor = c_fuchsia;
+var _hairColor = c_black;
 var _shirtColor = c_purple;
 var _pantsColor = c_dkgray;
 

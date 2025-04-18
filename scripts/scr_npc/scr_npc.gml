@@ -307,7 +307,7 @@ function npc_fight_itemUse(_item, _target)
 
 
 ///@function npc_exit_command()
-///@description Attempts to exit the npc's current command. Can only exit command if npcCommands array has more than 1 item.
+///@description Attempts to exit the npc's current command. Can only exit command if npcCommands array has more than 1 item. Needs to be called from within an NPC instance.
 ///@returns The next command in the array or noone if there is only 1 item in the array.
 function npc_exit_command()
 {
@@ -354,6 +354,17 @@ function NPCCommandFollow(_target): NPCCommand() constructor
 	target = _target;
 	static Perform = function(_user)
 	{
+
+		//If target no longer exists attempts to exit state.
+		if (!instance_exists(target) && instanceof(target) == undefined)
+		{
+			with (_user)
+			{
+				npc_exit_command();
+				return;
+			}
+		}
+		
 		//Creates a temporary variable holding the target from this struct so it can be used by the user.
 		var _target = target;
 		with (_user)
@@ -420,6 +431,16 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 	duration = _duration;
 	static Perform = function(_user)
 	{
+		//If target no longer exists attempts to exit state.
+		if (!instance_exists(target) && instanceof(target) == undefined)
+		{
+			with (_user)
+			{
+				npc_exit_command();
+				return;
+			}
+		}
+		
 		var _target = target;
 		var _duration = duration;
 		with (_user)
@@ -464,6 +485,16 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 	//show_debug_message(string("{0}, {1}", other.x, other.y))
 	static Perform = function(_user)
 	{
+		//If target no longer exists attempts to exit state.
+		if (!instance_exists(target) && instanceof(target) == undefined)
+		{
+			with (_user)
+			{
+				npc_exit_command();
+				return;
+			}
+		}
+		
 		var _target = target;
 		var _duration = duration;
 		
@@ -609,22 +640,22 @@ function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value): NPCComma
 }
 
 
-/// @function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _value = true)
+/// @function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _value = true, _compare = compare.equals)
 /// @description Checks the value of an instance's instance variable, 
-/// @param _instance The instance containing the variable to check. If no variable is passed just treats it as a boolean. If the instance can't be found defaults to _NPCCommand2.
+/// @param _instance The instance containing the variable to check. If no variable is passed just treats it as a boolean. If the instance can't be found defaults to _NPCCommand2. Checks like "_checkVal <_comparison> _instanceVariable"
 /// @param _instanceVarName A string containing the name of the instance variable to check.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
 /// @param _NPCCommand2 the NPCCommand that gets inserted at index 1 if the comparison returns false.
-/// @param _checkVal The value to set the instance variable to.
-function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _npcCommand2, _checkVal = true): NPCCommand() constructor
+/// @param _checkVal The value to check the instance variable against.
+/// @oaram _comparison The comparison sign (<, >, =) to use. Wants an enum. Defaults to equals.
+function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _npcCommand2, _checkVal = true, _comparison = compare.equals): NPCCommand() constructor
 {
 	instance = _instance;
-	instanceVarName = _instanceVarName;
-	value = _value;
-	
+	instanceVarName = _instanceVarName;	
 	npcCommand1 = _npcCommand1;
 	npcCommand2 = _npcCommand2;
 	checkVal = _checkVal;
+	comparison = _comparison
 	
 	static Perform = function (_user)
 	{
@@ -635,7 +666,27 @@ function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _
 		{
 			//Gets the value using the string name.
 			var _value = variable_instance_get(instance, instanceVarName);
-			var _check = (_value == checkVal);
+			
+			//Checks the compare value but defaults 
+			switch (comparison) 
+			{
+			    case compare.greaterThan:
+			        var _check = (_value > checkVal);
+			        break;
+			    case compare.lessThan:
+			        var _check = (_value < checkVal);
+			        break;
+			    case compare.greaterThanOrEqual:
+			        var _check = (_value >= checkVal);
+			        break;
+			    case compare.lessThanOrEqual:
+			        var _check = (_value <= checkVal);
+			        break;
+			    default:
+			        var _check = (_value == checkVal);
+			        break;
+			}
+			
 	
 			//If _check returns true sets _command to npcCommand1 instead.
 			if (_check)
@@ -658,6 +709,7 @@ function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _
 
 /// @function NPCCommandFight(_target)
 /// @description makes thes calling NPC fight the target. Attempts to exit when the target is dead.
+/// @param _target The target that is currently being fought.
 function NPCCommandFight(_target): NPCCommand() constructor
 {
 	target = _target;

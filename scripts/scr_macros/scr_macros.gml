@@ -12,8 +12,8 @@
 
 //player constants
 #region
-#macro PLAYER_STARTING_HP 400
-#macro PLAYER_STARTING_PP 400
+#macro PLAYER_STARTING_HP 4
+#macro PLAYER_STARTING_PP 4
 #macro PLAYER_FLICKER (game_get_speed(gamespeed_fps) * 3)
 #endregion
 
@@ -143,15 +143,14 @@ enum factions
 	player, neutral, enemy	
 }
 
-//enum npcCommands
-//{
-//	idle,
-//	move, 
-//	attack, 
-//	defend, 
-//	follow, 
-//	passive
-//}
+enum compare 
+{
+	greaterThan, 
+	lessThan, 
+	greaterThanOrEqual, 
+	lessThanOrEqual, 
+	equals	
+}
 
 enum cursor
 {

@@ -27,4 +27,11 @@ var _commands =
 
 var _loop = new NPCCommandLoop(_commands);
 
-npc_initialize("Johnny", ["Have you spoken to Atticus yet?"], 100, _loop);
+if (!global.storyTalkedToAtticus)
+{
+	npc_initialize("Johnny", ["Have you spoken to Atticus yet?"], 100, _loop);
+}
+else
+{
+	npc_initialize("Johnny",  ["So you talked to Atticus? Good.", "He used to be known as the greatest swordsman in the kingdom of Cydonia.", "He knows his stuff."], 100, _loop);
+}
