@@ -573,23 +573,18 @@ function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _c
 		{
 			case compare.greaterThan:
 			    var _check = (_value > checkVal);
-				show_debug_message("{0} > {1}", _value, checkVal);
 		        break;
 		    case compare.lessThan:
 		        var _check = (_value < checkVal);
-				show_debug_message("{0} < {1}", _value, checkVal);
 		        break;
 		    case compare.greaterThanOrEqual:
 		        var _check = (_value >= checkVal);
-				show_debug_message("{0} >= {1}", _value, checkVal);
 		        break;
 		    case compare.lessThanOrEqual:
 		        var _check = (_value <= checkVal);
-				show_debug_message("{0} <= {1}", _value, checkVal);
 		        break;
 		    default:
 		        var _check = (_value == checkVal);
-				show_debug_message("{0} == {1}", _value, checkVal);
 		        break;
 		}
 		

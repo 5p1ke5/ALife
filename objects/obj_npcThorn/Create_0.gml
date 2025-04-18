@@ -17,14 +17,17 @@ var _item = new ITEM_SWORD;
 inventory_add(inventory, _item);
 
 //NPC Commands for choices.
-var _npcCommand1 = new NPCCommandSetDialogue($"You've been playing for {global.gameTime} steps. Long time!");
-var _npcCommand2 = new NPCCommandSetDialogue($"You've been playing for {global.gameTime} steps. Not a long time.");
+var _npcCommand1 = new NPCCommandSetDialogue("You've been playing for more than 300 steps. Long time!");
+var _npcCommand2 = new NPCCommandSetDialogue("You've been playing for less than 300 steps. Not a long time.");
 
 //an array of states.
 var _commands = 
 [
 	new NPCCommandAwaitTarget(global.player, CLOSE_RANGE),
-	new NPCCommandCheckGlobalVar("gameTime", _npcCommand1, _npcCommand2, 300, compare.greaterThan),
+	new NPCCommandCheckGlobalVar("gameTime", 
+	_npcCommand1, 
+	_npcCommand2, 
+	300, compare.greaterThan),
 	new NPCCommandTalkTo(global.player)
 ];
 
