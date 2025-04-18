@@ -13,13 +13,11 @@ function npc_initialize(_name, _texts, _level, _npcCommands)
 	textIndex = 0; //Current indext in the text array.
 	level = _level;
 
-	//This will contain a reference to any dialogue balloon the NPC creates.
-	//If it equals noone the NPC has no created dialogue balloons.
+	//This will contain a reference to any dialogue balloon the NPC creates. If it equals noone the NPC has no created dialogue balloons.
 	myBalloon = noone;
 	
-	//What the NPC is trying to do. Think of it as what they have instead of controller input.
-	//If its a struct makes it an array with just that struct. 
-	if (is_struct(_npcCommands))
+	//What the NPC is trying to do. Think of it as what they have instead of controller input. 
+	if (is_struct(_npcCommands)) //If its a struct makes it an array with just that struct. 
 	{
 		npcCommands = array_create(1, _npcCommands)	
 	}
@@ -51,10 +49,8 @@ function npc_behavior()
 		attackTimer--;
 	}
 
-	//If the NPC senses enemies they will be in a fighting state.
-	//This can itself be overriden if the unit is in certain states.
-	if (ds_list_size(senseListEnemies) > 0) 
-	&&  (instanceof(npcCommands[0]) != "NPCCommandMove")
+	//If the NPC senses enemies they will be in a fighting state. This can itself be overriden if the unit is in certain states.
+	if (ds_list_size(senseListEnemies) > 0) && (instanceof(array_first(npcCommands)) != "NPCCommandMove")
 	{
 		npc_fight(ds_list_find_value(senseListEnemies, 0));
 	}
@@ -436,6 +432,7 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 {
 	target = _target;
 	duration = _duration;
+	
 	static Perform = function(_user)
 	{
 		//If target no longer exists attempts to exit state.
@@ -487,7 +484,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 	//These will be defined the first time Perform runs.
 	mpPath = path_add();
 	motionPathed = false;
-	path = [];
+	path = array_create(0);
 	
 	//show_debug_message(string("{0}, {1}", other.x, other.y))
 	static Perform = function(_user)
@@ -536,16 +533,15 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 				}
 			
 			}
-			else //Otherwise the instance is at the goal and attempts to exit state.
+			else //Otherwise the instance is at the goal and attempts to exit state. Waits there until it can.
 			{
+				npc_move_to(_target, 0);
 				if (_duration > -1)
 				{
-					npc_move_to(_target, 0);
 					_duration--;	
 				}
 				else
 				{
-					npc_move_to(_target, 0);
 					npc_exit_command();
 				}
 			}
@@ -575,7 +571,7 @@ function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _c
 		//Gets the value using the string name.
 		var _value = variable_global_get(globalVarName);
 		
-		//Checks the compare value but defaults 
+		//Checks the compare value, defaults to ==
 		switch (comparison) 
 		{
 			case compare.greaterThan:
@@ -590,19 +586,12 @@ function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _c
 		    case compare.lessThanOrEqual:
 		        var _check = (_value <= checkVal);
 		        break;
-		    default:
+		    default: // ==
 		        var _check = (_value == checkVal);
 		        break;
 		}
 		
-		if (_check)
-		{
-			var _command = npcCommand1;
-		}
-		else
-		{
-			var _command = npcCommand2;	
-		}
+		var _command = _check ? npcCommand1 : npcCommand2;
 		
 		with (_user)
 		{
@@ -611,6 +600,7 @@ function NPCCommandCheckGlobalVar(_globalVarName, _npcCommand1, _npcCommand2, _c
 		}
 	}
 }
+
 
 
 /// @function NPCCommandSetGlobalVar(_globalVarName, _value)
@@ -640,43 +630,11 @@ function NPCCommandSetGlobalVar(_globalVarName, _value): NPCCommand() constructo
 	}
 }
 
-///@function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value)
-///@description Attempts to set a variable on an instance to the given value.
-/// @param _instance The instance containing the variable to be set.
-/// @param _instanceVarName A string containing the name of the instance variable to be set.
-/// @param _value The value to set the instance variable to.
-function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value): NPCCommand() constructor
-{
-	instance = _instance;
-	instanceVarName = _instanceVarName;
-	value = _value;
-	
-	executed = false;
-	
-	static Perform = function(_user)
-	{
-		if !(executed)
-		{
-			//Checks if the instance exists. If so changes the variable
-			if (instance_exists(instance))
-			{
-				variable_instance_set(instance, instanceVarName, value);	
-			} //If not does nothing and tries to exit state.
-			
-			executed = true;
-		}
-		
-		with (_user)
-		{
-			npc_exit_command();	
-		}
-	}
-}
 
 
 /// @function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _value = true, _compare = compare.equals)
 /// @description Checks the value of an instance's instance variable, 
-/// @param _instance The instance containing the variable to check. If no variable is passed just treats it as a boolean. If the instance can't be found defaults to _NPCCommand2. Checks like "_checkVal <_comparison> _instanceVariable"
+/// @param _instance The instance containing the variable to check. If no variable is passed just treats it as a boolean. If the instance can't be found defaults to _NPCCommand2. Checks like "_instanceVarName <_comparison> _checkVal"
 /// @param _instanceVarName A string containing the name of the instance variable to check.
 /// @param _NPCCommand1 the NPCCommand that gets inserted at index 1 if the comparison returns true.
 /// @param _NPCCommand2 the NPCCommand that gets inserted at index 1 if the comparison returns false.
@@ -692,16 +650,13 @@ function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _
 	comparison = _comparison
 	
 	static Perform = function (_user)
-	{
-		//Defaults to npcCommand2 (false). This one also gets passed if the instance can't be found.
-		var _command = npcCommand2;
-		
+	{	
 		if (instance_exists(instance))
 		{
 			//Gets the value using the string name.
 			var _value = variable_instance_get(instance, instanceVarName);
 			
-			//Checks the compare value but defaults 
+			//Checks the compare value, defaults to equal.
 			switch (comparison) 
 			{
 			    case compare.greaterThan:
@@ -716,17 +671,11 @@ function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _
 			    case compare.lessThanOrEqual:
 			        var _check = (_value <= checkVal);
 			        break;
-			    default:
+			    default: // ==
 			        var _check = (_value == checkVal);
 			        break;
 			}
-			
-	
-			//If _check returns true sets _command to npcCommand1 instead.
-			if (_check)
-			{
-				_command = npcCommand1;
-			}
+			var _command = _check ? npcCommand1 : npcCommand2;
 		}
 		
 		
@@ -735,6 +684,42 @@ function NPCCommandCheckInstanceVar(_instance, _instanceVarName, _npcCommand1, _
 		{
 			array_insert(npcCommands, 1, _command);	
 			npc_exit_command();
+		}
+	}
+}
+
+
+
+///@function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value)
+///@description Attempts to set a variable on an instance to the given value.
+/// @param _instance The instance containing the variable to be set.
+/// @param _instanceVarName A string containing the name of the instance variable to be set.
+/// @param _value The value to set the instance variable to.
+function NPCCommandSetInstanceVar(_instance, _instanceVarName, _value): NPCCommand() constructor
+{
+	instance = _instance;
+	instanceVarName = _instanceVarName;
+	value = _value;
+	
+	//We only want to execute perform once so once Perform is used this is set to true and then it won't try to set the variable again.
+	executed = false;
+	
+	static Perform = function(_user)
+	{
+		if !(executed)
+		{
+			//Checks if the instance exists. If so changes the variable
+			if (instance_exists(instance))
+			{
+				variable_instance_set(instance, instanceVarName, value);	
+			} //If not, does nothing and tries to exit state.
+			
+			executed = true;
+		}
+		
+		with (_user)
+		{
+			npc_exit_command();	
 		}
 	}
 }
@@ -777,15 +762,24 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 	textIndex = 0;
 	static Perform = function(_user)
 	{
+		//If target no longer exists attempts to exit state.
+		if !(npc_check_target(target))
+		{
+			with (_user)
+			{
+				npc_exit_command();
+				return;
+			}
+		}
+		
 		//Get variables from state for use in the NPC.
+		var _target = target;
 		var _dialogue = dialogue;
 		var _textIndex = textIndex;
 		
-		
-		//Moves towards target point until right at it.
-		var _target = target;
 		with (_user)
 		{
+			//Moves towards target point until right at it.
 			npc_move_to(_target);
 			
 			//If an array was passed reads through that
@@ -799,7 +793,7 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 			}
 			
 			
-			//If textIndex == 0 that means the NPC is done with their dialogue.
+			//If textIndex == 0 that means the NPC is done with their dialogue. Checks for in either case if a dialogue array was passed or using the NPC's own dialogue.
 			if (_dialogue == noone && textIndex == 0) || (_dialogue != noone && _textIndex == 0)
 			{
 				npc_exit_command();	
@@ -816,29 +810,73 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 /// @function NPCCommandSetDialogue(_dialogue)
 /// @description Sets the NPC's current texts array and resets the textIndex. Attempts to exit state. Should usually have another state right after.
 /// @param _dialogue an array or string. This will be set as the npc's texts array. If its just a string is first converted to a 1-element array.
-function NPCCommandSetDialogue(_dialogue) : NPCCommandIdle() constructor
+function NPCCommandSetDialogue(_dialogue) : NPCCommand() constructor
 {
 	dialogue = _dialogue;
 	
+	executed = false;
 	static Perform = function(_user)
 	{
 		var _dialogue = dialogue;
+		var _executed = executed;
 		
 		with (_user)
 		{
-			//Sets dialogue to the passed value, resets text index. 
-			if (is_array(_dialogue))
+			if (!_executed)
 			{
-				texts = _dialogue;
+				//Sets dialogue to the passed value, resets text index. 
+				if (is_array(_dialogue))
+				{
+					texts = _dialogue;
+				}
+				else //If it's not an array turns the passed value into a 1-element array.
+				{
+					texts = array_create(1, _dialogue);	
+				}
+				//Resets textIndex and sets _executed to true.
+				textIndex = 0;
+				_executed = true;
 			}
-			else //If it's not an array turns the passed value into a 1-element array.
-			{
-				texts = array_create(1, _dialogue);	
-			}
-			textIndex = 0;
 			
 			//Attemps to exit state.
 			npc_exit_command();
+			
+		}
+		executed = _executed;
+	}
+}
+
+
+/// @function NPCCommanddSetCommands(_commands)
+/// @description Sets the NPC's command list to the passed commands and then attempts to exit state.
+/// @param _commands An array of commands that will replace the NPC's current list.
+function NPCCommandSetCommands(_commands) : NPCCommand() constructor
+{
+	commands = _commands;
+	static Perform = function(_user)
+	{
+		with (_user)
+		{
+			
+		}
+	}
+}
+
+
+/// @function NPCCommanddInsertCommands(_commands, _index)
+/// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 0 but will insert at a passed index.
+/// @param _commands An array of commands that will replace the NPC's current list.
+/// @param _index The index to begin inserting at.
+function NPCCommanddInsertCommands(_commands, _index) : NPCCommand() constructor
+{
+	commands = _commands;
+	index = _index;
+	
+	static Perform = function(_user)
+	{
+		with (_user)
+		{
+			
 		}
 	}
 }
@@ -851,7 +889,7 @@ function NPCCommandLoop(_commands): NPCCommand() constructor
 {
 	
 	//serializes the passed array into a serializedStates array. 
-	commands = [];
+	commands = array_create(0);
 	for (var _i = 0; _i < array_length(_commands); _i++)
 	{
 		array_push(commands, variable_clone(_commands[_i]))
@@ -867,7 +905,7 @@ function NPCCommandLoop(_commands): NPCCommand() constructor
 		
 		with (_user)
 		{
-			npcCommands = [];
+			npcCommands = array_create(0);
 			npcCommands = _commands;
 		
 		}

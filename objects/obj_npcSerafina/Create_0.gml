@@ -23,10 +23,12 @@ var _choice2 = new NPCCommandSetDialogue("Oh, you're hurt. Let me help you.")
 
 var _commands = 
 [
+
 	new NPCCommandAwaitTarget(global.player),
 	new NPCCommandCheckInstanceVar(global.player, "hp", _choice1, _choice2, 3, compare.greaterThanOrEqual),
 	new NPCCommandTalkTo(global.player),
-	new NPCCommandSetInstanceVar(global.player, "hp", global.player.maxHP)
+	new NPCCommandSetInstanceVar(global.player, "hp", global.player.maxHP),
+	new NPCCommandMove(new Point2(x, y))
 ];
 	
 var _loop = new NPCCommandLoop(_commands);	
