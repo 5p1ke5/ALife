@@ -847,7 +847,7 @@ function NPCCommandSetDialogue(_dialogue) : NPCCommand() constructor
 }
 
 
-/// @function NPCCommanddSetCommands(_commands)
+/// @function NPCCommandSetCommands(_commands)
 /// @description Sets the NPC's command list to the passed commands.
 /// @param _commands An array of commands that will replace the NPC's current list.
 function NPCCommandSetCommands(_commands) : NPCCommand() constructor
@@ -867,11 +867,11 @@ function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 }
 
 
-/// @function NPCCommanddInsertCommands(_commands, _index)
+/// @function NPCCommandInsertCommands(_commands, _index)
 /// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 0 but will insert at a passed index.
 /// @param _commands An array of commands that will be inserted into the NPC's current list.
 /// @param _index The index to begin inserting at.
-function NPCCommanddInsertCommands(_commands, _index = 0) : NPCCommand() constructor
+function NPCCommandInsertCommands(_commands, _index = 0) : NPCCommand() constructor
 {
 	commands = _commands;
 	index = _index;

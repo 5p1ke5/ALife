@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_npcAtticus",
+  "%Name":"obj_npcQlipoth",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_npcAtticus",
+  "name":"obj_npcQlipoth",
   "overriddenProperties":[],
   "parent":{
     "name":"characters",

@@ -80,6 +80,7 @@
     {"name":"obj_npcJohnny","order":8,"path":"objects/obj_npcJohnny/obj_npcJohnny.yy",},
     {"name":"obj_npcKai","order":5,"path":"objects/obj_npcKai/obj_npcKai.yy",},
     {"name":"obj_npcNeutral","order":2,"path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},
+    {"name":"obj_npcQlipoth","order":12,"path":"objects/obj_npcQlipoth/obj_npcQlipoth.yy",},
     {"name":"obj_npcSerafina","order":10,"path":"objects/obj_npcSerafina/obj_npcSerafina.yy",},
     {"name":"obj_npcThorn","order":11,"path":"objects/obj_npcThorn/obj_npcThorn.yy",},
     {"name":"obj_partySpawner","order":2,"path":"objects/obj_partySpawner/obj_partySpawner.yy",},
