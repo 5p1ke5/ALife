@@ -754,7 +754,7 @@ function NPCCommandFight(_target): NPCCommand() constructor
 ///@function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 ///@description Goes to a location or towards a target while talking.
 ///@param _target a Point2 or an Instance to go towards while talking.
-///@param [_dialogue] the things the NPC will say. If left blank will just use the NPC's own dialogue.
+///@param [_dialogue] an array of the things the NPC will say. If left blank will just use the NPC's own dialogue.
 function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 {
 	target = _target;
@@ -867,21 +867,42 @@ function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 }
 
 
+//Might just give up on this one
+
 /// @function NPCCommandInsertCommands(_commands, _index)
-/// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 0 but will insert at a passed index.
+/// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 1 (So immediately after the current command) but if an index is passed will do so from there.
 /// @param _commands An array of commands that will be inserted into the NPC's current list.
 /// @param _index The index to begin inserting at.
-function NPCCommandInsertCommands(_commands, _index = 0) : NPCCommand() constructor
+function NPCCommandInsertCommands(_commands, _index = 1) : NPCCommand() constructor
 {
 	commands = _commands;
 	index = _index;
+	executed = false;
 	
 	static Perform = function(_user)
 	{
+		var _commands = commands;
+		var _index = index;
+		var _executed = executed;
+		
+		
+		//If this command hasn't been executed yet does so and then attempts to exit state.
 		with (_user)
 		{
-			
+			if !(_executed)
+			{
+				for (var _i = 0; _i < array_length(_commands) ; _i++) 
+				{
+				    array_insert(npcCommands, _index + _i, _commands[_i]);
+					show_debug_message("Added {0} at {1}", string(_commands[_i]), _i);
+				}	
+				
+				_executed = true;
+				show_debug_message("Commands: {0}", _commands);
+			}	
+			npc_exit_command();
 		}
+		executed = _executed;
 	}
 }
 

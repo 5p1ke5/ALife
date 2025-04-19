@@ -20,14 +20,14 @@ inventory_add(inventory, _item);
 
 var _subCommands =
 [
-	new NPCCommandMove(new Point2(2100, 2600), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2200, 2650), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2000, 2500), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2100, 2600), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2100, 2600), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2200, 2650), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2000, 2500), 1 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMove(new Point2(2100, 2600), 1 * game_get_speed(gamespeed_fps))
+	new NPCCommandMove(new Point2(2100, 2600), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2200, 2650), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2000, 2500), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2100, 2600), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2100, 2600), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2200, 2650), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2000, 2500), 5 * game_get_speed(gamespeed_fps)),
+	new NPCCommandMove(new Point2(2100, 2600), 5 * game_get_speed(gamespeed_fps))
 ];
 
 var _commands = 
