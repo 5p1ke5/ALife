@@ -848,16 +848,20 @@ function NPCCommandSetDialogue(_dialogue) : NPCCommand() constructor
 
 
 /// @function NPCCommanddSetCommands(_commands)
-/// @description Sets the NPC's command list to the passed commands and then attempts to exit state.
+/// @description Sets the NPC's command list to the passed commands.
 /// @param _commands An array of commands that will replace the NPC's current list.
 function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 {
 	commands = _commands;
+	
+	//Doesn't need an exit condition: Replaces itself with the passed commands.
 	static Perform = function(_user)
 	{
+		var _commands = commands;
+		
 		with (_user)
 		{
-			
+			npcCommands = _commands;
 		}
 	}
 }
@@ -865,9 +869,9 @@ function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 
 /// @function NPCCommanddInsertCommands(_commands, _index)
 /// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 0 but will insert at a passed index.
-/// @param _commands An array of commands that will replace the NPC's current list.
+/// @param _commands An array of commands that will be inserted into the NPC's current list.
 /// @param _index The index to begin inserting at.
-function NPCCommanddInsertCommands(_commands, _index) : NPCCommand() constructor
+function NPCCommanddInsertCommands(_commands, _index = 0) : NPCCommand() constructor
 {
 	commands = _commands;
 	index = _index;
@@ -888,7 +892,7 @@ function NPCCommanddInsertCommands(_commands, _index) : NPCCommand() constructor
 function NPCCommandLoop(_commands): NPCCommand() constructor
 {
 	
-	//serializes the passed array into a serializedStates array. 
+	//Clones the passed array 
 	commands = array_create(0);
 	for (var _i = 0; _i < array_length(_commands); _i++)
 	{
