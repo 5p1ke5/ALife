@@ -867,44 +867,44 @@ function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 }
 
 
-//Might just give up on this one
+//Had a hard time getting this to work and probably more trouble than its worth so gonna just comment this out and bring it back if I need it.
 
 /// @function NPCCommandInsertCommands(_commands, _index)
 /// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 1 (So immediately after the current command) but if an index is passed will do so from there.
 /// @param _commands An array of commands that will be inserted into the NPC's current list.
 /// @param _index The index to begin inserting at.
-function NPCCommandInsertCommands(_commands, _index = 1) : NPCCommand() constructor
-{
-	commands = _commands;
-	index = _index;
-	executed = false;
+//function NPCCommandInsertCommands(_commands, _index = 1) : NPCCommand() constructor
+//{
+//	commands = _commands;
+//	index = _index;
+//	executed = false;
 	
-	static Perform = function(_user)
-	{
-		var _commands = commands;
-		var _index = index;
-		var _executed = executed;
+//	static Perform = function(_user)
+//	{
+//		var _commands = commands;
+//		var _index = index;
+//		var _executed = executed;
 		
 		
-		//If this command hasn't been executed yet does so and then attempts to exit state.
-		with (_user)
-		{
-			if !(_executed)
-			{
-				for (var _i = 0; _i < array_length(_commands) ; _i++) 
-				{
-				    array_insert(npcCommands, _index + _i, _commands[_i]);
-					show_debug_message("Added {0} at {1}", string(_commands[_i]), _i);
-				}	
+//		//If this command hasn't been executed yet does so and then attempts to exit state.
+//		with (_user)
+//		{
+//			if !(_executed)
+//			{
+//				for (var _i = 0; _i < array_length(_commands) ; _i++) 
+//				{
+//				    array_insert(npcCommands, _index + _i, _commands[_i]);
+//					show_debug_message("Added {0} at {1}", string(_commands[_i]), _i);
+//				}	
 				
-				_executed = true;
-				show_debug_message("Commands: {0}", _commands);
-			}	
-			npc_exit_command();
-		}
-		executed = _executed;
-	}
-}
+//				_executed = true;
+//				show_debug_message("Commands: {0}", _commands);
+//			}	
+//			npc_exit_command();
+//		}
+//		executed = _executed;
+//	}
+//}
 
 
 ///@function NPCCommandLoop(_states): NPCCommand() constructor
@@ -954,6 +954,13 @@ function NPCCommandAwaitTarget(_target, _range = CLOSE_RANGE) : NPCCommand() con
 		
 		with (_user)
 		{
+			//If target no longer exists attempts to exit state.
+			if !(npc_check_target(target))
+			{
+				npc_exit_command();
+				return;
+			}
+			
 			//If the target gets close enough attempts to go to next state.
 			if (distance_to_point(_target.x, _target.y) < _range)
 			{
