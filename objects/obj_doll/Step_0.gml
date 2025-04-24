@@ -1,6 +1,7 @@
-/// @description Inherit physics + timers. Executes NPC or player behavior,
 
 event_inherited();
+
+doll_animate();
 
 //If the doll is a player allows for control.
 if (global.player == id)
