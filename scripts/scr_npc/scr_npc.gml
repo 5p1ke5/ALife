@@ -113,7 +113,7 @@ function npc_sense_actors()
 	senseListEnemies =  ds_list_create();
 	
 	//Adds sensed NPCs to the list
-	var _npcsFound = collision_circle_list(x, y, CLOSE_RANGE, abs_doll, false, true, senseList, true);
+	var _npcsFound = collision_circle_list(x, y, CLOSE_RANGE, obj_doll, false, true, senseList, true);
 	
 	//Add sensed enemies to the list of sensed enemies.
 	for (var _i = 0; _i < _npcsFound; _i++)

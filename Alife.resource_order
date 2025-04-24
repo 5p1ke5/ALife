@@ -44,7 +44,6 @@
   "ResourceOrderSettings":[
     {"name":"fnt_button","order":2,"path":"fonts/fnt_button/fnt_button.yy",},
     {"name":"fnt_speech","order":1,"path":"fonts/fnt_speech/fnt_speech.yy",},
-    {"name":"abs_doll","order":1,"path":"objects/abs_doll/abs_doll.yy",},
     {"name":"abs_furniture","order":5,"path":"objects/abs_furniture/abs_furniture.yy",},
     {"name":"abs_gui","order":6,"path":"objects/abs_gui/abs_gui.yy",},
     {"name":"abs_hurtbox","order":2,"path":"objects/abs_hurtbox/abs_hurtbox.yy",},

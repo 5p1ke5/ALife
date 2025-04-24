@@ -18,8 +18,8 @@
     "path":"folders/Objects/dolls.yy",
   },
   "parentObjectId":{
-    "name":"abs_doll",
-    "path":"objects/abs_doll/abs_doll.yy",
+    "name":"abs_living",
+    "path":"objects/abs_living/abs_living.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

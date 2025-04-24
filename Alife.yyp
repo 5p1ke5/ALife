@@ -71,7 +71,6 @@
     {"id":{"name":"abs_blockable","path":"objects/abs_blockable/abs_blockable.yy",},},
     {"id":{"name":"abs_bullet","path":"objects/abs_bullet/abs_bullet.yy",},},
     {"id":{"name":"abs_colorSlider","path":"objects/abs_colorSlider/abs_colorSlider.yy",},},
-    {"id":{"name":"abs_doll","path":"objects/abs_doll/abs_doll.yy",},},
     {"id":{"name":"abs_furniture","path":"objects/abs_furniture/abs_furniture.yy",},},
     {"id":{"name":"abs_gui","path":"objects/abs_gui/abs_gui.yy",},},
     {"id":{"name":"abs_hurtbox","path":"objects/abs_hurtbox/abs_hurtbox.yy",},},
