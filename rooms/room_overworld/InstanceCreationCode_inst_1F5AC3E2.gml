@@ -1,1 +1,1 @@
-transition_initialize(room_houses, 438, 531);
+transition_initialize(room_inn, 438, 531);
