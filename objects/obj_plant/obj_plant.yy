@@ -9,8 +9,8 @@
   "name":"obj_plant",
   "overriddenProperties":[],
   "parent":{
-    "name":"furniture",
-    "path":"folders/Objects/furniture.yy",
+    "name":"plants",
+    "path":"folders/Objects/decor/plants.yy",
   },
   "parentObjectId":{
     "name":"abs_furniture",

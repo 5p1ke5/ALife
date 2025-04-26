@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_house4",
+  "%Name":"obj_chairUp",
   "eventList":[],
   "managed":true,
-  "name":"obj_house4",
+  "name":"obj_chairUp",
   "overriddenProperties":[],
   "parent":{
-    "name":"houses",
-    "path":"folders/Objects/decor/houses.yy",
+    "name":"furniture",
+    "path":"folders/Objects/decor/furniture.yy",
   },
   "parentObjectId":{
     "name":"abs_furniture",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_house4",
-    "path":"sprites/spr_house4/spr_house4.yy",
+    "name":"spr_chairUp",
+    "path":"sprites/spr_chairUp/spr_chairUp.yy",
   },
   "spriteMaskId":null,
   "visible":true,
