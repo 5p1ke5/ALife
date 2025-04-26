@@ -955,7 +955,7 @@ function NPCCommandAwaitTarget(_target, _range = CLOSE_RANGE) : NPCCommand() con
 		with (_user)
 		{
 			//If target no longer exists attempts to exit state.
-			if !(npc_check_target(target))
+			if !(npc_check_target(_target))
 			{
 				npc_exit_command();
 				return;
