@@ -867,47 +867,8 @@ function NPCCommandSetCommands(_commands) : NPCCommand() constructor
 }
 
 
-//Had a hard time getting this to work and probably more trouble than its worth so gonna just comment this out and bring it back if I need it.
 
-/// @function NPCCommandInsertCommands(_commands, _index)
-/// @description Inserts the passed _commands array into the calling NPC's commands array. By default inserts at 1 (So immediately after the current command) but if an index is passed will do so from there.
-/// @param _commands An array of commands that will be inserted into the NPC's current list.
-/// @param _index The index to begin inserting at.
-//function NPCCommandInsertCommands(_commands, _index = 1) : NPCCommand() constructor
-//{
-//	commands = _commands;
-//	index = _index;
-//	executed = false;
-	
-//	static Perform = function(_user)
-//	{
-//		var _commands = commands;
-//		var _index = index;
-//		var _executed = executed;
-		
-		
-//		//If this command hasn't been executed yet does so and then attempts to exit state.
-//		with (_user)
-//		{
-//			if !(_executed)
-//			{
-//				for (var _i = 0; _i < array_length(_commands) ; _i++) 
-//				{
-//				    array_insert(npcCommands, _index + _i, _commands[_i]);
-//					show_debug_message("Added {0} at {1}", string(_commands[_i]), _i);
-//				}	
-				
-//				_executed = true;
-//				show_debug_message("Commands: {0}", _commands);
-//			}	
-//			npc_exit_command();
-//		}
-//		executed = _executed;
-//	}
-//}
-
-
-///@function NPCCommandLoop(_states): NPCCommand() constructor
+///@function NPCCommandLoop(_commands)
 ///@description replaces the executing NPC's npcCommands array with the passed _states array, then appends a copy of this state to the end. This causes the NPC to loop the passed _states array.
 ///@param _states the new states array that will be looped through.
 function NPCCommandLoop(_commands): NPCCommand() constructor
