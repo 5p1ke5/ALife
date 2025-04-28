@@ -447,7 +447,7 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 		
 		var _target = target;
 		var _duration = duration;
-		with (other)
+		with (_user)
 		{
 			//Moves towards target point until right at it.
 			npc_move_to(_target);
@@ -492,7 +492,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 		//If target no longer exists attempts to exit state.
 		if !(npc_check_target(target))
 		{
-			with (other)
+			with (_user)
 			{
 				npc_exit_command();
 				return;
@@ -505,7 +505,7 @@ function NPCCommandMovePath(_target, _duration = -1): NPCCommand() constructor
 		//Initializes motionPath if necessary. 
 		if (path_get_number(mpPath) == 0)
 		{
-			motionPathed = mp_grid_path(global.mpGrid, mpPath, other.x, other.y, _target.x, _target.y, true);
+			motionPathed = mp_grid_path(global.mpGrid, mpPath, _user.x, _user.y, _target.x, _target.y, true);
 			
 			//Pushes mpPath coordinates to array 'path' as Point2s
 			for (var _i = 0; _i < path_get_number(mpPath) ; _i++) 
