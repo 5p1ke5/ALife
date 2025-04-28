@@ -18,9 +18,9 @@ inventory_add(inventory, _item);
 
 var _commands2 = 
 [
-	new NPCCommandSetDialogue([ "I've taught you all I can teach you. Why not ask the village elder for work?", "She lives in the building with the green roof."]),
+	//new NPCCommandSetDialogue([ "I've taught you all I can teach you. Why not ask the village elder for work?", "She lives in the building with the green roof."]),
 	new NPCCommandTalkTo(global.player, ["Good hit! You have the makings of a fine warrior.", "I've taught you all I can teach you. Why not ask the village elder for work?", "She lives in the building with the green roof."]),
-	new NPCCommandIdle()
+	new NPCCommandMovePath(new Point2(900, 2800), 0.2)
 ];
 
 var _choice1 = new NPCCommandSetCommands(_commands2);

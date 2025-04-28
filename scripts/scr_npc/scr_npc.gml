@@ -760,8 +760,21 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 	target = _target;
 	dialogue = _dialogue;
 	textIndex = 0;
+	
+	executed = false; //Will be set to true once Perform has been executed once.
+	
+	
 	static Perform = function(_user)
 	{
+		if !(executed) //First time this is executed destroys the current myBalloon.
+		{
+			with (_user)
+			{
+				instance_destroy(myBalloon);
+			}
+			executed = true;
+		}
+		
 		//If target no longer exists attempts to exit state.
 		if !(npc_check_target(target))
 		{
@@ -792,9 +805,11 @@ function NPCCommandTalkTo(_target, _dialogue = noone): NPCCommand() constructor
 				npc_speak();
 			}
 			
+			//Problem: Checking 0 returns false positives for wrap around. Solutions?
 			
-			//If textIndex == 0 that means the NPC is done with their dialogue. Checks for in either case if a dialogue array was passed or using the NPC's own dialogue.
+			//If textIndex == 0 or _textIndex == 0 that means the NPC is done with their dialogue. Checks for in either case if a dialogue array was passed or using the NPC's own dialogue.
 			if (_dialogue == noone && textIndex == 0) || (_dialogue != noone && _textIndex == 0)
+			//if (_dialogue == noone && textIndex >= array_length(texts) - 1) || (_dialogue != noone && _textIndex >= array_length(_dialogue) - 1)
 			{
 				npc_exit_command();	
 			}
