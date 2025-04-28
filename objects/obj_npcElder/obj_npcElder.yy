@@ -1,15 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_npcEnemy",
+  "%Name":"obj_npcElder",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_npcEnemy",
+  "name":"obj_npcElder",
   "overriddenProperties":[],
   "parent":{
-    "name":"dolls",
-    "path":"folders/Objects/dolls.yy",
+    "name":"characters",
+    "path":"folders/Objects/dolls/characters.yy",
   },
   "parentObjectId":{
     "name":"obj_doll",

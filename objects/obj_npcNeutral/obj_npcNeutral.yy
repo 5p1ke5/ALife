@@ -8,8 +8,8 @@
   "name":"obj_npcNeutral",
   "overriddenProperties":[],
   "parent":{
-    "name":"characters",
-    "path":"folders/Objects/dolls/characters.yy",
+    "name":"dolls",
+    "path":"folders/Objects/dolls.yy",
   },
   "parentObjectId":{
     "name":"obj_doll",

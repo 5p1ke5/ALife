@@ -113,6 +113,7 @@
     {"id":{"name":"obj_message","path":"objects/obj_message/obj_message.yy",},},
     {"id":{"name":"obj_npcAtticus","path":"objects/obj_npcAtticus/obj_npcAtticus.yy",},},
     {"id":{"name":"obj_npcCarli","path":"objects/obj_npcCarli/obj_npcCarli.yy",},},
+    {"id":{"name":"obj_npcElder","path":"objects/obj_npcElder/obj_npcElder.yy",},},
     {"id":{"name":"obj_npcElf","path":"objects/obj_npcElf/obj_npcElf.yy",},},
     {"id":{"name":"obj_npcEnemy","path":"objects/obj_npcEnemy/obj_npcEnemy.yy",},},
     {"id":{"name":"obj_npcFriendly","path":"objects/obj_npcFriendly/obj_npcFriendly.yy",},},
@@ -131,6 +132,7 @@
     {"id":{"name":"obj_transition","path":"objects/obj_transition/obj_transition.yy",},},
     {"id":{"name":"obj_tree","path":"objects/obj_tree/obj_tree.yy",},},
     {"id":{"name":"room_characterCreation","path":"rooms/room_characterCreation/room_characterCreation.yy",},},
+    {"id":{"name":"room_eldersHouse","path":"rooms/room_eldersHouse/room_eldersHouse.yy",},},
     {"id":{"name":"room_hometown","path":"rooms/room_hometown/room_hometown.yy",},},
     {"id":{"name":"room_initialize","path":"rooms/room_initialize/room_initialize.yy",},},
     {"id":{"name":"room_inn","path":"rooms/room_inn/room_inn.yy",},},
@@ -258,6 +260,7 @@
     {"roomId":{"name":"room_winterIsland","path":"rooms/room_winterIsland/room_winterIsland.yy",},},
     {"roomId":{"name":"room_overworld","path":"rooms/room_overworld/room_overworld.yy",},},
     {"roomId":{"name":"room_inn","path":"rooms/room_inn/room_inn.yy",},},
+    {"roomId":{"name":"room_eldersHouse","path":"rooms/room_eldersHouse/room_eldersHouse.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[
