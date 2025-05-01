@@ -56,6 +56,7 @@
 #macro TEXT_SPEED 10
 #macro TEXT_BALLOON_SPEED 5
 #macro TEXT_BALLOON_MAXW 100
+#macro SECOND game_get_speed(gamespeed_fps)
 #endregion
 
 #region	//Controls.

@@ -111,6 +111,7 @@
     {"id":{"name":"obj_meleeGuard","path":"objects/obj_meleeGuard/obj_meleeGuard.yy",},},
     {"id":{"name":"obj_meleeSwing","path":"objects/obj_meleeSwing/obj_meleeSwing.yy",},},
     {"id":{"name":"obj_message","path":"objects/obj_message/obj_message.yy",},},
+    {"id":{"name":"obj_npcAdvisor","path":"objects/obj_npcAdvisor/obj_npcAdvisor.yy",},},
     {"id":{"name":"obj_npcAtticus","path":"objects/obj_npcAtticus/obj_npcAtticus.yy",},},
     {"id":{"name":"obj_npcCarli","path":"objects/obj_npcCarli/obj_npcCarli.yy",},},
     {"id":{"name":"obj_npcElder","path":"objects/obj_npcElder/obj_npcElder.yy",},},
