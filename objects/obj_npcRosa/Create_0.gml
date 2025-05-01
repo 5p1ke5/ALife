@@ -17,13 +17,13 @@ var _item = new ITEM_KNIFE;
 inventory_add(inventory, _item);
 
 //arrays of commands.
-
+	
 //Dialogue for after initial story intro.
 var _choice1 = new NPCCommandSetDialogue("Looks like you're in good health. Perfect!");
 var _choice2 = new NPCCommandSetDialogue("Oh, you're hurt. Let me help you.");
 
 var _loop = new NPCCommandLoop([
-	new NPCCommandAwaitTarget(ref_create(global, global.player), MELEE_RANGE),
+	new NPCCommandAwaitTarget(global.player, MELEE_RANGE),
 	new NPCCommandCheckInstanceVar(global.player, "hp", _choice1, _choice2, 3, compare.greaterThanOrEqual),
 	new NPCCommandTalkTo(global.player),
 	new NPCCommandSetInstanceVar(global.player, "hp", global.player.maxHP),

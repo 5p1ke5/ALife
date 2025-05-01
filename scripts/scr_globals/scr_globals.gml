@@ -36,7 +36,5 @@ function globals_initialize()
 	#region //Story flags.
 	global.storyTalkedToAtticus = false;
 	global.storyTalkedToRosa = false;
-	global.storyTalkedToElder = false;
-	global.storyBanditBossKilled = false;
 	#endregion
 }

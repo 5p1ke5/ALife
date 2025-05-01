@@ -16,25 +16,14 @@ doll_initialize(5, 5, 3, 3, factions.player, _faceIndex, _hairIndex, _shirtIndex
 var _item = new ITEM_SWORD;
 inventory_add(inventory, _item);
 
-if !(global.storyTalkedToElder)
-{
-	var _loop =	
-	[
-		new NPCCommandAwaitTarget(global.player), 
-		new NPCCommandTalkTo(new Point2(x, y), ["Sorry, the elder told me not to let you leave until you talk to her. She lives in that green house to the west."]),
-		new NPCCommandMove(new Point2(x, y), 4 * SECOND)
-	];
+//an array of states.
+
+var _commands = 
+[
+	new NPCCommandAwaitTarget(global.player), 
+	new NPCCommandTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
+	new NPCCommandMove(new Point2(x, y))
+];
 	
-	var _commands = new NPCCommandLoop(_loop);
-}
-else
-{
-	var _commands = 
-	[
-		new NPCCommandTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
-		new NPCCommandMove(new Point2(x, y))
-	];
-	
-}
 
 npc_initialize("Kai", ["I've always dreamed of being an adventurer."], 100, _commands);
