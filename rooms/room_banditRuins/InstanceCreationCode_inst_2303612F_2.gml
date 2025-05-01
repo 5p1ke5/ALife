@@ -1,0 +1,1 @@
+transition_initialize(room_overworld, 488, 2634);
