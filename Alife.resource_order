@@ -162,7 +162,7 @@
     {"name":"spr_playerPantsUp0","order":1,"path":"sprites/spr_playerPantsUp0/spr_playerPantsUp0.yy",},
     {"name":"spr_playerPantsWalk0","order":2,"path":"sprites/spr_playerPantsWalk0/spr_playerPantsWalk0.yy",},
     {"name":"spr_playerPantsWalkUp0","order":3,"path":"sprites/spr_playerPantsWalkUp0/spr_playerPantsWalkUp0.yy",},
-    {"name":"spr_table","order":1,"path":"sprites/spr_table/spr_table.yy",},
+    {"name":"spr_table","order":5,"path":"sprites/spr_table/spr_table.yy",},
     {"name":"spr_tilesDungeon","order":4,"path":"sprites/spr_tilesDungeon/spr_tilesDungeon.yy",},
     {"name":"spr_tilesInterior","order":2,"path":"sprites/spr_tilesInterior/spr_tilesInterior.yy",},
     {"name":"spr_tilesOverworld","order":1,"path":"sprites/spr_tilesOverworld/spr_tilesOverworld.yy",},
