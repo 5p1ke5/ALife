@@ -3,7 +3,7 @@
 ///@param _roomTo The room to be sent to.
 ///@param _spawnX x coordinate the party will spawn at.
 ///@param _spawnY y coordinate the party will spawn at.
-function transition_initialize(_roomTo, _spawnX, _spawnY)
+function transition_initialize(_roomTo, _spawnX = -1, _spawnY = -1)
 {
 	roomTo = _roomTo;
 	spawnX = _spawnX;
