@@ -1,7 +1,7 @@
 #region //Room values
 #macro ROOM_TITLE room_titleScreen
 #macro ROOM_CHARACTER_CREATION room_characterCreation
-#macro ROOM_INTRO_SCREEN room_banditRuins
+#macro ROOM_INTRO_SCREEN room_inn
 #endregion
 
 #region //grid things
@@ -56,6 +56,7 @@
 #macro TEXT_SPEED 10
 #macro TEXT_BALLOON_SPEED 5
 #macro TEXT_BALLOON_MAXW 100
+#macro SECOND game_get_speed(gamespeed_fps)
 #endregion
 
 #region	//Controls.
