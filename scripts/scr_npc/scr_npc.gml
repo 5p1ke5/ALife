@@ -50,7 +50,7 @@ function npc_behavior()
 	}
 
 	//If the NPC senses enemies they will be in a fighting state. This can itself be overriden if the unit is in certain states.
-	if (ds_list_size(senseListEnemies) > 0) && (instanceof(array_first(npcCommands)) != "NPCCommandMove")
+	if (ds_list_size(senseListEnemies) > 0)// && (instanceof(array_first(npcCommands)) != "NPCCommandMove")
 	{
 		npc_fight(ds_list_find_value(senseListEnemies, 0));
 	}
@@ -113,7 +113,7 @@ function npc_sense_actors()
 	senseListEnemies =  ds_list_create();
 	
 	//Adds sensed NPCs to the list
-	var _npcsFound = collision_circle_list(x, y, CLOSE_RANGE, obj_doll, false, true, senseList, true);
+	var _npcsFound = collision_circle_list(x, y, MID_RANGE, obj_doll, false, true, senseList, true);
 	
 	//Add sensed enemies to the list of sensed enemies.
 	for (var _i = 0; _i < _npcsFound; _i++)
