@@ -20,7 +20,7 @@ inventory_add(inventory, _item);
 
 var _commands = 
 [
-	new NPCCommandAwaitTarget(global.player, MID_RANGE),
+	new NPCCommandAwaitTarget(global.player, RANGE_MID),
 	new NPCCommandFight(global.player)
 ];
 

@@ -87,6 +87,7 @@
     {"name":"obj_npcJohnny","order":5,"path":"objects/obj_npcJohnny/obj_npcJohnny.yy",},
     {"name":"obj_npcKai","order":10,"path":"objects/obj_npcKai/obj_npcKai.yy",},
     {"name":"obj_npcNeutral","order":6,"path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},
+    {"name":"obj_npcOrc","order":7,"path":"objects/obj_npcOrc/obj_npcOrc.yy",},
     {"name":"obj_npcQlipoth","order":9,"path":"objects/obj_npcQlipoth/obj_npcQlipoth.yy",},
     {"name":"obj_npcRosa","order":7,"path":"objects/obj_npcRosa/obj_npcRosa.yy",},
     {"name":"obj_npcThorn","order":8,"path":"objects/obj_npcThorn/obj_npcThorn.yy",},

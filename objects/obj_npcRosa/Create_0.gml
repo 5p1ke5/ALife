@@ -23,7 +23,7 @@ var _choice1 = new NPCCommandSetDialogue("Looks like you're in good health. Perf
 var _choice2 = new NPCCommandSetDialogue("Oh, you're hurt. Let me help you.");
 
 var _loop = new NPCCommandLoop([
-	new NPCCommandAwaitTarget(global.player, MELEE_RANGE),
+	new NPCCommandAwaitTarget(global.player, RANGE_MELEE),
 	new NPCCommandCheckInstanceVar(global.player, "hp", _choice1, _choice2, 3, compare.greaterThanOrEqual),
 	new NPCCommandTalkTo(global.player),
 	new NPCCommandSetInstanceVar(global.player, "hp", global.player.maxHP),
@@ -34,7 +34,7 @@ var _commands2 = [_loop];
 
 //Dialogue for story intro.
 var _commands1 = [
-		new NPCCommandAwaitTarget(global.player, CLOSE_RANGE),
+		new NPCCommandAwaitTarget(global.player, RANGE_CLOSE),
 		new NPCCommandSetGlobalVar("storyTalkedToRosa", true),
 		new NPCCommandTalkTo(global.player, ["Good morning! Glad to see you awake. You can use WASD to move. Right click on people to interact with them.", "We found you passed out in the forest. Did you get attacked?", "Atticus, our guardsman is outside. He's a nice guy, he'll help you get your bearings if you need it."]),
 		new NPCCommandMovePath(new Point2(360, 360)),

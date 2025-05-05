@@ -121,6 +121,7 @@
     {"id":{"name":"obj_npcJohnny","path":"objects/obj_npcJohnny/obj_npcJohnny.yy",},},
     {"id":{"name":"obj_npcKai","path":"objects/obj_npcKai/obj_npcKai.yy",},},
     {"id":{"name":"obj_npcNeutral","path":"objects/obj_npcNeutral/obj_npcNeutral.yy",},},
+    {"id":{"name":"obj_npcOrc","path":"objects/obj_npcOrc/obj_npcOrc.yy",},},
     {"id":{"name":"obj_npcQlipoth","path":"objects/obj_npcQlipoth/obj_npcQlipoth.yy",},},
     {"id":{"name":"obj_npcRosa","path":"objects/obj_npcRosa/obj_npcRosa.yy",},},
     {"id":{"name":"obj_npcThorn","path":"objects/obj_npcThorn/obj_npcThorn.yy",},},

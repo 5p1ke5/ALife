@@ -23,7 +23,7 @@ var _npcCommand2 = new NPCCommandSetDialogue("You've been playing for less than 
 //an array of states.
 var _commands = 
 [
-	new NPCCommandAwaitTarget(global.player, CLOSE_RANGE),
+	new NPCCommandAwaitTarget(global.player, RANGE_CLOSE),
 	new NPCCommandCheckGlobalVar("gameTime", 
 	_npcCommand1, 
 	_npcCommand2, 

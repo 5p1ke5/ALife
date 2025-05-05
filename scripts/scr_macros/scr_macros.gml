@@ -49,10 +49,10 @@
 
 #region	//numeric game values.
 #macro FLICKER (game_get_speed(gamespeed_fps) / 3)
-#macro MELEE_RANGE 16
-#macro CLOSE_RANGE 50
-#macro MID_RANGE 150
-#macro LONG_RANGE 200
+#macro RANGE_MELEE 16
+#macro RANGE_CLOSE 50
+#macro RANGE_MID 150
+#macro RANGE_LONG 200
 #macro TEXT_SPEED 10
 #macro TEXT_BALLOON_SPEED 5
 #macro TEXT_BALLOON_MAXW 100

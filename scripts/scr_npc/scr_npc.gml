@@ -113,7 +113,7 @@ function npc_sense_actors()
 	senseListEnemies =  ds_list_create();
 	
 	//Adds sensed NPCs to the list
-	var _npcsFound = collision_circle_list(x, y, MID_RANGE, obj_doll, false, true, senseList, true);
+	var _npcsFound = collision_circle_list(x, y, RANGE_MID, obj_doll, false, true, senseList, true);
 	
 	//Add sensed enemies to the list of sensed enemies.
 	for (var _i = 0; _i < _npcsFound; _i++)
@@ -219,8 +219,8 @@ function npc_speak_ext(_texts, _textIndex)
 /// @function npc_move_to(_target)
 /// @description makes the npc move towards a target (Can be an instance or a Point2)
 /// @param _target Instance or Point2 or anything with a .x and .y value to move towards.
-/// @param _range How close the npc has to move to the target. Defaults to CLOSE_RANGE/2 (25 px)
-function npc_move_to(_target, _range = CLOSE_RANGE/2)
+/// @param _range How close the npc has to move to the target. Defaults to RANGE_CLOSE/2 (25 px)
+function npc_move_to(_target, _range = RANGE_CLOSE/2)
 {
 	var _hDir = 0;
 	var _vDir = 0;
@@ -453,7 +453,7 @@ function NPCCommandMove(_target, _duration = -1): NPCCommand() constructor
 			npc_move_to(_target);
 			
 			//If NPC gets to their location waits for duration (if any) and then attempt to exit state.
-			if (distance_to_point(_target.x, _target.y) < CLOSE_RANGE)
+			if (distance_to_point(_target.x, _target.y) < RANGE_CLOSE)
 			{
 				if (_duration > -1)
 				{
@@ -918,7 +918,7 @@ function NPCCommandLoop(_commands): NPCCommand() constructor
 /// @description Has the NPC stand still until a target gets close enough, then attempts to exit state.
 /// @param _target An instance or point2 or something with x and y. 
 /// @param _range How close the NPC has to be to _target to go to the next state.
-function NPCCommandAwaitTarget(_target, _range = CLOSE_RANGE) : NPCCommand() constructor
+function NPCCommandAwaitTarget(_target, _range = RANGE_CLOSE) : NPCCommand() constructor
 {
 	target = _target;
 	range = _range;
