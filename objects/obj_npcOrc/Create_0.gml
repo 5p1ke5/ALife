@@ -5,7 +5,8 @@ var _faceIndex = 12;
 var _hairIndex = irandom(sprite_get_number(spr_dollHairs));
 var _shirtIndex =irandom(sprite_get_number(spr_dollShirts));
 var _pantsIndex = 0;
-var _hairColor = choose(c_green, c_red, c_olive, c_lime, c_orange);
+var _skinColor = choose(c_green, c_red, c_olive, c_lime, c_orange);
+var _hairColor = c_black;
 var _shirtColor = c_brunette;
 var _pantsColor = c_brunette;
 
