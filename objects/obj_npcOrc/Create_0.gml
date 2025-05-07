@@ -10,7 +10,7 @@ var _hairColor = c_black;
 var _shirtColor = c_brunette;
 var _pantsColor = c_brunette;
 
-doll_initialize(5, 5, 3, 3, factions.enemy, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor);
+doll_initialize(5, 5, 3, 3, factions.neutral, _faceIndex, _hairIndex, _shirtIndex, _pantsIndex, _skinColor, _hairColor, _shirtColor, _pantsColor);
 
 
 var _item = choose(new ITEM_AXE, new ITEM_HAMMER);

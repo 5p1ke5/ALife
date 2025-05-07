@@ -20,17 +20,12 @@ inventory_add(inventory, _item);
 
 var _commands = 
 	[
-	//new NPCCommandAwaitTarget(global.player),
-	//new NPCCommandTalkTo
-	//	(global.player, 
-	//	[
-	//	"Help! The bandits kidnapped my brother!",
-	//	"Can you save him for me?",
-	//	"He's deeper in the forest. Come with me!"
-	//	]),
-	new NPCCommandMovePath(new Point2(800, 2500), 2 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMovePath(new Point2(800, 2700), 2 * game_get_speed(gamespeed_fps)),
-	new NPCCommandMovePath(new Point2(2300, 2600), 2 * game_get_speed(gamespeed_fps))
+	new NPCCommandAwaitTarget(global.player),
+	new NPCCommandTalkTo
+		(new Point2(x, y), 
+		[
+		"Help! The orcs kidnapped my brother! I think they're going to eat him!"
+		])
 	]
 
 
