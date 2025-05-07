@@ -24,7 +24,7 @@ var _commands =
 	new NPCCommandTalkTo
 		(new Point2(x, y), 
 		[
-		"Help! The orcs kidnapped my brother! I think they're going to eat him!"
+		"Help! The orcs kidnapped my partner! I think he's going to eat them!"
 		])
 	]
 

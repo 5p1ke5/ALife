@@ -1,0 +1,3 @@
+/// @description If not already clicking on a GUI element attempts to create a dropdown. Children can overwrite this with something like...
+// npc_create_dropdown(_arrayWithButtons)
+npc_create_dropdown();

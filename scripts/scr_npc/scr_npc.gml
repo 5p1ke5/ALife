@@ -58,21 +58,26 @@ function npc_behavior()
 	{
 		npcCommands[0].Perform(id)	
 	}
-	
-	//If right clicked opens dropdown for that NPC.
-	if (position_meeting(mouse_x, mouse_y, id) && MOUSE_RIGHT_BUTTON_RELEASED_NOT_GUI)
-	{
-		npc_create_dropdown();
-	}
 }
 
 ///@function npc_create_dropdown()
 ///@description Destroys all other dropdowns, then creates a dropdown at the mouse position. Returns the created dropdown.
-function npc_create_dropdown()
+///@param _buttonsArray An optional array of buttons. If none is passed just does the defaults.
+function npc_create_dropdown(_buttonsParam = noone)
 {
 	//Destroys all currently existing dropdowns.
 	instance_destroy(obj_dropdown);
 	
+	
+	//If _buttonsParam was passed just uses that.
+	if (_buttonsParam != noone)
+	{
+		var _dropdown = gui_dropdown_create(mouse_x, mouse_y, depth - 5, _buttonsParam, self);
+		return _dropdown;	
+	}
+	
+	
+	//Otherwise uses the default buttons arrangement.
 	var _buttons = array_create(0);
 	array_push(_buttons, obj_buttonTalk);
 	

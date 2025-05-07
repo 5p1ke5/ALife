@@ -37,6 +37,8 @@ function globals_initialize()
 	global.storyTalkedToAtticus = false;
 	global.storyTalkedToRosa = false;
 	global.storyTalkedToElder = false;
+	global.storyElfQuestStarted = false;
+	global.storyElfQuestFinished = false;
 	global.storyBanditBossKilled = false;
 	#endregion
 }

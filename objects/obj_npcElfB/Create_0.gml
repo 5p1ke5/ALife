@@ -20,7 +20,7 @@ inventory_add(inventory, _item);
 
 var _commands = 
 	[
-	new NPCCommandMove(new Point2(x, y))
+		new NPCCommandMove(new Point2(x, y))
 	]
 
 
