@@ -31,7 +31,7 @@ var _loop =
 	new NPCCommandCheckInstanceVar(id, "hp", _choice1, _choice2, hp, compare.lessThan), //Checks if current hp is less than HP when command was initialized.
 ];
 
-if !(global.storyTalkedToAtticus && global.storyTalkedToElder)
+if (global.storyTalkedToAtticus || global.storyTalkedToElder)
 {
 	var _commands1 = new NPCCommandIdle();
 }

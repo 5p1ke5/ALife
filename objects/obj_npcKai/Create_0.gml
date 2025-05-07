@@ -31,6 +31,7 @@ else
 {
 	var _commands = 
 	[
+		new NPCCommandAwaitTarget(global.player), 
 		new NPCCommandTalkTo(global.player, ["I want to see the world beyond this village. Will you take me with you?", "You can add me to your party by right-clicking me and selecting 'Recruit.'"]),
 		new NPCCommandMove(new Point2(x, y))
 	];
